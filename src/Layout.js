@@ -115,7 +115,7 @@ function Layout({
 									{/* <img src={logo} width="140" /> <br /> */}
 									<br />
 									<p>
-										TutorSMS Singapore &middot; all rights
+										Tacita Enterprise &middot; all rights
 										reserved 2019
 									</p>
 									<p>
@@ -145,7 +145,7 @@ function Layout({
 					<div>
 						{/* <img src={logo} width="140" /> <br /> */}
 						<p>
-							TutorSMS Singapore &middot; all rights reserved 2019
+							Tacita Enterprise &middot; all rights reserved 2019
 						</p>
 						<p>
 							<a href="http://tutorsms.com/tnc" target="_blank">

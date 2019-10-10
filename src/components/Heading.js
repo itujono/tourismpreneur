@@ -31,7 +31,7 @@ function Heading({ bold = true, ...props }) {
 			>
 				{props.content}
 			</Title>
-			<Typography.Paragraph>{props.subheader}</Typography.Paragraph>
+			<p>{props.subheader}</p>
 		</Typo>
 	)
 }
