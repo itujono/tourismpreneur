@@ -10,6 +10,7 @@ const Typo = styled(Typography)`
 const Title = styled(Typography.Title)`
 	&& {
 		margin-bottom: 0;
+		font-weight: ${({ bold }) => bold && 'bold'};
 	}
 `
 
@@ -20,12 +21,13 @@ const reverseStyle = {
 	color: '#bbb',
 }
 
-function Heading(props) {
+function Heading({ bold = true, ...props }) {
 	return (
 		<Typo {...props}>
 			<Title
 				style={props.reverse ? reverseStyle : ''}
 				level={props.level || 4}
+				bold={bold}
 			>
 				{props.content}
 			</Title>

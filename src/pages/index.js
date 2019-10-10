@@ -1,15 +1,18 @@
 import React from 'react'
 import { Row, Col } from 'antd'
+import Layout from '../Layout'
+import { Button, Section } from '../components'
 
-const IndexPage = () => {
+const Home = () => {
 	return (
-		<Row type="flex" justify="center">
-			<Col lg={14}>
+		<Layout>
+			<Section>
 				<h2>Mantap!</h2>
 				Selamat datang para pekerja asing.
-			</Col>
-		</Row>
+				<Button>Heheh</Button>
+			</Section>
+		</Layout>
 	)
 }
 
-export default IndexPage
+export default Home

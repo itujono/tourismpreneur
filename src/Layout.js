@@ -30,10 +30,6 @@ const Section = styled.section`
 	padding-top: 3em;
 `
 
-const Bread = styled(Breadcrumb)`
-	margin-bottom: 2em;
-`
-
 const Sidebar = styled(PageLayout.Sider)`
 	&& {
 		min-height: 100vh;
@@ -78,11 +74,6 @@ function Layout({
 	history,
 	...props
 }) {
-	const loc = location && location.pathname.split('/')
-	const bread = loc.map((item, idx) =>
-		idx === 0 ? ['Home', ...item] : [...item]
-	)
-
 	return (
 		<PageLayout {...props}>
 			{!basic && (
@@ -117,20 +108,7 @@ function Layout({
 					)}
 
 					<StyledPageLayout pathname={props.pathname}>
-						<PageLayout.Content>
-							{breadcrumb && (
-								<Section>
-									<Bread>
-										{bread.map((item, idx) => (
-											<Breadcrumb.Item key={idx}>
-												{item}
-											</Breadcrumb.Item>
-										))}
-									</Bread>
-								</Section>
-							)}
-							{children}
-						</PageLayout.Content>
+						<PageLayout.Content>{children}</PageLayout.Content>
 						{sidebar && (
 							<Footer>
 								<div>
