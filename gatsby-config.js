@@ -47,6 +47,10 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-plugin-styled-components`,
+			options: {},
+		},
+		{
 			resolve: `gatsby-plugin-mdx`,
 			options: {
 				defaultLayouts: {

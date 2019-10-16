@@ -1,8 +1,9 @@
 import React from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col, Divider, Avatar } from 'antd'
 import Layout from '../Layout'
-import { Button, Section, Heading, Card } from '../components'
+import { Section, Heading, Card } from '../components'
 import styled from 'styled-components'
+import { baseStyles } from '../styles'
 
 const HeroSection = styled(Section)`
 	height: 100vh;
@@ -14,9 +15,49 @@ const HeroSection = styled(Section)`
 			color: #fff;
 		}
 		p {
-			font-size: 2em;
+			font-size: 1.4em;
+			color: #fff;
 		}
 	}
+`
+
+const InnerBox = styled.div`
+	height: 100%;
+	display: flex;
+	align-items: ${({ align }) => align || 'flex-end'};
+	justify-content: ${({ justify }) => justify || 'flex-end'};
+`
+
+const ReviewCard = styled.div`
+	line-height: 1.8;
+	background: ${baseStyles.lightGrey.two};
+	padding: 3em 4em;
+	margin-right: -50px;
+	position: relative;
+	z-index: 2;
+	box-shadow: ${baseStyles.boxShadow.main};
+	&& {
+		h4 {
+			margin-bottom: 1.2em;
+		}
+	}
+	.reviewer-section {
+		.reviewer {
+			line-height: initial;
+			h4 {
+				margin-bottom: initial;
+			}
+		}
+		.ant-avatar {
+			width: 90px;
+			height: 90px;
+		}
+	}
+`
+
+const StyledReviewImage = styled.div`
+	width: 450px;
+	height: 450px;
 `
 
 const Home = () => {
@@ -29,7 +70,7 @@ const Home = () => {
 							<Heading
 								className="heading"
 								content="Event organizer"
-								subheader="We are one of the best EO in town, they say."
+								subheader="We are one of the best EO in town, they say. But please don't believe it. Prove yourself!"
 							/>
 						</Col>
 						<Col lg={8}>Eheheh</Col>
@@ -44,6 +85,94 @@ const Home = () => {
 					</Row>
 				</Section>
 			</HeroSection>
+			<Section ph="very">
+				<Row gutter={32} type="flex">
+					<Col lg={8}>
+						<InnerBox align="center">
+							<div>
+								<img
+									src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5cfe97c2b4e53beb6d4389a7_crew.jpg"
+									width="200"
+									alt="What is Tacita?"
+								/>
+							</div>
+						</InnerBox>
+					</Col>
+					<Col lg={8}>
+						<img
+							src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5d81401d08863e1d917f691c_how%20it%20works-min.jpg"
+							width="100%"
+							alt="Know Tacita closer"
+						/>
+					</Col>
+					<Col lg={8}>
+						<Heading
+							content="Organizing an event is hard. Let us do the heavylifting for you."
+							level={1}
+							style={{
+								marginLeft: '-120px',
+								marginTop: 50,
+								width: '90%',
+							}}
+						/>
+						{/* <InnerBox align="center" justify="center"> */}
+						<p>
+							Too often, amazing brands trust shirt printers with
+							their designs, only to be let down by the shirts
+							they end up with. <br />
+							<br /> Real Thread uses a carefully selected shirt
+							library, unique print processes, and simple order
+							process to make it easier than ever to order shirts
+							you'll love and wear proudly.
+						</p>
+						{/* </InnerBox> */}
+					</Col>
+				</Row>
+			</Section>
+			<Divider />
+			<Section ph="very">
+				<Section ph="very">
+					<Row type="flex" justify="center" align="middle">
+						<Col lg={8}>
+							<ReviewCard>
+								<Heading
+									content="What they say"
+									subheader="Tacita is one of the best. Superb customer service too, very responsive and the nicest people from here to Timbuktu. Will order again. And again. HUGE THANKS TACITA! ❤️"
+								/>
+								<Row
+									gutter={32}
+									className="reviewer-section"
+									type="flex"
+									align="middle"
+								>
+									<Col lg={8}>
+										<Avatar
+											size="large"
+											src="https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5ced36d63d602ded8a75be9f_Team-Orange-Nick-Forneris-p-500.jpeg"
+										/>
+									</Col>
+									<Col lg={16}>
+										<Heading
+											className="reviewer"
+											content="Harmoko Zainuddin"
+											subheader="Pejaten, DKI Jakarta"
+										/>
+									</Col>
+								</Row>
+							</ReviewCard>
+						</Col>
+						<Col lg={10}>
+							<StyledReviewImage>
+								<img
+									src="https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cf18dcf08fa33b11d4b8be1_threefivetwo.jpg"
+									width="100%"
+									alt="Review image"
+								/>
+							</StyledReviewImage>
+						</Col>
+					</Row>
+				</Section>
+			</Section>
 		</Layout>
 	)
 }

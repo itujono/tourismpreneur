@@ -4,6 +4,7 @@ export const baseStyles = {
 	greyColor: '#999',
 	lightGrey: {
 		one: '#eee',
+		two: '#eceeef',
 	},
 	boxShadow: {
 		main:

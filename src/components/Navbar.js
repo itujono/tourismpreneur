@@ -37,8 +37,15 @@ const StyledMenu = styled(Menu)`
 const MenuItem = styled.p`
 	font-weight: bold;
 	font-size: 2em;
+	line-height: 1;
+	margin-bottom: 1.5em;
 	a {
 		color: ${baseStyles.primaryColor};
+		span {
+			font-weight: initial;
+			font-size: initial;
+			color: ${baseStyles.greyColor};
+		}
 	}
 `
 
@@ -62,13 +69,22 @@ function Navbar({ user, role, ...props }) {
 				width={450}
 			>
 				<MenuItem>
-					<Link to="/about">About</Link>
+					<Link to="/about">
+						About <br />
+						<span>If you want to know us much closer</span>
+					</Link>
 				</MenuItem>
 				<MenuItem>
-					<Link to="/events">Events</Link>
+					<Link to="/events">
+						Events <br />
+						<span>See what we have done for people</span>
+					</Link>
 				</MenuItem>
 				<MenuItem>
-					<Link to="/contact">Contact</Link>
+					<Link to="/contact">
+						Contact <br />
+						<span>Inquiries? Asking something? Let's do this!</span>
+					</Link>
 				</MenuItem>
 			</StyledDrawer>
 			<Row type="flex" justify="space-between">
