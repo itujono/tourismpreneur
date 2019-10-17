@@ -46,6 +46,34 @@ const VisionMission = styled(Section)`
 	}
 `
 
+const QuoteyText = styled.div`
+	padding: 4em;
+	background: ${baseStyles.secondaryColor};
+	width: 400px;
+	height: auto;
+	margin: 0 auto;
+	margin-top: -80px;
+	position: relative;
+	z-index: 2;
+	h4 {
+		line-height: 1.8;
+	}
+`
+
+const CommitmentSection = styled.div`
+	display: flex;
+	align-items: center;
+	padding: 6em 8em;
+	background: ${baseStyles.primaryColor};
+	text-align: center;
+	color: #fff;
+	height: 100%;
+	.ant-typography {
+		line-height: 1.8;
+		color: #fff;
+	}
+`
+
 export default function About() {
 	const heroText = (
 		<>
@@ -80,6 +108,25 @@ export default function About() {
 				Mengkreasi dan menggali ide-ide baru sebagai sarana promosi.{' '}
 			</li>
 		</ul>
+	)
+
+	const commitmentText = (
+		<>
+			<p>
+				Bagi kami Customer adalah arah bagi semua yang kami lakukan saat
+				sekarang dan di masa yang akan datang. TACITA Event Organizer
+				sangat menghormati komitmen, pengetahuan dan kreativitas dari
+				semua pihak yang terlibat. Kami meyakini bahwa semua orang
+				mempunyai bakat dan kemampuan untuk memberi andil bagi
+				terciptanya misi kami.
+			</p>
+			<p>
+				Bagi kami kerjasama dan rasa hormat diantara individu merupakan
+				landasan utama bagi semua keberhasilan. Hal inilah yang membuat
+				kami selalu dipercaya oleh perusahaan-perusahaan berskala
+				Nasional dan Internasional hingga saat ini.
+			</p>
+		</>
 	)
 
 	return (
@@ -117,8 +164,8 @@ export default function About() {
 				</Col>
 			</Row>
 			<VisionMission ph="very">
-				<Row gutter={64} type="flex" justify="center" align="middle">
-					<Col lg={10}>
+				<Row gutter={120} type="flex" justify="center" align="middle">
+					<Col lg={12}>
 						<img
 							src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5ccc8aa73871f96172c81ca3_passion-01.jpg"
 							width="100%"
@@ -134,6 +181,30 @@ export default function About() {
 					</Col>
 				</Row>
 			</VisionMission>
+			<QuoteyText>
+				<Heading content="Lebih dari ratusan event telah kami kerjakan, hingga membuat kami semakin kokoh dan dipercaya oleh puluhan perusahaan nasional yang hingga kini menjadi klien tetap Kami." />
+			</QuoteyText>
+			<Row type="flex" style={{ marginTop: '-70px' }}>
+				<Col lg={12}>
+					<CommitmentSection>
+						<Heading
+							headingStyles={{
+								marginBottom: '1em',
+								fontSize: '2em',
+							}}
+							content="Komitmen kami"
+							subheader={commitmentText}
+						/>
+					</CommitmentSection>
+				</Col>
+				<Col lg={12}>
+					<img
+						src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5ccc8aa73871f9ea0fc81c81_production-01.jpg"
+						width="100%"
+						alt="Tacita's commitment"
+					/>
+				</Col>
+			</Row>
 		</Layout>
 	)
 }
