@@ -8,6 +8,7 @@ const StyledSection = styled.section`
 		(ph === 'very' && `${pv} 5.5em`) ||
 		`${pv} ${ph}`};
 	background: ${({ bg }) => bg};
+	text-align: ${({ textAlign }) => textAlign};
 `
 
 export default function Section({ textAlign = 'left', children, ...props }) {

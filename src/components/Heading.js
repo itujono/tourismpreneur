@@ -25,7 +25,7 @@ function Heading({ bold = true, ...props }) {
 	return (
 		<Typo {...props}>
 			<Title
-				style={props.reverse ? reverseStyle : ''}
+				style={props.reverse ? reverseStyle : props.headingStyles}
 				level={props.level || 4}
 				bold={bold}
 			>
