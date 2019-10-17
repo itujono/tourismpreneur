@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col, Divider, Avatar } from 'antd'
 import Layout from '../Layout'
-import { Section, Heading, Card } from '../components'
+import { Section, Heading, Card, Button } from '../components'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
 
@@ -60,6 +60,24 @@ const StyledReviewImage = styled.div`
 	height: 450px;
 `
 
+const CallToAction = styled.div`
+	margin-top: -80px;
+	background: #77b8d4;
+	border-radius: 12px;
+	padding: 2em 4em;
+	box-shadow: ${baseStyles.boxShadow.main};
+	.ant-typography {
+		font-size: 1.7em;
+		line-height: 1.2;
+		color: #fff;
+	}
+	.ant-btn {
+		background: #fff;
+		border-color: #fff;
+		color: ${baseStyles.primaryColor};
+	}
+`
+
 const Home = () => {
 	return (
 		<Layout>
@@ -107,7 +125,7 @@ const Home = () => {
 					</Col>
 					<Col lg={8}>
 						<Heading
-							content="Organizing an event is hard. Let us do the heavylifting for you."
+							content="Ngadain event itu berat. Biar kami saja."
 							level={1}
 							style={{
 								marginLeft: '-120px',
@@ -129,8 +147,12 @@ const Home = () => {
 					</Col>
 				</Row>
 			</Section>
-			<Divider />
-			<Section ph="very">
+
+			<Section
+				ph="very"
+				bg={baseStyles.secondaryColor}
+				style={{ paddingTop: '4em', paddingBottom: '12em' }}
+			>
 				<Section ph="very">
 					<Row type="flex" justify="center" align="middle">
 						<Col lg={8}>
@@ -172,6 +194,23 @@ const Home = () => {
 						</Col>
 					</Row>
 				</Section>
+			</Section>
+			<Section ph="very">
+				<CallToAction>
+					<Row gutter={120} type="flex" align="middle">
+						<Col lg={16}>
+							<Heading
+								content="Sudah siap untuk nge-host event terkeren di kotamu?"
+								marginBottom="0"
+							/>
+						</Col>
+						<Col lg={6}>
+							<Button block type="primary" icon="phone">
+								Hubungi kami
+							</Button>
+						</Col>
+					</Row>
+				</CallToAction>
 			</Section>
 		</Layout>
 	)

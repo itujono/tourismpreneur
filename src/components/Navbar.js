@@ -57,7 +57,7 @@ const StyledDrawer = styled(Drawer)`
 	}
 `
 
-function Navbar({ user, role, ...props }) {
+function Navbar({ user, role }) {
 	const [menuDrawer, setMenuDrawer] = useState(false)
 
 	return (
@@ -90,7 +90,7 @@ function Navbar({ user, role, ...props }) {
 			<Row type="flex" justify="space-between">
 				<Col lg={8} xs={16}>
 					<Logo /> &nbsp;{' '}
-					<span>
+					{/* <span>
 						<Heading
 							bold
 							content="Tacita Enterprise"
@@ -99,7 +99,7 @@ function Navbar({ user, role, ...props }) {
 								verticalAlign: 'sub',
 							}}
 						/>
-					</span>
+					</span> */}
 				</Col>
 				<Col lg={8} xs={8} style={{ textAlign: 'right' }}>
 					<StyledMenu mode="horizontal">

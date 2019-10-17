@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Layout as PageLayout, Breadcrumb, Menu, Icon } from 'antd'
+import { Layout as PageLayout, Breadcrumb, Menu, Icon, Row, Col } from 'antd'
 import styled from 'styled-components'
 import { media } from './utils'
 import { Link } from 'gatsby'
 import Navbar from './components/Navbar'
+import DynamicIcon from './components/DynamicIcon'
 
 const Header = styled(PageLayout.Header)`
 	&& {
@@ -22,6 +23,7 @@ const Header = styled(PageLayout.Header)`
 const Footer = styled(PageLayout.Footer)`
 	text-align: center;
 	padding: 3em;
+	padding-top: 7em;
 `
 
 const Section = styled.section`
@@ -63,6 +65,18 @@ const StyledPageLayout = styled(PageLayout)`
 		overflow-x: ${({ pathname }) =>
 			pathname === '/dashboard/profile' && 'visible'} !important;
 	}
+`
+
+const StyledShareIcon = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	width: 30px;
+	height: 30px;
+	border-radius: 12px;
+	background-color: ${({ bg }) => bg};
+	cursor: pointer;
 `
 
 function Layout({
@@ -112,7 +126,17 @@ function Layout({
 						{sidebar && (
 							<Footer>
 								<div>
-									{/* <img src={logo} width="140" /> <br /> */}
+									<p>
+										<StyledShareIcon
+											bg="#3c589a"
+											onClick={() => ({})}
+										>
+											<DynamicIcon
+												type="icon-facebook-fill"
+												color="#fff"
+											/>
+										</StyledShareIcon>
+									</p>
 									<br />
 									<p>
 										Tacita Enterprise &middot; all rights
@@ -143,7 +167,46 @@ function Layout({
 			{!basic && !sidebar && (
 				<Footer>
 					<div>
-						{/* <img src={logo} width="140" /> <br /> */}
+						<Row
+							gutter={32}
+							type="flex"
+							justify="center"
+							style={{ marginBottom: '2em' }}
+						>
+							<Col>
+								<StyledShareIcon
+									bg="#3c589a"
+									onClick={() => ({})}
+								>
+									<DynamicIcon
+										type="icon-facebook-fill"
+										color="#fff"
+									/>
+								</StyledShareIcon>
+							</Col>
+							<Col>
+								<StyledShareIcon
+									bg="#5eaade"
+									onClick={() => ({})}
+								>
+									<DynamicIcon
+										type="icon-twitter-fill"
+										color="#fff"
+									/>
+								</StyledShareIcon>
+							</Col>
+							<Col>
+								<StyledShareIcon
+									bg="#4dc247"
+									onClick={() => ({})}
+								>
+									<DynamicIcon
+										type="icon-whatsapp-line"
+										color="#fff"
+									/>
+								</StyledShareIcon>
+							</Col>
+						</Row>
 						<p>
 							Tacita Enterprise &middot; all rights reserved 2019
 						</p>

@@ -1,5 +1,6 @@
 export const baseStyles = {
 	primaryColor: '#08242a',
+	secondaryColor: '#dde8e2',
 	redColor: '#f50',
 	greyColor: '#999',
 	lightGrey: {

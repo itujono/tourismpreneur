@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
 	siteMetadata: {
 		title: 'Gatsby Ant-Design Documentation Starter',
@@ -34,6 +36,15 @@ module.exports = {
 		},
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-sharp`,
+		{
+			resolve: `gatsby-plugin-root-import`,
+			options: {
+				src: path.join(__dirname, 'src'),
+				pages: path.join(__dirname, 'src/pages'),
+				components: path.join(__dirname, 'src/components'),
+				images: path.join(__dirname, 'src/images'),
+			},
+		},
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {

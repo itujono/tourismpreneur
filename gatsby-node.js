@@ -7,6 +7,7 @@
 // You can delete this file if you're not using it
 
 module.exports = {
-  createPages: require('./gatsby/createPages'),
-  onCreateNode: require('./gatsby/onCreateNode'),
+	createPages: require('./gatsby/createPages'),
+	onCreateNode: require('./gatsby/onCreateNode'),
+	onCreateWebpackConfig: require('./gatsby/webpackConfig'),
 }
