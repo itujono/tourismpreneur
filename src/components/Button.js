@@ -12,6 +12,7 @@ const StyledButton = styled(_Button).attrs(({ size }) => ({
 		font-weight: bold;
 		font-size: ${({ size }) => size === 'large' && '16px'};
 		color: white;
+		border-color: ${baseStyles.primaryColor};
 		background-color: ${baseStyles.primaryColor};
 	}
 `
