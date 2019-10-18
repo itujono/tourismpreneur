@@ -82,6 +82,7 @@ export default function Events() {
 								<Select
 									name="sort"
 									placeholder="Urutkan event"
+									label="Boong"
 								></Select>
 							</Form.Item>
 						</Form>
