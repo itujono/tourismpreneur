@@ -79,9 +79,10 @@ export default function Events() {
 						</Form>
 						<Form layout="vertical" style={{ marginBottom: '3em' }}>
 							<Form.Item name="sort" label="Urutkan event">
-								<Select name="sort" placeholder="Urutkan event">
-									{/* ['Berdasarkan u'] */}
-								</Select>
+								<Select
+									name="sort"
+									placeholder="Urutkan event"
+								></Select>
 							</Form.Item>
 						</Form>
 					</Col>
