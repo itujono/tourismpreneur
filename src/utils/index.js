@@ -58,5 +58,8 @@ export const media = Object.keys(sizes).reduce((acc, label) => {
 	return acc
 }, {})
 
-export const mobile = window.innerWidth < 415
-export const tablet = window.innerWidth > 414 && window.innerWidth < 769
+export const mobile = typeof window !== 'undefined' && window.innerWidth < 415
+export const tablet =
+	typeof window !== 'undefined' &&
+	window.innerWidth > 414 &&
+	window.innerWidth < 769
