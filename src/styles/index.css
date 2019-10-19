@@ -1,0 +1,28 @@
+@font-face {
+	font-family: 'Circular';
+	src: url('./fonts/CircularStd-Book.woff');
+}
+
+@font-face {
+	font-family: 'Circular Black';
+	src: url('./fonts/CircularStd-Black.woff');
+}
+
+@font-face {
+	font-family: 'Circular Medium';
+	src: url('./fonts/CircularStd-Medium.woff');
+}
+
+body {
+	/* font-family: 'Circular', Arial, Helvetica, sans-serif;
+	font-feature-settings: normal; */
+}
+
+/* h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Circular Black', Arial, Helvetica, sans-serif;
+} */

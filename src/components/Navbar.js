@@ -104,7 +104,7 @@ function Navbar({ user, role }) {
 				<Col lg={8} xs={8} style={{ textAlign: 'right' }}>
 					<StyledMenu mode="horizontal">
 						<Menu.Item
-							key="notifications"
+							key="events"
 							style={{ paddingLeft: '2em', paddingRight: 0 }}
 						>
 							<Button icon="plus" size="large">
@@ -112,7 +112,7 @@ function Navbar({ user, role }) {
 							</Button>
 						</Menu.Item>
 						<Menu.Item
-							key="notifications"
+							key="menus"
 							style={{ paddingLeft: '2em', paddingRight: 0 }}
 						>
 							<Button

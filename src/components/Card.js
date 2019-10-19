@@ -5,6 +5,9 @@ import { Card as _Card } from 'antd'
 const StyledCard = styled(_Card)`
 	&& {
 		border-radius: 8px;
+		.ant-card-meta-title {
+			font-weight: bold;
+		}
 		.ant-card-cover {
 			img {
 				border-radius: 8px 8px 0 0;

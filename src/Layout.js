@@ -5,6 +5,7 @@ import { media } from './utils'
 import { Link } from 'gatsby'
 import Navbar from './components/Navbar'
 import DynamicIcon from './components/DynamicIcon'
+import './styles/index.css'
 
 const Header = styled(PageLayout.Header)`
 	&& {

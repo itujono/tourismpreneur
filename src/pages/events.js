@@ -6,6 +6,7 @@ import { Row, Col, Icon, Input, Form, Select } from 'antd'
 import { baseStyles } from '../styles'
 import { eventItems } from '../utils/dummy'
 import { Link } from 'gatsby'
+import { graphql } from 'gatsby'
 
 const MainSection = styled(Section)`
 	padding: 5em 7em;
@@ -36,14 +37,18 @@ const EventItem = styled.div`
 	}
 `
 
-export default function Events() {
+function Events({ data: { allContentfulEvent = {} } }) {
+	const eventData = allContentfulEvent.edges || []
+
+	console.log({ eventData })
+
 	return (
 		<Layout>
 			<MainSection ph="very">
 				<Row gutter={64}>
 					<Col lg={16}>
-						{eventItems.map(item => (
-							<EventItem key={item.id}>
+						{eventData.map(({ node }) => (
+							<EventItem key={node.id}>
 								<Link to="/">
 									<Row type="flex">
 										<Col lg={8} className="left">
@@ -55,8 +60,10 @@ export default function Events() {
 											/>
 										</Col>
 										<Col lg={16} className="right">
-											<p>{item.date}</p>
-											<Heading content={item.title} />
+											<p>
+												{node.fromDate} - {node.toDate}
+											</p>
+											<Heading content={node.title} />
 											<Button type="primary">
 												Lihat detail{' '}
 												<Icon type="right" />
@@ -92,3 +99,25 @@ export default function Events() {
 		</Layout>
 	)
 }
+
+export const queryAllEvents = graphql`
+	query queryEventItem {
+		allContentfulEvent {
+			edges {
+				node {
+					id
+					title
+					featuredImage {
+						fluid {
+							src
+						}
+					}
+					fromDate(formatString: "DD MMM YYYY")
+					toDate(formatString: "DD MMM YYYY")
+				}
+			}
+		}
+	}
+`
+
+export default Events
