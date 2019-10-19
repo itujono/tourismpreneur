@@ -1,11 +1,13 @@
 const path = require('path')
+require('dotenv').config({
+	path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
 	siteMetadata: {
 		title: 'Gatsby Ant-Design Documentation Starter',
 	},
 	plugins: [
-		`gatsby-plugin-typescript`,
 		`gatsby-plugin-react-helmet`,
 		{
 			resolve: `gatsby-source-filesystem`,
@@ -62,33 +64,10 @@ module.exports = {
 			options: {},
 		},
 		{
-			resolve: `gatsby-plugin-mdx`,
+			resolve: `gatsby-source-contentful`,
 			options: {
-				defaultLayouts: {
-					default: require.resolve('./src/Layout.js'),
-				},
-				extensions: ['.mdx', '.md'],
-				// workaround: https://github.com/gatsbyjs/gatsby/issues/16422#issuecomment-518985316
-				plugins: [`gatsby-remark-autolink-headers`],
-				gatsbyRemarkPlugins: [
-					`gatsby-remark-katex`,
-					{
-						resolve: `gatsby-remark-images`,
-						options: {
-							maxWidth: 1035,
-						},
-					},
-					`gatsby-remark-autolink-headers`,
-					{
-						resolve: `gatsby-remark-prismjs`,
-						options: {
-							classPrefix: 'language-',
-							inlineCodeMarker: null,
-							showLineNumbers: true,
-							noInlineHighlight: false,
-						},
-					},
-				],
+				spaceId: process.env.CONTENTFUL_SPACE_ID,
+				accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 			},
 		},
 		`gatsby-plugin-remove-trailing-slashes`,
@@ -97,6 +76,6 @@ module.exports = {
 		// 'gatsby-plugin-offline',
 	],
 	/// this must match the path your webpage is displayed from
-	pathPrefix:
-		process.env.NODE_ENV === 'development' ? '' : '/gatsby-antd-docs',
+	// pathPrefix:
+	// 	process.env.NODE_ENV === 'development' ? '' : '/gatsby-antd-docs',
 }

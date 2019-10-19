@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Divider, Avatar } from 'antd'
+import { Row, Col, Avatar } from 'antd'
 import Layout from '../Layout'
 import { Section, Heading, Card, Button } from '../components'
 import styled from 'styled-components'
@@ -188,7 +188,7 @@ const Home = () => {
 								<img
 									src="https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cf18dcf08fa33b11d4b8be1_threefivetwo.jpg"
 									width="100%"
-									alt="Review image"
+									alt="Review"
 								/>
 							</StyledReviewImage>
 						</Col>
