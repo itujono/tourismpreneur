@@ -27,6 +27,9 @@ const EventItem = styled.div`
 	}
 	.right {
 		padding: 4em;
+		.date {
+			color: ${baseStyles.greyColor};
+		}
 		.ant-typography {
 			line-height: 1.2;
 			h4 {
@@ -40,8 +43,6 @@ const EventItem = styled.div`
 function Events({ data: { allContentfulEvent = {} } }) {
 	const eventData = allContentfulEvent.edges || []
 
-	console.log({ eventData })
-
 	return (
 		<Layout>
 			<MainSection ph="very">
@@ -49,7 +50,7 @@ function Events({ data: { allContentfulEvent = {} } }) {
 					<Col lg={16}>
 						{eventData.map(({ node }) => (
 							<EventItem key={node.id}>
-								<Link to="/">
+								<Link to={`/events/${node.id}`}>
 									<Row type="flex">
 										<Col lg={8} className="left">
 											<img
@@ -60,7 +61,7 @@ function Events({ data: { allContentfulEvent = {} } }) {
 											/>
 										</Col>
 										<Col lg={16} className="right">
-											<p>
+											<p className="date">
 												{node.fromDate} - {node.toDate}
 											</p>
 											<Heading content={node.title} />
