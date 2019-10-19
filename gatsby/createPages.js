@@ -9,7 +9,7 @@ module.exports = exports.createPages = ({ graphql, actions }) => {
 				edges {
 					node {
 						id
-						name
+						title
 						description {
 							description
 						}
