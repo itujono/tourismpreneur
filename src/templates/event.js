@@ -48,13 +48,8 @@ const ContentSection = styled(Section)`
 	}
 `
 
-export default function Event({
-	data: {
-		contentfulEvent: event = {},
-		contentfulEventDescriptionRichTextNode: rich = {},
-	},
-}) {
-	console.log({ event, rich })
+export default function Event({ data: { contentfulEvent: event = {} } }) {
+	console.log({ event })
 	// prettier-ignore
 	const { featuredImage, client, description, title, tags, fromDate, toDate, updatedAt } = event
 
@@ -73,11 +68,18 @@ export default function Event({
 					{toDate}
 				</p>
 				<Heading content={title} level={1} />
-				<div>
-					{tags.map(item => (
-						<Tag color="#f50">{item}</Tag>
-					))}
-				</div>
+				<Row type="flex" justify="space-between">
+					<Col lg={8}>
+						<div>
+							{tags.map(item => (
+								<Tag color="#f50">{item}</Tag>
+							))}
+						</div>
+					</Col>
+					<Col lg={8}>
+						<div>Klien: {client}</div>
+					</Col>
+				</Row>
 			</TitleSection>
 			<ContentSection>
 				<article>

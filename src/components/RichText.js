@@ -13,6 +13,9 @@ const options = {
 	},
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
+		[BLOCKS.EMBEDDED_ASSET]: ({ data }, children) => (
+			<img src={data.target.sys.id} alt="Eheheh" />
+		),
 	},
 }
 
