@@ -80,10 +80,22 @@ export default function Contact() {
 						</Col>
 						<Col lg={10} className="right">
 							<div className="details">
-								<p>Email: tacita@gmail.com</p>
 								<p>
-									Alamat: Jalan Kartini VI Blok C #89, Sei
-									Harapan, Batam
+									Email:{' '}
+									<a href="mailto:rivayudha@gmail.com?subject=Hi, Tacita! Saya mau bertanya tentang pembuatan event">
+										tacita@gmail.com
+									</a>
+								</p>
+								<p>
+									Alamat:{' '}
+									<a
+										href="https://www.google.com/maps/dir/?api=1&destination=Jalan Kartini VI Blok C #89, Sei
+			Harapan, Batam"
+										target="_blank"
+									>
+										Jalan Kartini VI Blok C #89, Sei
+										Harapan, Batam
+									</a>
 								</p>
 								<p>Telepon: +62 778 4324242</p>
 							</div>
