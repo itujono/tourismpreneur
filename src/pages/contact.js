@@ -57,6 +57,17 @@ const ShareIcons = styled.ul`
 	}
 `
 
+const url = 'https://sg.cudy.co'
+const windowFeatures = 'height=350,width=600,left=300,top=200'
+
+const handleShareWhatsapp = text => {
+	window.open(
+		`whatsapp://send?text=${text}`,
+		'whatsapp-popup',
+		windowFeatures
+	)
+}
+
 export default function Contact() {
 	return (
 		<Layout>
@@ -80,36 +91,42 @@ export default function Contact() {
 								<Col lg={12}>
 									<ShareIcons>
 										<li>
-											<StyledShareIcon
-												bg="#3c589a"
-												onClick={() => ({})}
-											>
-												<DynamicIcon
-													type="iconfacebook-fill"
-													color="#fff"
-												/>
+											<StyledShareIcon bg="#3c589a">
+												<a
+													href="https://facebook.com/rivabatam"
+													target="_blank"
+												>
+													<DynamicIcon
+														type="iconfacebook-fill"
+														color="#fff"
+													/>
+												</a>
 											</StyledShareIcon>
 										</li>
 										<li>
-											<StyledShareIcon
-												bg="#5eaade"
-												onClick={() => ({})}
-											>
-												<DynamicIcon
-													type="icontwitter-fill"
-													color="#fff"
-												/>
+											<StyledShareIcon bg="#5eaade">
+												<a
+													href="https://twitter.com/rivayudha"
+													target="_blank"
+												>
+													<DynamicIcon
+														type="icontwitter-fill"
+														color="#fff"
+													/>
+												</a>
 											</StyledShareIcon>
 										</li>
 										<li>
-											<StyledShareIcon
-												bg="#4dc247"
-												onClick={() => ({})}
-											>
-												<DynamicIcon
-													type="iconwhatsapp-line"
-													color="#fff"
-												/>
+											<StyledShareIcon bg="#4dc247">
+												<a
+													target="_blank"
+													href="https://wa.me/6282113111668?text=Hi,%20Tacita!%20Saya%20mau%20bertanya%20tentang%20pembuatan%20event"
+												>
+													<DynamicIcon
+														type="iconwhatsapp-line"
+														color="#fff"
+													/>
+												</a>
 											</StyledShareIcon>
 										</li>
 									</ShareIcons>
