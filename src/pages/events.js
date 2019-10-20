@@ -4,7 +4,6 @@ import Layout from '../Layout'
 import { Section, Heading, Button } from '../components'
 import { Row, Col, Icon, Input, Form, Select } from 'antd'
 import { baseStyles } from '../styles'
-import { eventItems } from '../utils/dummy'
 import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 
@@ -17,7 +16,7 @@ const EventItem = styled.div`
 	background-color: ${baseStyles.secondaryColor};
 	transition: all 0.2s ease;
 	&:hover {
-		box-shadow: ${baseStyles.boxShadow.hover};
+		box-shadow: ${baseStyles.boxShadow.main};
 		transform: translateY(-5px);
 	}
 	.left {

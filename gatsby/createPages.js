@@ -8,16 +8,22 @@ module.exports = exports.createPages = ({ graphql, actions }) => {
 			allContentfulEvent {
 				edges {
 					node {
+						client
 						id
 						title
-						description {
-							description
-						}
+						tags
 						featuredImage {
 							fluid {
 								src
 							}
 						}
+						fromDate(formatString: "DD MMM YYYY")
+						toDate(formatString: "DD MMM YYYY")
+						description {
+							json
+							description
+						}
+						updatedAt(formatString: "DD MMM YYYY")
 					}
 				}
 			}

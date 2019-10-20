@@ -100,8 +100,8 @@ export default function Event({ data: { contentfulEvent: event = {} } }) {
 }
 
 export const queryEvent = graphql`
-	query queryEvent {
-		contentfulEvent {
+	query queryEvent($id: String!) {
+		contentfulEvent(id: { eq: $id }) {
 			client
 			id
 			title
@@ -118,13 +118,6 @@ export const queryEvent = graphql`
 				description
 			}
 			updatedAt(formatString: "DD MMM YYYY")
-		}
-		contentfulEventDescriptionRichTextNode {
-			content {
-				content {
-					value
-				}
-			}
 		}
 	}
 `
