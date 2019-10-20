@@ -6,6 +6,8 @@ import Tag from '../components/Tag'
 import { baseStyles } from '../styles'
 import DynamicIcon from '../components/DynamicIcon'
 import { Row, Col, Icon } from 'antd'
+import { graphql } from 'gatsby'
+import RichText from '../components/RichText'
 
 const FeaturedSection = styled(Section)`
 	max-height: 350px;
@@ -46,60 +48,46 @@ const ContentSection = styled(Section)`
 	}
 `
 
-export default function Event({ data }) {
+export default function Event({
+	data: {
+		contentfulEvent: event = {},
+		contentfulEventDescriptionRichTextNode: rich = {},
+	},
+}) {
+	console.log({ event, rich })
+	// prettier-ignore
+	const { featuredImage, client, description, title, tags, fromDate, toDate, updatedAt } = event
+
 	return (
 		<Layout>
 			<FeaturedSection noPadding>
 				<img
-					src="https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cf19c0ffeecff536f839acd_pop%20parlour%20feature.jpg"
+					src={featuredImage.fluid.src}
 					width="100%"
 					alt="featured"
 				/>
 			</FeaturedSection>
 			<TitleSection>
 				<p className="date">
-					<DynamicIcon type="iconicon_date" /> &nbsp; 9 October 2019 -
-					11 October 2019
+					<DynamicIcon type="iconicon_date" /> &nbsp; {fromDate} -{' '}
+					{toDate}
 				</p>
-				<Heading
-					content="Coba-coba main sama minyak kayu putih tak terlalu baik untuk badan gembul"
-					level={1}
-				/>
+				<Heading content={title} level={1} />
 				<div>
-					<Tag color="#f50">Culinary</Tag>
-					<Tag color="#2db7f5">Corporate</Tag>
+					{tags.map(item => (
+						<Tag color="#f50">{item}</Tag>
+					))}
 				</div>
 			</TitleSection>
 			<ContentSection>
 				<article>
-					<p>
-						It is a long established fact that a reader will be
-						distracted by the readable content of a page when
-						looking at its layout. The point of using Lorem Ipsum is
-						that it has a more-or-less normal distribution of
-						letters, as opposed to using 'Content here, content
-						here', making it look like readable English.{' '}
-					</p>
-					<p>
-						Many desktop publishing packages and web page editors
-						now use Lorem Ipsum as their default model text, and a
-						search for 'lorem ipsum' will uncover many web sites
-						still in their infancy. Various versions have evolved
-						over the years, sometimes by accident, sometimes on
-						purpose (injected humour and the like).
-					</p>
-					<p>
-						There are many variations of passages of Lorem Ipsum
-						available, but the majority have suffered alteration in
-						some form, by injected humour, or randomised words which
-						don't look even slightly believable. If you are going to
-						use a passage of Lorem Ipsum, you need to be sure there
-						isn't anything embarrassing hidden in the middle of
-						text. All the Lorem Ipsum generators on the Internet
-						tend to repeat predefined chunks as necessary, making
-						this the first true generator on the Internet.
-					</p>
+					<RichText description={description} />
 				</article>
+				<Row>
+					<Col>
+						<code>Last update: {updatedAt}</code>
+					</Col>
+				</Row>
 			</ContentSection>
 			<Row type="flex" justify="center">
 				<Col lg={8} style={{ textAlign: 'center' }}>
@@ -109,3 +97,33 @@ export default function Event({ data }) {
 		</Layout>
 	)
 }
+
+export const queryEvent = graphql`
+	query queryEvent {
+		contentfulEvent {
+			client
+			id
+			title
+			tags
+			featuredImage {
+				fluid {
+					src
+				}
+			}
+			fromDate(formatString: "DD MMM YYYY")
+			toDate(formatString: "DD MMM YYYY")
+			description {
+				json
+				description
+			}
+			updatedAt(formatString: "DD MMM YYYY")
+		}
+		contentfulEventDescriptionRichTextNode {
+			content {
+				content {
+					value
+				}
+			}
+		}
+	}
+`

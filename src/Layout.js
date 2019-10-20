@@ -180,7 +180,7 @@ function Layout({
 									onClick={() => ({})}
 								>
 									<DynamicIcon
-										type="icon-facebook-fill"
+										type="iconfacebook-fill"
 										color="#fff"
 									/>
 								</StyledShareIcon>
@@ -191,7 +191,7 @@ function Layout({
 									onClick={() => ({})}
 								>
 									<DynamicIcon
-										type="icon-twitter-fill"
+										type="icontwitter-fill"
 										color="#fff"
 									/>
 								</StyledShareIcon>
@@ -202,7 +202,7 @@ function Layout({
 									onClick={() => ({})}
 								>
 									<DynamicIcon
-										type="icon-whatsapp-line"
+										type="iconwhatsapp-line"
 										color="#fff"
 									/>
 								</StyledShareIcon>

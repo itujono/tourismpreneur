@@ -4,6 +4,8 @@
 	"version": "0.1.0",
 	"author": "Bejo Karmila",
 	"dependencies": {
+		"@contentful/rich-text-react-renderer": "^13.4.0",
+		"@contentful/rich-text-types": "^13.4.0",
 		"@mdx-js/mdx": "1.4.4",
 		"@mdx-js/react": "1.4.4",
 		"@mdx-js/tag": "0.20.3",

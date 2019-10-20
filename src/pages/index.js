@@ -4,6 +4,7 @@ import Layout from '../Layout'
 import { Section, Heading, Card, Button } from '../components'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
+import DynamicIcon from '../components/DynamicIcon'
 
 const HeroSection = styled(Section)`
 	height: 100vh;
@@ -64,7 +65,7 @@ const CallToAction = styled.div`
 	margin-top: -80px;
 	background: #77b8d4;
 	border-radius: 12px;
-	padding: 2em 4em;
+	padding: 3em 5em;
 	box-shadow: ${baseStyles.boxShadow.main};
 	.ant-typography {
 		font-size: 1.7em;
@@ -88,7 +89,7 @@ const Home = () => {
 							<Heading
 								className="heading"
 								content="Event organizer"
-								subheader="We are one of the best EO in town, they say. But please don't believe it. Prove yourself!"
+								subheader="Kami adalah salah satu EO terbaik di kota ini. Itu kata mereka. Jangan percaya mereka -- buktikan sendiri!"
 							/>
 						</Col>
 						<Col lg={8}>Eheheh</Col>
@@ -158,7 +159,7 @@ const Home = () => {
 						<Col lg={8}>
 							<ReviewCard>
 								<Heading
-									content="What they say"
+									content="Apa kata mereka"
 									subheader="Tacita is one of the best. Superb customer service too, very responsive and the nicest people from here to Timbuktu. Will order again. And again. HUGE THANKS TACITA! ❤️"
 								/>
 								<Row
@@ -176,7 +177,7 @@ const Home = () => {
 									<Col lg={16}>
 										<Heading
 											className="reviewer"
-											content="Harmoko Zainuddin"
+											content="Felix Zainuddin"
 											subheader="Pejaten, DKI Jakarta"
 										/>
 									</Col>
@@ -205,7 +206,8 @@ const Home = () => {
 							/>
 						</Col>
 						<Col lg={6}>
-							<Button block type="primary" icon="phone">
+							<Button block type="primary">
+								<DynamicIcon type="iconicon_comment" />
 								Hubungi kami
 							</Button>
 						</Col>
