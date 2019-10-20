@@ -6,6 +6,15 @@ const Bold = ({ children }) => (
 	<strong style={{ fontFamily: 'Futura Bold' }}>{children}</strong>
 )
 
+const Image = props => (
+	<img
+		{...props}
+		width="100%"
+		alt="Ehehehh"
+		style={{ maxWidth: 250, marginRight: '.5em' }}
+	/>
+)
+
 const options = {
 	renderMark: {
 		[MARKS.BOLD]: text => <Bold>{text}</Bold>,
@@ -13,9 +22,11 @@ const options = {
 	},
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
-		[BLOCKS.EMBEDDED_ASSET]: ({ data }, children) => (
-			<img src={data.target.sys.id} alt="Eheheh" />
-		),
+		[BLOCKS.EMBEDDED_ASSET]: ({ data }, children) => {
+			const url = data.target.fields.file['en-US'] || {}
+
+			return <Image src={url.url} />
+		},
 	},
 }
 
