@@ -5,6 +5,7 @@ import { Section, Heading, Card, Button } from '../components'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
 import DynamicIcon from '../components/DynamicIcon'
+import { Link } from 'gatsby'
 
 const HeroSection = styled(Section)`
 	height: 100vh;
@@ -206,10 +207,12 @@ const Home = () => {
 							/>
 						</Col>
 						<Col lg={6}>
-							<Button block type="primary">
-								<DynamicIcon type="iconicon_comment" />
-								Hubungi kami
-							</Button>
+							<Link to="/contact">
+								<Button block type="primary">
+									<DynamicIcon type="iconicon_comment" />
+									Hubungi kami
+								</Button>
+							</Link>
 						</Col>
 					</Row>
 				</CallToAction>

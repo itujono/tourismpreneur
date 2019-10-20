@@ -33,7 +33,7 @@ const EventItem = styled.div`
 			line-height: 1.2;
 			h4 {
 				line-height: 1.2;
-				font-size: 2.7em;
+				font-size: 2.2em;
 			}
 		}
 	}
@@ -46,7 +46,7 @@ function Events({ data: { allContentfulEvent = {} } }) {
 		<Layout>
 			<MainSection ph="very">
 				<Row gutter={64}>
-					<Col lg={16}>
+					<Col lg={18}>
 						{eventData.map(({ node }) => (
 							<EventItem key={node.id}>
 								<Link to={`/events/${node.id}`}>
@@ -74,7 +74,7 @@ function Events({ data: { allContentfulEvent = {} } }) {
 							</EventItem>
 						))}
 					</Col>
-					<Col lg={8}>
+					<Col lg={6}>
 						<Form layout="vertical" style={{ marginBottom: '3em' }}>
 							<Form.Item name="search" label="Cari event">
 								<Input.Search

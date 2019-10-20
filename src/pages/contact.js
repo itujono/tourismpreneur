@@ -15,6 +15,7 @@ const HeroSection = styled(Section)`
 		background: ${baseStyles.secondaryColor};
 	}
 	.right {
+		margin-top: 2em;
 		.details {
 			margin-bottom: 2em;
 		}
@@ -47,17 +48,26 @@ const StyledShareIcon = styled.div`
 	cursor: pointer;
 `
 
+const ShareIcons = styled.ul`
+	padding-left: 0;
+	li {
+		list-style-type: none;
+		display: inline-block;
+		margin-right: 1em;
+	}
+`
+
 export default function Contact() {
 	return (
 		<Layout>
 			<HeroSection>
 				<Section ph="very" className="inner-box">
-					<Row gutter={32}>
-						<Col lg={12} className="left">
+					<Row gutter={64} type="flex" align="middle">
+						<Col lg={14} className="left">
 							<p>Kontak kami</p>
 							<Heading content="Tanyakan apa saja yang ada di kepala. Kami selalu siap!" />
 						</Col>
-						<Col lg={12} className="right">
+						<Col lg={10} className="right">
 							<div className="details">
 								<p>Email: tacita@gmail.com</p>
 								<p>
@@ -67,38 +77,42 @@ export default function Contact() {
 								<p>Telepon: +62 778 4324242</p>
 							</div>
 							<Row gutter={32} style={{ marginBottom: '2em' }}>
-								<Col lg={4}>
-									<StyledShareIcon
-										bg="#3c589a"
-										onClick={() => ({})}
-									>
-										<DynamicIcon
-											type="icon-facebook-fill"
-											color="#fff"
-										/>
-									</StyledShareIcon>
-								</Col>
-								<Col lg={4}>
-									<StyledShareIcon
-										bg="#5eaade"
-										onClick={() => ({})}
-									>
-										<DynamicIcon
-											type="icon-twitter-fill"
-											color="#fff"
-										/>
-									</StyledShareIcon>
-								</Col>
-								<Col lg={4}>
-									<StyledShareIcon
-										bg="#4dc247"
-										onClick={() => ({})}
-									>
-										<DynamicIcon
-											type="icon-whatsapp-line"
-											color="#fff"
-										/>
-									</StyledShareIcon>
+								<Col lg={12}>
+									<ShareIcons>
+										<li>
+											<StyledShareIcon
+												bg="#3c589a"
+												onClick={() => ({})}
+											>
+												<DynamicIcon
+													type="iconfacebook-fill"
+													color="#fff"
+												/>
+											</StyledShareIcon>
+										</li>
+										<li>
+											<StyledShareIcon
+												bg="#5eaade"
+												onClick={() => ({})}
+											>
+												<DynamicIcon
+													type="icontwitter-fill"
+													color="#fff"
+												/>
+											</StyledShareIcon>
+										</li>
+										<li>
+											<StyledShareIcon
+												bg="#4dc247"
+												onClick={() => ({})}
+											>
+												<DynamicIcon
+													type="iconwhatsapp-line"
+													color="#fff"
+												/>
+											</StyledShareIcon>
+										</li>
+									</ShareIcons>
 								</Col>
 							</Row>
 						</Col>

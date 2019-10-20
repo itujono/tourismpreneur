@@ -167,14 +167,14 @@ function Layout({
 
 			{!basic && !sidebar && (
 				<Footer>
-					<div>
+					<div style={{ width: '50%', margin: '0 auto' }}>
 						<Row
 							gutter={32}
 							type="flex"
 							justify="center"
 							style={{ marginBottom: '2em' }}
 						>
-							<Col>
+							<Col lg={3}>
 								<StyledShareIcon
 									bg="#3c589a"
 									onClick={() => ({})}
@@ -185,7 +185,7 @@ function Layout({
 									/>
 								</StyledShareIcon>
 							</Col>
-							<Col>
+							<Col lg={3}>
 								<StyledShareIcon
 									bg="#5eaade"
 									onClick={() => ({})}
@@ -196,7 +196,7 @@ function Layout({
 									/>
 								</StyledShareIcon>
 							</Col>
-							<Col>
+							<Col lg={3}>
 								<StyledShareIcon
 									bg="#4dc247"
 									onClick={() => ({})}
