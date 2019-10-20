@@ -36,12 +36,14 @@ const StyledMenu = styled(Menu)`
 
 const MenuItem = styled.p`
 	font-weight: bold;
+	font-family: 'Futura Bold', Arial, Helvetica, sans-serif;
 	font-size: 2em;
 	line-height: 1;
 	margin-bottom: 1.5em;
 	a {
 		color: ${baseStyles.primaryColor};
 		span {
+			font-family: 'Futura Medium', Arial, Helvetica, sans-serif;
 			font-weight: initial;
 			font-size: initial;
 			color: ${baseStyles.greyColor};
@@ -70,19 +72,19 @@ function Navbar({ user, role }) {
 			>
 				<MenuItem>
 					<Link to="/about">
-						About <br />
+						ABOUT <br />
 						<span>If you want to know us much closer</span>
 					</Link>
 				</MenuItem>
 				<MenuItem>
 					<Link to="/events">
-						Events <br />
+						EVENTS <br />
 						<span>See what we have done for people</span>
 					</Link>
 				</MenuItem>
 				<MenuItem>
 					<Link to="/contact">
-						Contact <br />
+						CONTACT <br />
 						<span>Inquiries? Asking something? Let's do this!</span>
 					</Link>
 				</MenuItem>
