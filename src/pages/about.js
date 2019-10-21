@@ -2,8 +2,9 @@ import React from 'react'
 import Layout from '../Layout'
 import styled from 'styled-components'
 import { Section, Heading } from '../components'
-import { Row, Col } from 'antd'
+import { Row, Col, Divider } from 'antd'
 import { baseStyles } from '../styles'
+import DynamicIcon from '../components/DynamicIcon'
 
 const HeroSection = styled(Section)`
 	padding: 7em 8em;
@@ -34,8 +35,10 @@ const VisionMission = styled(Section)`
 		.ant-typography {
 			h4 {
 				text-transform: uppercase;
-				font-size: 1.2em;
+				font-size: 1em;
+				margin-bottom: 1.5em;
 				letter-spacing: 2px;
+				font-family: 'Futura Medium', Arial, Helvetica, sans-serif;
 				color: ${baseStyles.greyColor};
 			}
 			p {
@@ -124,7 +127,7 @@ export default function About() {
 				sekarang dan di masa yang akan datang. TACITA Event Organizer
 				sangat menghormati komitmen, pengetahuan dan kreativitas dari
 				semua pihak yang terlibat. Kami meyakini bahwa{' '}
-				<span className="underline">
+				<span className="underline inherit">
 					semua orang mempunyai bakat dan kemampuan untuk memberi
 					andil
 				</span>{' '}
@@ -134,7 +137,7 @@ export default function About() {
 				Bagi kami kerjasama dan rasa hormat di antara individu merupakan
 				landasan utama bagi semua keberhasilan. Hal inilah yang membuat
 				kami{' '}
-				<span className="underline">
+				<span className="underline inherit">
 					selalu dipercaya oleh perusahaan-perusahaan berskala
 					Nasional dan Internasional
 				</span>{' '}
@@ -169,9 +172,20 @@ export default function About() {
 			<Row type="flex" justify="center">
 				<Col lg={16}>
 					<Section textAlign="center">
+						<div style={{ marginBottom: '2em' }}>
+							<DynamicIcon type="iconicon_video" size="6em" />
+						</div>
 						<Heading
 							level={1}
-							content="We don't make events. We make happiness."
+							content={
+								<span>
+									We don't make events. We{' '}
+									<span className="underline">
+										make happiness
+									</span>
+									.
+								</span>
+							}
 							headingStyles={{ fontSize: '4em' }}
 						/>
 					</Section>
@@ -191,6 +205,7 @@ export default function About() {
 							content="Visi kami"
 							subheader="Menjadi Event Organizer yang Profesional, Berkualitas, Menghibur dan Terpercaya."
 						/>
+						<Divider />
 						<Heading content="Misi kami" subheader={missionText} />
 					</Col>
 				</Row>

@@ -47,3 +47,7 @@ a.underline {
 	background-position: 0 0;
 	word-break: break-word;
 }
+
+span.underline.inherit {
+	color: inherit;
+}

@@ -9,6 +9,9 @@ import { Link } from 'gatsby'
 
 const HeroSection = styled(Section)`
 	height: 100vh;
+	background: url('https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cdaba596d9f35a12997b809_masthead-pop-parlour-compressor-p-1600.jpeg')
+		center no-repeat;
+	background-size: cover;
 	.heading {
 		h4 {
 			font-size: 5em;
@@ -84,13 +87,14 @@ const Home = () => {
 	return (
 		<Layout>
 			<HeroSection bg="#77b8d4">
-				<Section ph="very">
+				<Section ph="very" style={{ marginTop: '3em' }}>
 					<Row gutter={32} type="flex" align="middle">
 						<Col lg={8}>
 							<Heading
 								className="heading"
 								content="Event organizer"
-								subheader="Kami adalah salah satu EO terbaik di kota ini. Itu kata mereka. Jangan percaya mereka -- buktikan sendiri!"
+								headingStyles={{ marginBottom: '0.2em' }}
+								subheader="Kami adalah salah satu EO terbaik di kota ini. Well, itu kata mereka. Jangan percaya mereka -- kamu harus buktikan sendiri!"
 							/>
 							<a
 								target="_blank"
@@ -107,8 +111,9 @@ const Home = () => {
 								style={{ width: 250, margin: '0 auto' }}
 								cover="https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cf19c0ffeecff536f839acd_pop%20parlour%20feature.jpg"
 								title="Hear from them"
-								description="Kan mantap kalo bisa begini, kenapa juga mesti begitu. Sip kan?"
+								description="Saya sudah bermitra dengan Tacita sejak tahun 2015, dan sampai saat ini Tacita sudah membantu saya membuat hingga 6 event di berbagai kota..."
 							/>
+							<Button icon="arrow-right" shape="circle" />
 						</Col>
 					</Row>
 				</Section>
@@ -145,10 +150,13 @@ const Home = () => {
 						/>
 						{/* <InnerBox align="center" justify="center"> */}
 						<p>
-							Too often, amazing brands trust shirt printers with
-							their designs, only to be let down by the shirts
-							they end up with. <br />
-							<br /> Real Thread uses a carefully selected shirt
+							Bagian ini nggak tau mau diisi dengan copywriting
+							apa. Semoga{' '}
+							<span className="underline">
+								amal ibadah para hadirin solat Jumat
+							</span>
+							diterima sepantasnya dan selayaknya. Thanks. <br />
+							<br /> Tacita uses a carefully selected shirt
 							library, unique print processes, and simple order
 							process to make it easier than ever to order shirts
 							you'll love and wear proudly.
