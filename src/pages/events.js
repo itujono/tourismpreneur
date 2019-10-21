@@ -20,6 +20,7 @@ const EventItem = styled.div`
 		transform: translateY(-5px);
 	}
 	.left {
+		max-height: 280px;
 		img {
 			object-fit: cover;
 		}
@@ -53,7 +54,9 @@ function Events({ data: { allContentfulEvent = {} } }) {
 									<Row type="flex">
 										<Col lg={8} className="left">
 											<img
-												src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5ccc8aa73871f96172c81ca3_passion-01.jpg"
+												src={
+													node.featuredImage.fluid.src
+												}
 												height="100%"
 												width="100%"
 												alt="Some event item"

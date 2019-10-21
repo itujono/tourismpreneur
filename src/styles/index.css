@@ -30,3 +30,20 @@ h5,
 h6 {
 	font-family: 'Futura Bold', Arial, Helvetica, sans-serif;
 }
+
+span.underline,
+a.underline {
+	color: initial;
+	padding: 0;
+	text-decoration: none;
+	background-image: linear-gradient(
+		transparent 0%,
+		transparent calc(50% - 8px),
+		rgba(0, 255, 0, 0.35) calc(50% - 8px),
+		rgba(0, 255, 0, 0.35) 100%
+	);
+	transition: background-position 120ms ease-in-out, padding 120ms ease-in-out;
+	background-size: 100% 200%;
+	background-position: 0 0;
+	word-break: break-word;
+}

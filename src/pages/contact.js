@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Layout from '../Layout'
 import { Section, Heading, Button } from '../components'
 import { baseStyles } from '../styles'
-import { Row, Col, Form, Input } from 'antd'
+import { Row, Col, Form, Input, Tooltip } from 'antd'
 import DynamicIcon from '../components/DynamicIcon'
 import { mobile } from '../utils'
 
@@ -76,26 +76,44 @@ export default function Contact() {
 					<Row gutter={64} type="flex" align="middle">
 						<Col lg={14} className="left">
 							<p>Kontak kami</p>
-							<Heading content="Tanyakan apa saja yang ada di kepala. Kami selalu siap!" />
+							<Heading
+								content={
+									<span>
+										Tanyakan{' '}
+										<span className="underline">
+											apa saja
+										</span>{' '}
+										yang ada di kepala. Kami selalu siap!
+									</span>
+								}
+							/>
 						</Col>
 						<Col lg={10} className="right">
 							<div className="details">
 								<p>
 									Email:{' '}
-									<a href="mailto:rivayudha@gmail.com?subject=Hi, Tacita! Saya mau bertanya tentang pembuatan event">
-										tacita@gmail.com
-									</a>
+									<Tooltip title="Email kami langsung">
+										<a
+											className="underline"
+											href="mailto:rivayudha@gmail.com?subject=Hi, Tacita! Saya mau bertanya tentang pembuatan event"
+										>
+											tacita@gmail.com
+										</a>
+									</Tooltip>
 								</p>
 								<p>
 									Alamat:{' '}
-									<a
-										href="https://www.google.com/maps/dir/?api=1&destination=Jalan Kartini VI Blok C #89, Sei
+									<Tooltip title="Lihat di Google Maps">
+										<a
+											className="underline"
+											href="https://www.google.com/maps/dir/?api=1&destination=Jalan Kartini VI Blok C #89, Sei
 			Harapan, Batam"
-										target="_blank"
-									>
-										Jalan Kartini VI Blok C #89, Sei
-										Harapan, Batam
-									</a>
+											target="_blank"
+										>
+											Jalan Kartini VI Blok C #89, Sei
+											Harapan, Batam
+										</a>
+									</Tooltip>
 								</p>
 								<p>Telepon: +62 778 4324242</p>
 							</div>

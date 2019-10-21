@@ -6,6 +6,10 @@ const Bold = ({ children }) => (
 	<strong style={{ fontFamily: 'Futura Bold' }}>{children}</strong>
 )
 
+const Underline = ({ children }) => (
+	<span className="underline">{children}</span>
+)
+
 const Image = props => (
 	<img
 		{...props}
@@ -19,6 +23,7 @@ const options = {
 	renderMark: {
 		[MARKS.BOLD]: text => <Bold>{text}</Bold>,
 		[MARKS.ITALIC]: text => <em>{text}</em>,
+		[MARKS.UNDERLINE]: text => <Underline>{text}</Underline>,
 	},
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,

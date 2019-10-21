@@ -8,7 +8,7 @@ import { Link } from 'gatsby'
 import { baseStyles } from '../styles'
 
 const Nav = styled.nav`
-	width: 80%;
+	width: 85%;
 	margin: 0 auto;
 	background-color: transparent;
 `
@@ -40,6 +40,28 @@ const MenuItem = styled.p`
 	font-size: 2em;
 	line-height: 1;
 	margin-bottom: 1.5em;
+	&:hover {
+		a {
+			padding: 0;
+			text-decoration: none;
+			background-image: linear-gradient(
+				transparent 0%,
+				transparent calc(50% - 8px),
+				rgba(0, 255, 0, 0.35) calc(50% - 8px),
+				rgba(0, 255, 0, 0.35) 100%
+			);
+			transition: background-position 120ms ease-in-out,
+				padding 120ms ease-in-out;
+			background-size: 100% 200%;
+			background-position: 0 0;
+			word-break: break-word;
+		}
+		span {
+			background-image: unset;
+			background-size: unset;
+			background-position: unset;
+		}
+	}
 	a {
 		color: ${baseStyles.primaryColor};
 		span {
@@ -59,7 +81,7 @@ const StyledDrawer = styled(Drawer)`
 	}
 `
 
-function Navbar({ user, role }) {
+function Navbar() {
 	const [menuDrawer, setMenuDrawer] = useState(false)
 
 	return (
@@ -89,7 +111,7 @@ function Navbar({ user, role }) {
 					</Link>
 				</MenuItem>
 			</StyledDrawer>
-			<Row type="flex" justify="space-between">
+			<Row type="flex" justify="space-between" align="middle">
 				<Col lg={8} xs={16}>
 					<Logo /> &nbsp;{' '}
 					{/* <span>

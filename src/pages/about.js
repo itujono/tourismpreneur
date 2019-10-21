@@ -78,18 +78,25 @@ export default function About() {
 	const heroText = (
 		<>
 			<p>
-				TACITA ENTERPRISE adalah Event Organizer yang bebasis di Batam.
-				Kompetensi kami telah teruji selama bertahun-tahun. Kami bukan
-				fresh graduate di dunia Event Organiser. Latar belakang kami
-				adalah ‘Pekerja Event’, MC, Sales, Pekerja Media serta graphic
-				designer. Dengan ragam latar belakang, kami mengikatkan diri
-				dalam satu wadah bernama TACITA Event Organizer.
+				TACITA ENTERPRISE adalah{' '}
+				<span className="underline">Event Organizer</span> yang berbasis
+				di Batam. Kompetensi kami telah teruji selama bertahun-tahun.
+				Kami bukan fresh graduate di dunia Event Organiser. Latar
+				belakang kami adalah ‘Pekerja Event’, MC, Sales, Pekerja Media
+				serta graphic designer. Dengan ragam latar belakang, kami{' '}
+				<span className="underline">
+					mengikatkan diri dalam satu wadah
+				</span>{' '}
+				bernama TACITA Event Organizer.
 			</p>
 			<p>
-				Kami hadir sebagai solusi kreatif untuk membantu
-				mengkomunikasikan kebutuhan promosi dan membangun image positif
-				perusahaan Anda ke konsumen serta masyarakat secara luas melalui
-				event-event promosi dan kegiatan alternatif lainnya.
+				Kami hadir sebagai solusi kreatif untuk membantu{' '}
+				<span className="underline">
+					mengkomunikasikan kebutuhan promosi dan membangun image
+					positif perusahaan Anda ke konsumen
+				</span>{' '}
+				serta masyarakat secara luas melalui event-event promosi dan
+				kegiatan alternatif lainnya.
 			</p>
 		</>
 	)
@@ -116,15 +123,22 @@ export default function About() {
 				Bagi kami Customer adalah arah bagi semua yang kami lakukan saat
 				sekarang dan di masa yang akan datang. TACITA Event Organizer
 				sangat menghormati komitmen, pengetahuan dan kreativitas dari
-				semua pihak yang terlibat. Kami meyakini bahwa semua orang
-				mempunyai bakat dan kemampuan untuk memberi andil bagi
-				terciptanya misi kami.
+				semua pihak yang terlibat. Kami meyakini bahwa{' '}
+				<span className="underline">
+					semua orang mempunyai bakat dan kemampuan untuk memberi
+					andil
+				</span>{' '}
+				bagi terciptanya misi kami.
 			</p>
 			<p>
-				Bagi kami kerjasama dan rasa hormat diantara individu merupakan
+				Bagi kami kerjasama dan rasa hormat di antara individu merupakan
 				landasan utama bagi semua keberhasilan. Hal inilah yang membuat
-				kami selalu dipercaya oleh perusahaan-perusahaan berskala
-				Nasional dan Internasional hingga saat ini.
+				kami{' '}
+				<span className="underline">
+					selalu dipercaya oleh perusahaan-perusahaan berskala
+					Nasional dan Internasional
+				</span>{' '}
+				hingga saat ini.
 			</p>
 		</>
 	)
@@ -182,7 +196,18 @@ export default function About() {
 				</Row>
 			</VisionMission>
 			<QuoteyText>
-				<Heading content="Lebih dari ratusan event telah kami kerjakan, hingga membuat kami semakin kokoh dan dipercaya oleh puluhan perusahaan nasional yang hingga kini menjadi klien tetap Kami." />
+				<Heading
+					content={
+						<span>
+							Lebih dari ratusan event telah kami kerjakan, hingga
+							membuat kami semakin kokoh dan{' '}
+							<span className="underline">
+								dipercaya oleh puluhan perusahaan nasional
+							</span>{' '}
+							yang hingga kini menjadi klien tetap kami.
+						</span>
+					}
+				/>
 			</QuoteyText>
 			<Row type="flex" style={{ marginTop: '-70px' }}>
 				<Col lg={12}>

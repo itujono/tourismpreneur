@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Avatar } from 'antd'
+import { Row, Col, Avatar, Icon } from 'antd'
 import Layout from '../Layout'
 import { Section, Heading, Card, Button } from '../components'
 import styled from 'styled-components'
@@ -92,6 +92,14 @@ const Home = () => {
 								content="Event organizer"
 								subheader="Kami adalah salah satu EO terbaik di kota ini. Itu kata mereka. Jangan percaya mereka -- buktikan sendiri!"
 							/>
+							<a
+								target="_blank"
+								href="https://wa.me/6282113111668?text=Hi,%20Tacita!%20Saya%20mau%20bertanya%20tentang%20pembuatan%20event"
+							>
+								<Button type="primary">
+									<Icon type="smile" /> Ngobrol dengan kami
+								</Button>
+							</a>
 						</Col>
 						<Col lg={8}>Eheheh</Col>
 						<Col lg={8}>
@@ -202,7 +210,15 @@ const Home = () => {
 					<Row gutter={120} type="flex" align="middle">
 						<Col lg={16}>
 							<Heading
-								content="Sudah siap untuk nge-host event terkeren di kotamu?"
+								content={
+									<span>
+										Sudah siap untuk{' '}
+										<span className="underline">
+											nge-host event terkeren
+										</span>{' '}
+										di kotamu?
+									</span>
+								}
 								marginBottom="0"
 							/>
 						</Col>

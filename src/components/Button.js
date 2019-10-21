@@ -14,6 +14,11 @@ const StyledButton = styled(_Button).attrs(({ size }) => ({
 		color: white;
 		border-color: ${baseStyles.primaryColor};
 		background-color: ${baseStyles.primaryColor};
+		&:hover {
+			background-color: ${baseStyles.tertiaryColor};
+			border-color: ${baseStyles.tertiaryColor};
+			color: ${baseStyles.primaryColor};
+		}
 	}
 `
 
