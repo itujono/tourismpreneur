@@ -131,9 +131,11 @@ function Navbar() {
 							key="events"
 							style={{ paddingLeft: '2em', paddingRight: 0 }}
 						>
-							<Button icon="plus" size="large">
-								Browse events
-							</Button>
+							<Link to="/events">
+								<Button icon="plus" size="large">
+									Browse events
+								</Button>
+							</Link>
 						</Menu.Item>
 						<Menu.Item
 							key="menus"
