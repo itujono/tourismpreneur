@@ -8,6 +8,7 @@ import DynamicIcon from '../components/DynamicIcon'
 import { Row, Col, Icon } from 'antd'
 import { graphql } from 'gatsby'
 import RichText from '../components/RichText'
+import { media } from '../utils'
 
 const FeaturedSection = styled(Section)`
 	max-height: 350px;
@@ -36,6 +37,11 @@ const TitleSection = styled(Section)`
 			margin-right: 0.5em;
 		}
 	}
+
+	${media.mobile`
+		padding: 2em;
+		width: 100%;
+	`}
 `
 
 const ContentSection = styled(Section)`
@@ -46,6 +52,11 @@ const ContentSection = styled(Section)`
 	article {
 		margin-bottom: 2em;
 	}
+
+	${media.mobile`
+		padding: 2em;
+		width: 100%;
+	`}
 `
 
 export default function Event({ data: { contentfulEvent: event = {} } }) {

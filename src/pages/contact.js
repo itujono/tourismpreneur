@@ -5,7 +5,7 @@ import { Section, Heading, Button } from '../components'
 import { baseStyles } from '../styles'
 import { Row, Col, Form, Input, Tooltip } from 'antd'
 import DynamicIcon from '../components/DynamicIcon'
-import { mobile } from '../utils'
+import { mobile, media } from '../utils'
 import TextInput from '../components/TextInput'
 
 const HeroSection = styled(Section)`
@@ -35,6 +35,12 @@ const HeroSection = styled(Section)`
 			}
 		}
 	}
+
+	${media.mobile`
+		.inner-box {
+			padding: 2em;
+		}
+	`}
 `
 
 const StyledShareIcon = styled.div`
@@ -204,17 +210,26 @@ export default function Contact() {
 									label="Apa yang mau kamu utarakan?"
 									placeholder="Misal: Saya mau konsultasi tentang event olahraga yang akan saya adakan..."
 								/>
-								<Button type="primary" icon="check">
-									Kirim pertanyaan saya
-								</Button>{' '}
-								&nbsp; Atau{' '}
-								<a
-									className="underline"
-									target="_blank"
-									href="https://wa.me/6282113111668?text=Hi,%20Tacita!%20Saya%20mau%20bertanya%20tentang%20pembuatan%20event"
-								>
-									whatsapp saja langsung
-								</a>
+								<Section textAlign={mobile && 'center'}>
+									<Button
+										type="primary"
+										icon="check"
+										block={mobile}
+										style={{
+											marginBottom: mobile && '1em',
+										}}
+									>
+										Kirim pertanyaan saya
+									</Button>{' '}
+									&nbsp; Atau{' '}
+									<a
+										className="underline"
+										target="_blank"
+										href="https://wa.me/6282113111668?text=Hi,%20Tacita!%20Saya%20mau%20bertanya%20tentang%20pembuatan%20event"
+									>
+										whatsapp saja langsung
+									</a>
+								</Section>
 							</Form>
 						</Col>
 					</Row>

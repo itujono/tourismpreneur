@@ -6,6 +6,7 @@ import Heading from './Heading'
 import Button from './Button'
 import { Link } from 'gatsby'
 import { baseStyles } from '../styles'
+import { mobile } from '../utils'
 
 const Nav = styled.nav`
 	width: 85%;
@@ -90,22 +91,22 @@ function Navbar() {
 				title="Menu"
 				onClose={() => setMenuDrawer(false)}
 				visible={menuDrawer}
-				width={450}
+				width={mobile ? '100%' : 450}
 			>
 				<MenuItem>
-					<Link to="/about">
+					<Link to="/about" onClick={() => setMenuDrawer(false)}>
 						ABOUT <br />
 						<span>If you want to know us much closer</span>
 					</Link>
 				</MenuItem>
 				<MenuItem>
-					<Link to="/events">
+					<Link to="/events" onClick={() => setMenuDrawer(false)}>
 						EVENTS <br />
 						<span>See what we have done for people</span>
 					</Link>
 				</MenuItem>
 				<MenuItem>
-					<Link to="/contact">
+					<Link to="/contact" onClick={() => setMenuDrawer(false)}>
 						CONTACT <br />
 						<span>Inquiries? Asking something? Let's do this!</span>
 					</Link>

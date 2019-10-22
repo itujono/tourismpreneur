@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { media } from '../utils'
 
 const StyledSection = styled.section`
 	padding: ${({ ph, pv, noPadding }) =>
@@ -10,6 +11,11 @@ const StyledSection = styled.section`
 		`${pv} ${ph}`};
 	background: ${({ bg }) => bg};
 	text-align: ${({ textAlign }) => textAlign};
+	${media.mobile`
+		&& {
+			padding: 1em;
+		}
+	`}
 `
 
 export default function Section({ textAlign = 'left', children, ...props }) {

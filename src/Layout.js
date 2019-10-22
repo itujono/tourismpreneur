@@ -174,7 +174,7 @@ function Layout({
 							justify="center"
 							style={{ marginBottom: '2em' }}
 						>
-							<Col lg={2}>
+							<Col lg={2} xs={6}>
 								<StyledShareIcon
 									bg="#3c589a"
 									onClick={() => ({})}
@@ -185,7 +185,7 @@ function Layout({
 									/>
 								</StyledShareIcon>
 							</Col>
-							<Col lg={2}>
+							<Col lg={2} xs={6}>
 								<StyledShareIcon
 									bg="#5eaade"
 									onClick={() => ({})}
@@ -196,7 +196,7 @@ function Layout({
 									/>
 								</StyledShareIcon>
 							</Col>
-							<Col lg={2}>
+							<Col lg={2} xs={6}>
 								<StyledShareIcon
 									bg="#4dc247"
 									onClick={() => ({})}
