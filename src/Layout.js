@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Layout as PageLayout, Breadcrumb, Menu, Icon, Row, Col } from 'antd'
+import { Layout as PageLayout, Menu, Icon, Row, Col } from 'antd'
 import styled from 'styled-components'
-import { media } from './utils'
+import { media, mobile } from './utils'
 import { Link } from 'gatsby'
 import Navbar from './components/Navbar'
 import DynamicIcon from './components/DynamicIcon'
@@ -25,12 +25,6 @@ const Footer = styled(PageLayout.Footer)`
 	text-align: center;
 	padding: 3em;
 	padding-top: 7em;
-`
-
-const Section = styled.section`
-	padding-left: 4em;
-	padding-right: 4em;
-	padding-top: 3em;
 `
 
 const Sidebar = styled(PageLayout.Sider)`
@@ -167,14 +161,19 @@ function Layout({
 
 			{!basic && !sidebar && (
 				<Footer>
-					<div style={{ width: '50%', margin: '0 auto' }}>
+					<div
+						style={{
+							width: mobile ? '100%' : '50%',
+							margin: '0 auto',
+						}}
+					>
 						<Row
 							gutter={32}
 							type="flex"
 							justify="center"
 							style={{ marginBottom: '2em' }}
 						>
-							<Col lg={2} xs={6}>
+							<Col lg={2} xs={4}>
 								<StyledShareIcon
 									bg="#3c589a"
 									onClick={() => ({})}
@@ -185,7 +184,7 @@ function Layout({
 									/>
 								</StyledShareIcon>
 							</Col>
-							<Col lg={2} xs={6}>
+							<Col lg={2} xs={4}>
 								<StyledShareIcon
 									bg="#5eaade"
 									onClick={() => ({})}
@@ -196,7 +195,7 @@ function Layout({
 									/>
 								</StyledShareIcon>
 							</Col>
-							<Col lg={2} xs={6}>
+							<Col lg={2} xs={4}>
 								<StyledShareIcon
 									bg="#4dc247"
 									onClick={() => ({})}

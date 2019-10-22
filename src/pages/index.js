@@ -7,12 +7,21 @@ import { baseStyles } from '../styles'
 import DynamicIcon from '../components/DynamicIcon'
 import { Link } from 'gatsby'
 import blueSplatter from '../images/splatter-blue.svg'
+import { media, mobile } from '../utils'
 
 const HeroSection = styled(Section)`
 	height: 100vh;
 	background: url('https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cdaba596d9f35a12997b809_masthead-pop-parlour-compressor-p-1600.jpeg')
 		center no-repeat;
 	background-size: cover;
+	.testimonial {
+		position: relative;
+		.ant-btn {
+			position: absolute;
+			bottom: -25px;
+			right: 100px;
+		}
+	}
 	.heading {
 		h4 {
 			font-size: 5em;
@@ -33,6 +42,9 @@ const InnerBox = styled.div`
 	display: flex;
 	align-items: ${({ align }) => align || 'flex-end'};
 	justify-content: ${({ justify }) => justify || 'flex-end'};
+	.image {
+		position: relative;
+	}
 	.splatter {
 		position: absolute;
 		left: 30%;
@@ -40,6 +52,34 @@ const InnerBox = styled.div`
 		width: 150px;
 		z-index: 0;
 	}
+`
+
+const MiddleSection = styled(Section)`
+	.event-is-hard {
+		article.ant-typography {
+			width: 90%;
+			margin-top: 50px;
+			margin-left: -120px;
+		}
+	}
+
+	${media.mobile`
+		.event-is-hard {
+			article.ant-typography {
+				margin-left: initial;
+			}
+		}
+	`}
+`
+
+const ReviewSection = styled(Section)`
+	padding-top: 4em;
+	padding-bottom: 12em;
+
+	${media.mobile`
+			padding-top: 2em;
+			padding-bottom: 2em;
+	`}
 `
 
 const ReviewCard = styled.div`
@@ -71,6 +111,10 @@ const ReviewCard = styled.div`
 			height: 70px;
 		}
 	}
+
+	${media.mobile`
+		margin-right: initial;
+	`}
 `
 
 const StyledReviewImage = styled.div`
@@ -94,6 +138,11 @@ const CallToAction = styled.div`
 		border-color: #fff;
 		color: ${baseStyles.primaryColor};
 	}
+
+	${media.mobile`
+		margin-top: initial;
+		padding: 2em;
+	`}
 `
 
 const Home = () => {
@@ -119,7 +168,7 @@ const Home = () => {
 							</a>
 						</Col>
 						<Col lg={8}></Col>
-						<Col lg={8}>
+						<Col lg={8} className="testimonial">
 							<Card
 								style={{ width: 250, margin: '0 auto' }}
 								cover="https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cf19c0ffeecff536f839acd_pop%20parlour%20feature.jpg"
@@ -131,7 +180,8 @@ const Home = () => {
 					</Row>
 				</Section>
 			</HeroSection>
-			<Section ph="very">
+
+			<MiddleSection ph="very">
 				<Row gutter={32} type="flex">
 					<Col lg={8}>
 						<InnerBox align="center">
@@ -140,7 +190,7 @@ const Home = () => {
 								src={blueSplatter}
 								alt="Biarkan Tacita yang merancang event kamu"
 							/>
-							<div>
+							<div className="image">
 								<img
 									src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5cfe97c2b4e53beb6d4389a7_crew.jpg"
 									width="200"
@@ -156,16 +206,11 @@ const Home = () => {
 							alt="Know Tacita closer"
 						/>
 					</Col>
-					<Col lg={8}>
+					<Col lg={8} className="event-is-hard">
 						{/* prettier-ignore */}
 						<Heading
 							content={<span>Ngadain{' '} <span className="underline"> event itu berat </span> . Biar kami saja.</span>}
 							level={1}
-							style={{
-								marginLeft: '-120px',
-								marginTop: 50,
-								width: '90%',
-							}}
 						/>
 						{/* <InnerBox align="center" justify="center"> */}
 						<p>
@@ -182,13 +227,9 @@ const Home = () => {
 						</p>
 					</Col>
 				</Row>
-			</Section>
+			</MiddleSection>
 
-			<Section
-				ph="very"
-				bg={baseStyles.secondaryColor}
-				style={{ paddingTop: '4em', paddingBottom: '12em' }}
-			>
+			<ReviewSection ph="very" bg={baseStyles.secondaryColor}>
 				<Section ph="very">
 					<Row type="flex" justify="center" align="middle">
 						<Col lg={8}>
@@ -232,8 +273,8 @@ const Home = () => {
 						</Col>
 					</Row>
 				</Section>
-			</Section>
-			<Section ph="very">
+			</ReviewSection>
+			<Section ph="very" style={{ height: mobile ? 'auto' : 300 }}>
 				<CallToAction>
 					<Row gutter={120} type="flex" align="middle">
 						<Col lg={16}>
@@ -247,7 +288,7 @@ const Home = () => {
 										di kotamu?
 									</span>
 								}
-								marginBottom="0"
+								marginBottom={!mobile && '0'}
 							/>
 						</Col>
 						<Col lg={6}>

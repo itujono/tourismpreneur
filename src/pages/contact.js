@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Layout from '../Layout'
 import { Section, Heading, Button } from '../components'
 import { baseStyles } from '../styles'
-import { Row, Col, Form, Input, Tooltip } from 'antd'
+import { Row, Col, Form, Tooltip } from 'antd'
 import DynamicIcon from '../components/DynamicIcon'
 import { mobile, media } from '../utils'
 import TextInput from '../components/TextInput'
@@ -63,17 +63,6 @@ const ShareIcons = styled.ul`
 		margin-right: 1em;
 	}
 `
-
-const url = 'https://sg.cudy.co'
-const windowFeatures = 'height=350,width=600,left=300,top=200'
-
-const handleShareWhatsapp = text => {
-	window.open(
-		`whatsapp://send?text=${text}`,
-		'whatsapp-popup',
-		windowFeatures
-	)
-}
 
 export default function Contact() {
 	return (
@@ -210,7 +199,7 @@ export default function Contact() {
 									label="Apa yang mau kamu utarakan?"
 									placeholder="Misal: Saya mau konsultasi tentang event olahraga yang akan saya adakan..."
 								/>
-								<Section textAlign={mobile && 'center'}>
+								<Section ph={0} textAlign={mobile && 'center'}>
 									<Button
 										type="primary"
 										icon="check"

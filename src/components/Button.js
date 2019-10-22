@@ -3,12 +3,13 @@ import { Button as _Button } from 'antd'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
 
-const StyledButton = styled(_Button).attrs(({ size }) => ({
+const StyledButton = styled(_Button).attrs(({ size, shape }) => ({
 	size: size || 'large',
-	shape: 'round',
+	shape: shape || 'round',
 }))`
 	&& {
 		height: 50px;
+		width: ${({ shape }) => (shape === 'circle' ? '50px' : 'auto')};
 		font-weight: bold;
 		font-size: ${({ size }) => size === 'large' && '16px'};
 		color: white;

@@ -6,12 +6,16 @@ import Heading from './Heading'
 import Button from './Button'
 import { Link } from 'gatsby'
 import { baseStyles } from '../styles'
-import { mobile } from '../utils'
+import { mobile, media } from '../utils'
 
 const Nav = styled.nav`
 	width: 85%;
 	margin: 0 auto;
 	background-color: transparent;
+
+	${media.mobile`
+		width: 100%;
+	`}
 `
 
 const StyledMenu = styled(Menu)`
@@ -91,7 +95,7 @@ function Navbar() {
 				title="Menu"
 				onClose={() => setMenuDrawer(false)}
 				visible={menuDrawer}
-				width={mobile ? '100%' : 450}
+				width={mobile ? '85%' : 450}
 			>
 				<MenuItem>
 					<Link to="/about" onClick={() => setMenuDrawer(false)}>
@@ -127,28 +131,36 @@ function Navbar() {
 					</span> */}
 				</Col>
 				<Col lg={8} xs={8} style={{ textAlign: 'right' }}>
-					<StyledMenu mode="horizontal">
-						<Menu.Item
-							key="events"
-							style={{ paddingLeft: '2em', paddingRight: 0 }}
-						>
-							<Link to="/events">
-								<Button icon="plus" size="large">
-									Browse events
-								</Button>
-							</Link>
-						</Menu.Item>
-						<Menu.Item
-							key="menus"
-							style={{ paddingLeft: '2em', paddingRight: 0 }}
-						>
-							<Button
-								shape="circle"
-								icon="menu"
-								onClick={() => setMenuDrawer(!menuDrawer)}
-							/>
-						</Menu.Item>
-					</StyledMenu>
+					{mobile ? (
+						<Button
+							shape="circle"
+							icon="menu"
+							onClick={() => setMenuDrawer(!menuDrawer)}
+						/>
+					) : (
+						<StyledMenu mode="horizontal">
+							<Menu.Item
+								key="events"
+								style={{ paddingLeft: '2em', paddingRight: 0 }}
+							>
+								<Link to="/events">
+									<Button icon="plus" size="large">
+										Browse events
+									</Button>
+								</Link>
+							</Menu.Item>
+							<Menu.Item
+								key="menus"
+								style={{ paddingLeft: '2em', paddingRight: 0 }}
+							>
+								<Button
+									shape="circle"
+									icon="menu"
+									onClick={() => setMenuDrawer(!menuDrawer)}
+								/>
+							</Menu.Item>
+						</StyledMenu>
+					)}
 				</Col>
 			</Row>
 		</Nav>
