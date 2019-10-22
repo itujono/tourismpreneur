@@ -14,6 +14,7 @@ const HeroSection = styled(Section)`
 	background: url('https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cdaba596d9f35a12997b809_masthead-pop-parlour-compressor-p-1600.jpeg')
 		center no-repeat;
 	background-size: cover;
+	position: relative;
 	.testimonial {
 		position: relative;
 		.ant-btn {
@@ -34,6 +35,25 @@ const HeroSection = styled(Section)`
 			color: #fff;
 		}
 	}
+
+	${media.mobile`
+		&& {
+			padding: 0;
+			margin-bottom: 2em;
+			height: 120vh;
+			.heading {
+				h4 {
+					font-size: 3em;
+				}
+			}
+		}
+		.overlay-on-mobile {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, .5);
+		}
+	`}
 `
 
 const InnerBox = styled.div`
@@ -52,6 +72,16 @@ const InnerBox = styled.div`
 		width: 150px;
 		z-index: 0;
 	}
+
+	${media.mobile`
+		margin-bottom: 2em;
+		.image {
+			right: -100px;
+		}
+		.splatter {
+			left: 10%;
+		}
+	`}
 `
 
 const MiddleSection = styled(Section)`
@@ -120,6 +150,10 @@ const ReviewCard = styled.div`
 const StyledReviewImage = styled.div`
 	width: 450px;
 	height: 450px;
+
+	${media.mobile`
+		width: 100%;
+	`}
 `
 
 const CallToAction = styled.div`
@@ -149,9 +183,16 @@ const Home = () => {
 	return (
 		<Layout>
 			<HeroSection bg="#77b8d4">
-				<Section ph="very" style={{ marginTop: '3em' }}>
+				{mobile && <div className="overlay-on-mobile"></div>}
+				<Section
+					ph="very"
+					style={{
+						marginTop: !mobile && '3em',
+						padding: mobile && '3em',
+					}}
+				>
 					<Row gutter={32} type="flex" align="middle">
-						<Col lg={8}>
+						<Col lg={8} style={{ marginBottom: mobile && '2em' }}>
 							<Heading
 								className="heading"
 								content="Event organizer"
@@ -167,10 +208,13 @@ const Home = () => {
 								</Button>
 							</a>
 						</Col>
-						<Col lg={8}></Col>
+						{!mobile && <Col lg={8}></Col>}
 						<Col lg={8} className="testimonial">
 							<Card
-								style={{ width: 250, margin: '0 auto' }}
+								style={{
+									width: !mobile && 250,
+									margin: '0 auto',
+								}}
 								cover="https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cf19c0ffeecff536f839acd_pop%20parlour%20feature.jpg"
 								title="Hear from them"
 								description="Saya sudah bermitra dengan Tacita sejak tahun 2015, dan sampai saat ini Tacita sudah membantu saya membuat hingga 6 event di berbagai kota..."

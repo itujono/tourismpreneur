@@ -41,7 +41,26 @@ const HeroCard = styled.div`
 	`}
 `
 
+const HappinessSection = styled(Section)`
+	article.ant-typography {
+		line-height: 1.2;
+		> h1 {
+			font-size: 4em;
+		}
+	}
+
+	${media.mobile`
+		article.ant-typography {
+			line-height: 1.1
+			> h1 {
+				line-height: 1.1
+			}
+		}
+	`}
+`
+
 const VisionMission = styled(Section)`
+	/* padding: 0; */
 	.vision-mission {
 		.ant-typography {
 			h4 {
@@ -58,6 +77,20 @@ const VisionMission = styled(Section)`
 			}
 		}
 	}
+
+	${media.mobile`
+		&& {
+			.vision-mission {
+				padding: 4em;
+				.ant-typography {
+					p {
+						font-size: initial;
+						color: ${baseStyles.primaryColor};
+					}
+				}
+			}
+		}
+	`}
 `
 
 const QuoteyText = styled.div`
@@ -75,6 +108,7 @@ const QuoteyText = styled.div`
 
 	${media.mobile`
 		margin-top: initial;
+		width: 100%;
 	`}
 `
 
@@ -190,7 +224,7 @@ export default function About() {
 			</HeroSection>
 			<Row type="flex" justify="center">
 				<Col lg={16}>
-					<Section textAlign="center">
+					<HappinessSection textAlign="center">
 						<div style={{ marginBottom: '2em' }}>
 							<DynamicIcon type="iconicon_video" size="6em" />
 						</div>
@@ -205,13 +239,17 @@ export default function About() {
 									.
 								</span>
 							}
-							headingStyles={{ fontSize: '4em' }}
 						/>
-					</Section>
+					</HappinessSection>
 				</Col>
 			</Row>
 			<VisionMission ph="very">
-				<Row gutter={120} type="flex" justify="center" align="middle">
+				<Row
+					gutter={!mobile && 120}
+					type="flex"
+					justify="center"
+					align="middle"
+				>
 					<Col lg={12} style={{ marginBottom: mobile && '2em' }}>
 						<img
 							src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5ccc8aa73871f96172c81ca3_passion-01.jpg"
