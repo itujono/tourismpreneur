@@ -6,6 +6,8 @@ import { Row, Col, Icon, Input, Form, Select } from 'antd'
 import { baseStyles } from '../styles'
 import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
+import TextInput from '../components/TextInput'
+import SelectInput from '../components/SelectInput'
 
 const MainSection = styled(Section)`
 	padding: 5em 7em;
@@ -79,22 +81,20 @@ function Events({ data: { allContentfulEvent = {} } }) {
 					</Col>
 					<Col lg={6}>
 						<Form layout="vertical" style={{ marginBottom: '3em' }}>
-							<Form.Item name="search" label="Cari event">
-								<Input.Search
-									name="search"
-									placeholder="Misal: Djarum Super"
-									style={{ width: '100%' }}
-								/>
-							</Form.Item>
+							<TextInput
+								search
+								name="search"
+								label="Cari event"
+								placeholder="Misal: Djarum Super"
+							/>
 						</Form>
 						<Form layout="vertical" style={{ marginBottom: '3em' }}>
-							<Form.Item name="sort" label="Urutkan event">
-								<Select
-									name="sort"
-									placeholder="Urutkan event"
-									label="Boong"
-								></Select>
-							</Form.Item>
+							<SelectInput
+								name="sort"
+								label="Urutkan event"
+								placeholder="Urutkan event"
+								options={[]}
+							/>
 						</Form>
 					</Col>
 				</Row>

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { baseStyles } from '../styles'
 import DynamicIcon from '../components/DynamicIcon'
 import { Link } from 'gatsby'
+import blueSplatter from '../images/splatter-blue.svg'
 
 const HeroSection = styled(Section)`
 	height: 100vh;
@@ -27,10 +28,18 @@ const HeroSection = styled(Section)`
 `
 
 const InnerBox = styled.div`
+	position: relative;
 	height: 100%;
 	display: flex;
 	align-items: ${({ align }) => align || 'flex-end'};
 	justify-content: ${({ justify }) => justify || 'flex-end'};
+	.splatter {
+		position: absolute;
+		left: 30%;
+		top: 40%;
+		width: 150px;
+		z-index: 0;
+	}
 `
 
 const ReviewCard = styled.div`
@@ -52,10 +61,14 @@ const ReviewCard = styled.div`
 			h4 {
 				margin-bottom: initial;
 			}
+			p {
+				margin-bottom: 0;
+				color: ${baseStyles.greyColor};
+			}
 		}
 		.ant-avatar {
-			width: 90px;
-			height: 90px;
+			width: 70px;
+			height: 70px;
 		}
 	}
 `
@@ -94,7 +107,7 @@ const Home = () => {
 								className="heading"
 								content="Event organizer"
 								headingStyles={{ marginBottom: '0.2em' }}
-								subheader="Kami adalah salah satu EO terbaik di kota ini. Well, itu kata mereka. Jangan percaya mereka -- kamu harus buktikan sendiri!"
+								subheader="Kami adalah salah satu EO terbaik di kota ini. Well, itu kata mereka. Jangan percaya mereka &mdash; kamu harus buktikan sendiri!"
 							/>
 							<a
 								target="_blank"
@@ -105,7 +118,7 @@ const Home = () => {
 								</Button>
 							</a>
 						</Col>
-						<Col lg={8}>Eheheh</Col>
+						<Col lg={8}></Col>
 						<Col lg={8}>
 							<Card
 								style={{ width: 250, margin: '0 auto' }}
@@ -122,6 +135,11 @@ const Home = () => {
 				<Row gutter={32} type="flex">
 					<Col lg={8}>
 						<InnerBox align="center">
+							<img
+								className="splatter"
+								src={blueSplatter}
+								alt="Biarkan Tacita yang merancang event kamu"
+							/>
 							<div>
 								<img
 									src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5cfe97c2b4e53beb6d4389a7_crew.jpg"
@@ -139,8 +157,9 @@ const Home = () => {
 						/>
 					</Col>
 					<Col lg={8}>
+						{/* prettier-ignore */}
 						<Heading
-							content="Ngadain event itu berat. Biar kami saja."
+							content={<span>Ngadain{' '} <span className="underline"> event itu berat </span> . Biar kami saja.</span>}
 							level={1}
 							style={{
 								marginLeft: '-120px',
@@ -154,14 +173,13 @@ const Home = () => {
 							apa. Semoga{' '}
 							<span className="underline">
 								amal ibadah para hadirin solat Jumat
-							</span>
+							</span>{' '}
 							diterima sepantasnya dan selayaknya. Thanks. <br />
 							<br /> Tacita uses a carefully selected shirt
 							library, unique print processes, and simple order
 							process to make it easier than ever to order shirts
 							you'll love and wear proudly.
 						</p>
-						{/* </InnerBox> */}
 					</Col>
 				</Row>
 			</Section>
@@ -178,6 +196,7 @@ const Home = () => {
 								<Heading
 									content="Apa kata mereka"
 									subheader="Tacita is one of the best. Superb customer service too, very responsive and the nicest people from here to Timbuktu. Will order again. And again. HUGE THANKS TACITA! ❤️"
+									marginBottom="4em"
 								/>
 								<Row
 									gutter={32}
@@ -187,7 +206,7 @@ const Home = () => {
 								>
 									<Col lg={8}>
 										<Avatar
-											size="large"
+											size="default"
 											src="https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5ced36d63d602ded8a75be9f_Team-Orange-Nick-Forneris-p-500.jpeg"
 										/>
 									</Col>
@@ -196,6 +215,7 @@ const Home = () => {
 											className="reviewer"
 											content="Felix Zainuddin"
 											subheader="Pejaten, DKI Jakarta"
+											marginBottom="0"
 										/>
 									</Col>
 								</Row>

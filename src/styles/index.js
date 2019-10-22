@@ -7,6 +7,7 @@ export const baseStyles = {
 	lightGrey: {
 		one: '#eee',
 		two: '#eceeef',
+		three: '#bbb',
 	},
 	boxShadow: {
 		main:

@@ -6,6 +6,7 @@ import { baseStyles } from '../styles'
 import { Row, Col, Form, Input, Tooltip } from 'antd'
 import DynamicIcon from '../components/DynamicIcon'
 import { mobile } from '../utils'
+import TextInput from '../components/TextInput'
 
 const HeroSection = styled(Section)`
 	padding: 4em 7em;
@@ -176,49 +177,44 @@ export default function Contact() {
 						</Col>
 						<Col lg={18}>
 							<Form layout="vertical">
-								<Form.Item name="name" label="Nama kamu">
-									<Input
-										name="name"
-										placeholder="Misal: Jeni Karmila"
-									/>
-								</Form.Item>
+								<TextInput
+									name="name"
+									label="Nama kamu"
+									placeholder="Misal: Jeni Karmila"
+								/>
 								<Row gutter={32}>
 									<Col lg={12}>
-										<Form.Item
+										<TextInput
 											name="email"
 											label="Email kamu"
-										>
-											<Input
-												name="email"
-												placeholder="Misal: Jeni@example.com"
-											/>
-										</Form.Item>
+											placeholder="Misal: Jeni@example.com"
+										/>
 									</Col>
 									<Col lg={12}>
-										<Form.Item
+										<TextInput
 											name="phone"
 											label="Nomor handphone kamu"
-										>
-											<Input
-												name="phone"
-												placeholder="Misal: 08122222229"
-											/>
-										</Form.Item>
+											placeholder="Misal: 08122222229"
+										/>
 									</Col>
 								</Row>
-								<Form.Item
+								<TextInput
+									textarea
 									name="message"
 									label="Apa yang mau kamu utarakan?"
-								>
-									<Input.TextArea
-										rows={4}
-										name="message"
-										placeholder="Misal: Saya mau konsultasi tentang event olahraga yang akan saya adakan..."
-									/>
-								</Form.Item>
+									placeholder="Misal: Saya mau konsultasi tentang event olahraga yang akan saya adakan..."
+								/>
 								<Button type="primary" icon="check">
 									Kirim pertanyaan saya
-								</Button>
+								</Button>{' '}
+								&nbsp; Atau{' '}
+								<a
+									className="underline"
+									target="_blank"
+									href="https://wa.me/6282113111668?text=Hi,%20Tacita!%20Saya%20mau%20bertanya%20tentang%20pembuatan%20event"
+								>
+									whatsapp saja langsung
+								</a>
 							</Form>
 						</Col>
 					</Row>
