@@ -5,9 +5,14 @@ import { Section, Heading } from '../components'
 import { Row, Col, Divider } from 'antd'
 import { baseStyles } from '../styles'
 import DynamicIcon from '../components/DynamicIcon'
+import { media, mobile } from '../utils'
 
 const HeroSection = styled(Section)`
 	padding: 7em 8em;
+
+	${media.mobile`
+		padding: 2em;
+	`}
 `
 
 const HeroCard = styled.div`
@@ -28,6 +33,12 @@ const HeroCard = styled.div`
 			}
 		}
 	}
+
+	${media.mobile`
+		.left {
+			padding: 2em;
+		}
+	`}
 `
 
 const VisionMission = styled(Section)`
@@ -61,6 +72,10 @@ const QuoteyText = styled.div`
 	h4 {
 		line-height: 1.8;
 	}
+
+	${media.mobile`
+		margin-top: initial;
+	`}
 `
 
 const CommitmentSection = styled.div`
@@ -75,6 +90,10 @@ const CommitmentSection = styled.div`
 		line-height: 1.8;
 		color: #fff;
 	}
+
+	${media.mobile`
+		padding: 2em;
+	`}
 `
 
 export default function About() {
@@ -193,7 +212,7 @@ export default function About() {
 			</Row>
 			<VisionMission ph="very">
 				<Row gutter={120} type="flex" justify="center" align="middle">
-					<Col lg={12}>
+					<Col lg={12} style={{ marginBottom: mobile && '2em' }}>
 						<img
 							src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5ccc8aa73871f96172c81ca3_passion-01.jpg"
 							width="100%"
@@ -224,7 +243,7 @@ export default function About() {
 					}
 				/>
 			</QuoteyText>
-			<Row type="flex" style={{ marginTop: '-70px' }}>
+			<Row type="flex" style={{ marginTop: !mobile && '-70px' }}>
 				<Col lg={12}>
 					<CommitmentSection>
 						<Heading
