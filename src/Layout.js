@@ -25,6 +25,16 @@ const Footer = styled(PageLayout.Footer)`
 	text-align: center;
 	padding: 3em;
 	padding-top: 7em;
+	.container {
+		width: 50%;
+		margin: 0 auto;
+	}
+
+	${media.mobile`
+		.container {
+			width: 100%;
+		}
+	`}
 `
 
 const Sidebar = styled(PageLayout.Sider)`
@@ -57,8 +67,7 @@ const StyledMenu = styled(Menu)`
 
 const StyledPageLayout = styled(PageLayout)`
 	&& {
-		overflow-x: ${({ pathname }) =>
-			pathname === '/dashboard/profile' && 'visible'} !important;
+		overflow-x: ${({ pathname }) => pathname === '/dashboard/profile' && 'visible'} !important;
 	}
 `
 
@@ -74,15 +83,7 @@ const StyledShareIcon = styled.div`
 	cursor: pointer;
 `
 
-function Layout({
-	basic = false,
-	sidebar = false,
-	children,
-	breadcrumb = false,
-	location = {},
-	history,
-	...props
-}) {
+function Layout({ basic = false, sidebar = false, children, breadcrumb = false, location = {}, history, ...props }) {
 	return (
 		<PageLayout {...props}>
 			{!basic && (
@@ -103,8 +104,7 @@ function Layout({
 								</Menu.Item>
 								<Menu.Item key="settings">
 									<Link to="/dashboard/settings">
-										<Icon type="experiment" /> &nbsp;
-										Settings
+										<Icon type="experiment" /> &nbsp; Settings
 									</Link>
 								</Menu.Item>
 								{/* <Menu.Item key="feedback">
@@ -122,33 +122,18 @@ function Layout({
 							<Footer>
 								<div>
 									<p>
-										<StyledShareIcon
-											bg="#3c589a"
-											onClick={() => ({})}
-										>
-											<DynamicIcon
-												type="icon-facebook-fill"
-												color="#fff"
-											/>
+										<StyledShareIcon bg="#3c589a" onClick={() => ({})}>
+											<DynamicIcon type="icon-facebook-fill" color="#fff" />
 										</StyledShareIcon>
 									</p>
 									<br />
+									<p>Tacita Enterprise &middot; all rights reserved 2019</p>
 									<p>
-										Tacita Enterprise &middot; all rights
-										reserved 2019
-									</p>
-									<p>
-										<a
-											href="http://tutorsms.com/tnc"
-											target="_blank"
-										>
+										<a href="http://tutorsms.com/tnc" target="_blank">
 											Terms & conditions
 										</a>{' '}
 										&nbsp; &middot; &nbsp;
-										<a
-											href="http://tutorsms.com/privacy"
-											target="_blank"
-										>
+										<a href="http://tutorsms.com/privacy" target="_blank">
 											Privacy policy
 										</a>
 									</p>
@@ -161,64 +146,31 @@ function Layout({
 
 			{!basic && !sidebar && (
 				<Footer>
-					<div
-						style={{
-							width: mobile ? '100%' : '50%',
-							margin: '0 auto',
-						}}
-					>
-						<Row
-							gutter={32}
-							type="flex"
-							justify="center"
-							style={{ marginBottom: '2em' }}
-						>
+					<div className="container">
+						<Row gutter={32} type="flex" justify="center" style={{ marginBottom: '2em' }}>
 							<Col lg={2} xs={4}>
-								<StyledShareIcon
-									bg="#3c589a"
-									onClick={() => ({})}
-								>
-									<DynamicIcon
-										type="iconfacebook-fill"
-										color="#fff"
-									/>
+								<StyledShareIcon bg="#3c589a" onClick={() => ({})}>
+									<DynamicIcon type="iconfacebook-fill" color="#fff" />
 								</StyledShareIcon>
 							</Col>
 							<Col lg={2} xs={4}>
-								<StyledShareIcon
-									bg="#5eaade"
-									onClick={() => ({})}
-								>
-									<DynamicIcon
-										type="icontwitter-fill"
-										color="#fff"
-									/>
+								<StyledShareIcon bg="#5eaade" onClick={() => ({})}>
+									<DynamicIcon type="icontwitter-fill" color="#fff" />
 								</StyledShareIcon>
 							</Col>
 							<Col lg={2} xs={4}>
-								<StyledShareIcon
-									bg="#4dc247"
-									onClick={() => ({})}
-								>
-									<DynamicIcon
-										type="iconwhatsapp-line"
-										color="#fff"
-									/>
+								<StyledShareIcon bg="#4dc247" onClick={() => ({})}>
+									<DynamicIcon type="iconwhatsapp-line" color="#fff" />
 								</StyledShareIcon>
 							</Col>
 						</Row>
-						<p>
-							Tacita Enterprise &middot; all rights reserved 2019
-						</p>
+						<p>Tacita Enterprise &middot; all rights reserved 2019</p>
 						<p>
 							<a href="http://tutorsms.com/tnc" target="_blank">
 								Terms & conditions
 							</a>{' '}
 							&nbsp; &middot; &nbsp;
-							<a
-								href="http://tutorsms.com/privacy"
-								target="_blank"
-							>
+							<a href="http://tutorsms.com/privacy" target="_blank">
 								Privacy policy
 							</a>
 						</p>

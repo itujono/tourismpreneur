@@ -88,16 +88,11 @@ const Home = () => {
 						/>
 						{/* <InnerBox align="center" justify="center"> */}
 						<p>
-							Bagian ini nggak tau mau diisi dengan copywriting
-							apa. Semoga{' '}
-							<span className="underline">
-								amal ibadah para hadirin solat Jumat
-							</span>{' '}
-							diterima sepantasnya dan selayaknya. Thanks. <br />
-							<br /> Tacita uses a carefully selected shirt
-							library, unique print processes, and simple order
-							process to make it easier than ever to order shirts
-							you'll love and wear proudly.
+							Bagian ini nggak tau mau diisi dengan copywriting apa. Semoga{' '}
+							<span className="underline">amal ibadah para hadirin solat Jumat</span> diterima sepantasnya
+							dan selayaknya. Thanks. <br />
+							<br /> Tacita uses a carefully selected shirt library, unique print processes, and simple
+							order process to make it easier than ever to order shirts you'll love and wear proudly.
 						</p>
 					</Col>
 				</Row>
@@ -113,12 +108,7 @@ const Home = () => {
 									subheader="Tacita is one of the best. Superb customer service too, very responsive and the nicest people from here to Timbuktu. Will order again. And again. HUGE THANKS TACITA! ❤️"
 									marginBottom="4em"
 								/>
-								<Row
-									gutter={32}
-									className="reviewer-section"
-									type="flex"
-									align="middle"
-								>
+								<Row gutter={32} className="reviewer-section" type="flex" align="middle">
 									<Col lg={8}>
 										<Avatar
 											size="default"
@@ -148,18 +138,15 @@ const Home = () => {
 					</Row>
 				</Section>
 			</ReviewSection>
-			<Section ph="very" style={{ height: mobile ? 'auto' : 300 }}>
+			<CTASection ph="very" style={{ height: mobile ? 'auto' : 300 }}>
 				<CallToAction>
 					<Row gutter={120} type="flex" align="middle">
 						<Col lg={16}>
 							<Heading
 								content={
 									<span>
-										Sudah siap untuk{' '}
-										<span className="underline">
-											nge-host event terkeren
-										</span>{' '}
-										di kotamu?
+										Sudah siap untuk <span className="underline">nge-host event terkeren</span> di
+										kotamu?
 									</span>
 								}
 								marginBottom={!mobile && '0'}
@@ -175,7 +162,7 @@ const Home = () => {
 						</Col>
 					</Row>
 				</CallToAction>
-			</Section>
+			</CTASection>
 		</Layout>
 	)
 }
@@ -326,6 +313,14 @@ const StyledReviewImage = styled.div`
 
 	${media.mobile`
 		width: 100%;
+	`}
+`
+
+const CTASection = styled(Section)`
+	height: 300px;
+
+	${media.mobile`
+		height: auto;
 	`}
 `
 
