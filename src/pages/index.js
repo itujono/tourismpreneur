@@ -157,7 +157,7 @@ const Home = () => {
 										kotamu?
 									</span>
 								}
-								marginBottom={!mobile && '0'}
+								className="heading"
 							/>
 						</Col>
 						<Col lg={6}>
@@ -347,6 +347,9 @@ const CallToAction = styled.div`
 	border-radius: 12px;
 	padding: 3em 5em;
 	box-shadow: ${baseStyles.boxShadow.main};
+	.heading {
+		margin-bottom: 0;
+	}
 	.ant-typography {
 		font-size: 1.7em;
 		line-height: 1.2;
