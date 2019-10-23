@@ -41,10 +41,6 @@ const Home = () => {
 						{!mobile && <Col lg={8}></Col>}
 						<Col lg={8} className="testimonial">
 							<Card
-								style={{
-									width: !mobile && 250,
-									margin: '0 auto',
-								}}
 								cover="https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cf19c0ffeecff536f839acd_pop%20parlour%20feature.jpg"
 								title="Hear from them"
 								description="Saya sudah bermitra dengan Tacita sejak tahun 2015, dan sampai saat ini Tacita sudah membantu saya membuat hingga 6 event di berbagai kota..."
@@ -138,7 +134,7 @@ const Home = () => {
 					</Row>
 				</Section>
 			</ReviewSection>
-			<CTASection ph="very" style={{ height: mobile ? 'auto' : 300 }}>
+			<CTASection ph="very">
 				<CallToAction>
 					<Row gutter={120} type="flex" align="middle">
 						<Col lg={16}>
@@ -177,6 +173,10 @@ const HeroSection = styled(Section)`
 	position: relative;
 	.testimonial {
 		position: relative;
+		> .ant-card {
+			margin: 0 auto;
+			width: 250px;
+		}
 		.ant-btn {
 			position: absolute;
 			bottom: -25px;
@@ -201,6 +201,11 @@ const HeroSection = styled(Section)`
 			padding: 0;
 			margin-bottom: 2em;
 			height: 120vh;
+			.testimonial {
+				> .ant-card {
+					width: 100%;
+				}
+			}
 			.heading {
 				h4 {
 					font-size: 3em;
