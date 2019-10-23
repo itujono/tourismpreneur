@@ -36,6 +36,7 @@ module.exports = {
 				path: `${__dirname}/contents`,
 			},
 		},
+		`gatsby-plugin-styled-components`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-sharp`,
 		{
@@ -59,7 +60,6 @@ module.exports = {
 				icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
 			},
 		},
-		`gatsby-plugin-styled-components`,
 		{
 			resolve: `gatsby-source-contentful`,
 			options: {
