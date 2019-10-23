@@ -74,8 +74,8 @@ function encode(data) {
 export default function Contact() {
 	const [formValues, setFormValues] = useState({})
 
-	const handleChange = e => {
-		setFormValues({ ...formValues, [e.target.name]: e.target.value })
+	const handleChange = name => e => {
+		setFormValues({ ...formValues, [name]: e.target.value })
 	}
 
 	const handleSubmit = e => {
@@ -94,9 +94,15 @@ export default function Contact() {
 					navigate(form.getAttribute('action'))
 				})
 			)
-			.then(() => message.success('Oke, message kamu udah berhasil dikirim. Tunggu kabar dari kami yaa :)'))
+			.then(() =>
+				message.success(
+					'Oke, message kamu udah berhasil dikirim. Tunggu kabar dari kami yaa, dan kami akan segera menghubungi kamu :)'
+				)
+			)
 			.catch(error => message.error(error))
 	}
+
+	console.log({ formValues })
 
 	return (
 		<Layout>
@@ -194,15 +200,15 @@ export default function Contact() {
 									name="name"
 									label="Nama kamu"
 									placeholder="Misal: Jeni Karmila"
-									onChange={handleChange}
+									onChange={handleChange('name')}
 								/>
 								<Row gutter={32}>
 									<Col lg={12}>
 										<TextInput
 											name="email"
 											label="Email kamu"
-											placeholder="Misal: Jeni@example.com"
-											onChange={handleChange}
+											placeholder="Misal: jeni@example.com"
+											onChange={handleChange('email')}
 										/>
 									</Col>
 									<Col lg={12}>
@@ -210,7 +216,7 @@ export default function Contact() {
 											name="phone"
 											label="Nomor handphone kamu"
 											placeholder="Misal: 08122222229"
-											onChange={handleChange}
+											onChange={handleChange('phone')}
 										/>
 									</Col>
 								</Row>
@@ -219,7 +225,7 @@ export default function Contact() {
 									name="message"
 									label="Apa yang mau kamu utarakan?"
 									placeholder="Misal: Saya mau konsultasi tentang event olahraga yang akan saya adakan..."
-									onChange={handleChange}
+									onChange={handleChange('message')}
 								/>
 								<Section ph={0} textAlign={mobile && 'center'}>
 									<Button
