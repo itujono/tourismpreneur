@@ -89,7 +89,11 @@ export default function Contact() {
 				...formValues,
 			}),
 		})
-			.then(() => navigate(form.getAttribute('action')))
+			.then(() =>
+				message.loading('Okay mohon tunggu...').then(() => {
+					navigate(form.getAttribute('action'))
+				})
+			)
 			.then(() => message.success('Oke, message kamu udah berhasil dikirim. Tunggu kabar dari kami yaa :)'))
 			.catch(error => message.error(error))
 	}
