@@ -16,13 +16,25 @@ const Home = () => {
 				{mobile && <div className="overlay-on-mobile"></div>}
 				<Section
 					ph="very"
-					style={{
-						marginTop: !mobile && '3em',
-						padding: mobile && '3em',
-					}}
+					css={`
+						margin-top: 3em;
+						${media.mobile`
+							&& {
+								padding: 3em;
+								margin-top: 0;
+							}
+						`}
+					`}
 				>
 					<Row gutter={32} type="flex" align="middle">
-						<Col lg={8} style={{ marginBottom: mobile && '2em' }}>
+						<Col
+							lg={8}
+							css={`
+								${media.mobile`
+									margin-bottom: 2em;
+								`}
+							`}
+						>
 							<Heading
 								className="heading"
 								content="Event organizer"
