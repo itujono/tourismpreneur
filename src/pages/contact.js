@@ -102,8 +102,6 @@ export default function Contact() {
 			.catch(error => message.error(error))
 	}
 
-	console.log({ formValues })
-
 	return (
 		<Layout>
 			<HeroSection>
@@ -194,8 +192,7 @@ export default function Contact() {
 								data-netlify="true"
 								data-netlify-honeypot="bot-field"
 							>
-								{/* <input type="hidden" name="form-name" value="contact" /> */}
-								<form-name type="hidden" name="contact" value="contact" />
+								<input type="hidden" name="form-name" value="contact" />
 
 								<TextInput
 									name="name"
