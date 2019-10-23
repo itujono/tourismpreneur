@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Layout from '../Layout'
 import { Section, Heading, Button } from '../components'
 import { baseStyles } from '../styles'
-import { Row, Col, Form, Tooltip } from 'antd'
+import { Row, Col, Form, Tooltip, message } from 'antd'
 import DynamicIcon from '../components/DynamicIcon'
 import { mobile, media } from '../utils'
 import TextInput from '../components/TextInput'
+import { navigate } from 'gatsby'
 
 const HeroSection = styled(Section)`
 	padding: 4em 7em;
@@ -64,7 +65,35 @@ const ShareIcons = styled.ul`
 	}
 `
 
+function encode(data) {
+	return Object.keys(data)
+		.map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+		.join('&')
+}
+
 export default function Contact() {
+	const [formValues, setFormValues] = useState({})
+
+	const handleChange = e => {
+		setFormValues({ ...formValues, [e.target.name]: e.target.value })
+	}
+
+	const handleSubmit = e => {
+		e.preventDefault()
+		const form = e.target
+		fetch('/', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: encode({
+				'form-name': form.getAttribute('name'),
+				...formValues,
+			}),
+		})
+			.then(() => navigate(form.getAttribute('action')))
+			.then(() => message.success('Oke, message kamu udah berhasil dikirim. Tunggu kabar dari kami yaa :)'))
+			.catch(error => message.error(error))
+	}
+
 	return (
 		<Layout>
 			<HeroSection>
@@ -75,11 +104,8 @@ export default function Contact() {
 							<Heading
 								content={
 									<span>
-										Tanyakan{' '}
-										<span className="underline">
-											apa saja
-										</span>{' '}
-										yang ada di kepala. Kami selalu siap!
+										Tanyakan <span className="underline">apa saja</span> yang ada di kepala. Kami
+										selalu siap!
 									</span>
 								}
 							/>
@@ -102,12 +128,10 @@ export default function Contact() {
 									<Tooltip title="Lihat di Google Maps">
 										<a
 											className="underline"
-											href="https://www.google.com/maps/dir/?api=1&destination=Jalan Kartini VI Blok C #89, Sei
-			Harapan, Batam"
+											href="https://www.google.com/maps/dir/?api=1&destination=Jalan Kartini VI Blok C #89, Sei Harapan, Batam"
 											target="_blank"
 										>
-											Jalan Kartini VI Blok C #89, Sei
-											Harapan, Batam
+											Jalan Kartini VI Blok C #89, Sei Harapan, Batam
 										</a>
 									</Tooltip>
 								</p>
@@ -118,27 +142,15 @@ export default function Contact() {
 									<ShareIcons>
 										<li>
 											<StyledShareIcon bg="#3c589a">
-												<a
-													href="https://facebook.com/rivabatam"
-													target="_blank"
-												>
-													<DynamicIcon
-														type="iconfacebook-fill"
-														color="#fff"
-													/>
+												<a href="https://facebook.com/rivabatam" target="_blank">
+													<DynamicIcon type="iconfacebook-fill" color="#fff" />
 												</a>
 											</StyledShareIcon>
 										</li>
 										<li>
 											<StyledShareIcon bg="#5eaade">
-												<a
-													href="https://twitter.com/rivayudha"
-													target="_blank"
-												>
-													<DynamicIcon
-														type="icontwitter-fill"
-														color="#fff"
-													/>
+												<a href="https://twitter.com/rivayudha" target="_blank">
+													<DynamicIcon type="icontwitter-fill" color="#fff" />
 												</a>
 											</StyledShareIcon>
 										</li>
@@ -148,10 +160,7 @@ export default function Contact() {
 													target="_blank"
 													href="https://wa.me/6282113111668?text=Hi,%20Tacita!%20Saya%20mau%20bertanya%20tentang%20pembuatan%20event"
 												>
-													<DynamicIcon
-														type="iconwhatsapp-line"
-														color="#fff"
-													/>
+													<DynamicIcon type="iconwhatsapp-line" color="#fff" />
 												</a>
 											</StyledShareIcon>
 										</li>
@@ -164,18 +173,24 @@ export default function Contact() {
 				<Section className="inner-box">
 					<Row gutter={64}>
 						<Col lg={6}>
-							<Heading
-								content={`Atau hubungi kami via form ${
-									mobile ? 'di bawah ini' : 'di samping'
-								}`}
-							/>
+							<Heading content={`Atau hubungi kami via form ${mobile ? 'di bawah ini' : 'di samping'}`} />
 						</Col>
 						<Col lg={18}>
-							<Form layout="vertical">
+							<Form
+								layout="vertical"
+								name="contact"
+								onSubmit={handleSubmit}
+								layout="vertical"
+								data-netlify="true"
+								data-netlify-honeypot="bot-field"
+							>
+								<input type="hidden" name="form-name" value="contact" />
+
 								<TextInput
 									name="name"
 									label="Nama kamu"
 									placeholder="Misal: Jeni Karmila"
+									onChange={handleChange}
 								/>
 								<Row gutter={32}>
 									<Col lg={12}>
@@ -183,6 +198,7 @@ export default function Contact() {
 											name="email"
 											label="Email kamu"
 											placeholder="Misal: Jeni@example.com"
+											onChange={handleChange}
 										/>
 									</Col>
 									<Col lg={12}>
@@ -190,6 +206,7 @@ export default function Contact() {
 											name="phone"
 											label="Nomor handphone kamu"
 											placeholder="Misal: 08122222229"
+											onChange={handleChange}
 										/>
 									</Col>
 								</Row>
@@ -198,12 +215,14 @@ export default function Contact() {
 									name="message"
 									label="Apa yang mau kamu utarakan?"
 									placeholder="Misal: Saya mau konsultasi tentang event olahraga yang akan saya adakan..."
+									onChange={handleChange}
 								/>
 								<Section ph={0} textAlign={mobile && 'center'}>
 									<Button
 										type="primary"
 										icon="check"
 										block={mobile}
+										htmlType="submit"
 										style={{
 											marginBottom: mobile && '1em',
 										}}

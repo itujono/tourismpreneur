@@ -9,176 +9,6 @@ import { Link } from 'gatsby'
 import blueSplatter from '../images/splatter-blue.svg'
 import { media, mobile } from '../utils'
 
-const HeroSection = styled(Section)`
-	height: 100vh;
-	background: url('https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cdaba596d9f35a12997b809_masthead-pop-parlour-compressor-p-1600.jpeg')
-		center no-repeat;
-	background-size: cover;
-	position: relative;
-	.testimonial {
-		position: relative;
-		.ant-btn {
-			position: absolute;
-			bottom: -25px;
-			right: 100px;
-		}
-	}
-	.heading {
-		h4 {
-			font-size: 5em;
-			line-height: 1;
-			margin-bottom: 0.5em;
-			color: #fff;
-		}
-		p {
-			font-size: 1.4em;
-			color: #fff;
-		}
-	}
-
-	${media.mobile`
-		&& {
-			padding: 0;
-			margin-bottom: 2em;
-			height: 120vh;
-			.heading {
-				h4 {
-					font-size: 3em;
-				}
-			}
-		}
-		.overlay-on-mobile {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0, 0, 0, .5);
-		}
-	`}
-`
-
-const InnerBox = styled.div`
-	position: relative;
-	height: 100%;
-	display: flex;
-	align-items: ${({ align }) => align || 'flex-end'};
-	justify-content: ${({ justify }) => justify || 'flex-end'};
-	.image {
-		position: relative;
-	}
-	.splatter {
-		position: absolute;
-		left: 30%;
-		top: 40%;
-		width: 150px;
-		z-index: 0;
-	}
-
-	${media.mobile`
-		margin-bottom: 2em;
-		.image {
-			right: -100px;
-		}
-		.splatter {
-			left: 10%;
-		}
-	`}
-`
-
-const MiddleSection = styled(Section)`
-	.event-is-hard {
-		article.ant-typography {
-			width: 90%;
-			margin-top: 50px;
-			margin-left: -120px;
-		}
-	}
-
-	${media.mobile`
-		.event-is-hard {
-			article.ant-typography {
-				margin-left: initial;
-			}
-		}
-	`}
-`
-
-const ReviewSection = styled(Section)`
-	padding-top: 4em;
-	padding-bottom: 12em;
-
-	${media.mobile`
-			padding-top: 2em;
-			padding-bottom: 2em;
-	`}
-`
-
-const ReviewCard = styled.div`
-	line-height: 1.8;
-	background: ${baseStyles.lightGrey.two};
-	padding: 3em 4em;
-	margin-right: -50px;
-	position: relative;
-	z-index: 2;
-	box-shadow: ${baseStyles.boxShadow.main};
-	&& {
-		h4 {
-			margin-bottom: 1.2em;
-		}
-	}
-	.reviewer-section {
-		.reviewer {
-			line-height: initial;
-			h4 {
-				margin-bottom: initial;
-			}
-			p {
-				margin-bottom: 0;
-				color: ${baseStyles.greyColor};
-			}
-		}
-		.ant-avatar {
-			width: 70px;
-			height: 70px;
-		}
-	}
-
-	${media.mobile`
-		margin-right: initial;
-	`}
-`
-
-const StyledReviewImage = styled.div`
-	width: 450px;
-	height: 450px;
-
-	${media.mobile`
-		width: 100%;
-	`}
-`
-
-const CallToAction = styled.div`
-	margin-top: -80px;
-	background: #77b8d4;
-	border-radius: 12px;
-	padding: 3em 5em;
-	box-shadow: ${baseStyles.boxShadow.main};
-	.ant-typography {
-		font-size: 1.7em;
-		line-height: 1.2;
-		color: #fff;
-	}
-	.ant-btn {
-		background: #fff;
-		border-color: #fff;
-		color: ${baseStyles.primaryColor};
-	}
-
-	${media.mobile`
-		margin-top: initial;
-		padding: 2em;
-	`}
-`
-
 const Home = () => {
 	return (
 		<Layout>
@@ -351,3 +181,173 @@ const Home = () => {
 }
 
 export default Home
+
+const HeroSection = styled(Section)`
+	height: 100vh;
+	background: url('https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cdaba596d9f35a12997b809_masthead-pop-parlour-compressor-p-1600.jpeg')
+		center no-repeat;
+	background-size: cover;
+	position: relative;
+	.testimonial {
+		position: relative;
+		.ant-btn {
+			position: absolute;
+			bottom: -25px;
+			right: 100px;
+		}
+	}
+	.heading {
+		h4 {
+			font-size: 5em;
+			line-height: 1;
+			margin-bottom: 0.5em;
+			color: #fff;
+		}
+		p {
+			font-size: 1.4em;
+			color: #fff;
+		}
+	}
+
+	${media.mobile`
+		&& {
+			padding: 0;
+			margin-bottom: 2em;
+			height: 120vh;
+			.heading {
+				h4 {
+					font-size: 3em;
+				}
+			}
+		}
+		.overlay-on-mobile {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, .5);
+		}
+	`}
+`
+
+const InnerBox = styled.div`
+	position: relative;
+	height: 100%;
+	display: flex;
+	align-items: ${({ align }) => align || 'flex-end'};
+	justify-content: ${({ justify }) => justify || 'flex-end'};
+	.image {
+		position: relative;
+	}
+	.splatter {
+		position: absolute;
+		left: 30%;
+		top: 40%;
+		width: 150px;
+		z-index: 0;
+	}
+
+	${media.mobile`
+		margin-bottom: 2em;
+		.image {
+			right: -100px;
+		}
+		.splatter {
+			left: 10%;
+		}
+	`}
+`
+
+const MiddleSection = styled(Section)`
+	.event-is-hard {
+		article.ant-typography {
+			width: 90%;
+			margin-top: 50px;
+			margin-left: -120px;
+		}
+	}
+
+	${media.mobile`
+		.event-is-hard {
+			article.ant-typography {
+				margin-left: initial;
+			}
+		}
+	`}
+`
+
+const ReviewSection = styled(Section)`
+	padding-top: 4em;
+	padding-bottom: 12em;
+
+	${media.mobile`
+			padding-top: 2em;
+			padding-bottom: 2em;
+	`}
+`
+
+const ReviewCard = styled.div`
+	line-height: 1.8;
+	background: ${baseStyles.lightGrey.two};
+	padding: 3em 4em;
+	margin-right: -50px;
+	position: relative;
+	z-index: 2;
+	box-shadow: ${baseStyles.boxShadow.main};
+	&& {
+		h4 {
+			margin-bottom: 1.2em;
+		}
+	}
+	.reviewer-section {
+		.reviewer {
+			line-height: initial;
+			h4 {
+				margin-bottom: initial;
+			}
+			p {
+				margin-bottom: 0;
+				color: ${baseStyles.greyColor};
+			}
+		}
+		.ant-avatar {
+			width: 70px;
+			height: 70px;
+		}
+	}
+
+	${media.mobile`
+		margin-right: initial;
+	`}
+`
+
+const StyledReviewImage = styled.div`
+	width: 450px;
+	height: 450px;
+
+	${media.mobile`
+		width: 100%;
+	`}
+`
+
+const CallToAction = styled.div`
+	margin-top: -80px;
+	background: #77b8d4;
+	border-radius: 12px;
+	padding: 3em 5em;
+	box-shadow: ${baseStyles.boxShadow.main};
+	.ant-typography {
+		font-size: 1.7em;
+		line-height: 1.2;
+		color: #fff;
+	}
+	.ant-btn {
+		background: #fff;
+		border-color: #fff;
+		color: ${baseStyles.primaryColor};
+	}
+
+	${media.mobile`
+		margin-top: initial;
+		padding: 2em;
+	`}
+`
