@@ -5,7 +5,7 @@ require('dotenv').config({
 
 module.exports = {
 	siteMetadata: {
-		title: 'Gatsby Ant-Design Documentation Starter',
+		title: 'Tacita Enterprise',
 	},
 	plugins: [
 		`gatsby-plugin-react-helmet`,
