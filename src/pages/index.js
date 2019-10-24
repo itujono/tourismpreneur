@@ -1,15 +1,26 @@
 import React from 'react'
-import { Row, Col, Avatar, Icon } from 'antd'
+import { Row, Col, Avatar, Icon, Calendar } from 'antd'
 import Layout from '../Layout'
 import { Section, Heading, Card, Button } from '../components'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
 import DynamicIcon from '../components/DynamicIcon'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import blueSplatter from '../images/splatter-blue.svg'
 import { media, mobile } from '../utils'
+import moment from 'moment'
 
-const Home = () => {
+const Home = ({ data: { allContentfulEvent } }) => {
+	const renderDayCell = value => {
+		const hasEvent =
+			(allContentfulEvent.edges || []).filter(
+				({ node }) => moment(node.fromDate).format('D MM YY') === moment(value).format('D MM YY')
+			) || []
+		console.log({ hasEvent, value: value.date() })
+		const event = hasEvent[0] || {}
+		return (event.node || {}).title
+	}
+
 	return (
 		<Layout>
 			<HeroSection bg="#77b8d4">
@@ -64,6 +75,11 @@ const Home = () => {
 			</HeroSection>
 
 			<MiddleSection ph="very">
+				<Row type="flex" justify="center" style={{ marginBottom: '2em' }}>
+					<Col lg={18}>
+						<StyledCalendar dateCellRender={renderDayCell} />
+					</Col>
+				</Row>
 				<Row gutter={32} type="flex">
 					<Col lg={8}>
 						<InnerBox align="center">
@@ -177,6 +193,29 @@ const Home = () => {
 
 export default Home
 
+export const queryAllEvents = graphql`
+	query queryAllEvents {
+		allContentfulEvent {
+			edges {
+				node {
+					fromDate(formatString: "D MMM YYYY")
+					title
+				}
+			}
+		}
+	}
+`
+
+/*
+ * ███████╗████████╗██╗   ██╗██╗     ███████╗███████╗
+ * ██╔════╝╚══██╔══╝╚██╗ ██╔╝██║     ██╔════╝██╔════╝
+ * ███████╗   ██║    ╚████╔╝ ██║     █████╗  ███████╗
+ * ╚════██║   ██║     ╚██╔╝  ██║     ██╔══╝  ╚════██║
+ * ███████║   ██║      ██║   ███████╗███████╗███████║
+ * ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝╚══════╝
+ *
+ */
+
 const HeroSection = styled(Section)`
 	height: 100vh;
 	background: url('https://assets.website-files.com/5ccc8aa73871f9d12dc81c1b/5cdaba596d9f35a12997b809_masthead-pop-parlour-compressor-p-1600.jpeg')
@@ -259,6 +298,10 @@ const InnerBox = styled.div`
 			left: 10%;
 		}
 	`}
+`
+
+const StyledCalendar = styled(Calendar)`
+	background-color: white;
 `
 
 const MiddleSection = styled(Section)`

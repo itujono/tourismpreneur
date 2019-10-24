@@ -1,6 +1,10 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { css } from 'styled-components'
+import moment from 'moment'
+import 'moment/locale/id'
+
+moment.locale('id')
 
 const instance = axios.create({
 	baseURL: 'https://chatbot.tutorsms.com/api/',
@@ -59,7 +63,4 @@ export const media = Object.keys(sizes).reduce((acc, label) => {
 }, {})
 
 export const mobile = typeof window !== 'undefined' && window.innerWidth < 415
-export const tablet =
-	typeof window !== 'undefined' &&
-	window.innerWidth > 414 &&
-	window.innerWidth < 769
+export const tablet = typeof window !== 'undefined' && window.innerWidth > 414 && window.innerWidth < 769
