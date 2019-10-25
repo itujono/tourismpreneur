@@ -1,5 +1,5 @@
-import React from 'react'
-import { Row, Col, Avatar, Icon, Calendar } from 'antd'
+import React, { useState } from 'react'
+import { Row, Col, Avatar, Icon, Calendar, Badge } from 'antd'
 import Layout from '../Layout'
 import { Section, Heading, Card, Button } from '../components'
 import styled from 'styled-components'
@@ -9,20 +9,40 @@ import { Link, graphql } from 'gatsby'
 import blueSplatter from '../images/splatter-blue.svg'
 import { media, mobile } from '../utils'
 import moment from 'moment'
+import EventModal from '../templates/EventModal'
 
-const Home = ({ data: { allContentfulEvent } }) => {
+const Home = ({ data: { allContentfulEvent = {} } }) => {
+	const [selectedEvent, setSelectedEvent] = useState({})
+
+	const handleSelectEvent = value => {
+		const selected =
+			(allContentfulEvent.edges || []).find(
+				({ node }) => node.fromDate === moment(value).format('DD MMM YYYY')
+			) || {}
+		setSelectedEvent(selected.node)
+	}
+
 	const renderDayCell = value => {
 		const hasEvent =
-			(allContentfulEvent.edges || []).filter(
-				({ node }) => moment(node.fromDate).format('D MM YY') === moment(value).format('D MM YY')
-			) || []
-		console.log({ hasEvent, value: value.date() })
-		const event = hasEvent[0] || {}
-		return (event.node || {}).title
+			(allContentfulEvent.edges || []).filter(({ node }) => node.fromDate === moment(value).format('D MM YY')) ||
+			[]
+		if (hasEvent.length > 0) {
+			const event = (hasEvent[0] || {}).node || {}
+			return <Badge status="success" text={event.title} />
+		}
+		return
 	}
+
+	console.log({ selectedEvent, events: allContentfulEvent.edges })
 
 	return (
 		<Layout>
+			<EventModal
+				item={selectedEvent}
+				visible={Object.keys(selectedEvent).length > 0}
+				onCancel={() => setSelectedEvent('')}
+			/>
+
 			<HeroSection bg="#77b8d4">
 				{mobile && <div className="overlay-on-mobile"></div>}
 				<Section
@@ -74,12 +94,25 @@ const Home = ({ data: { allContentfulEvent } }) => {
 				</Section>
 			</HeroSection>
 
-			<MiddleSection ph="very">
+			<CalSection ph="very">
 				<Row type="flex" justify="center" style={{ marginBottom: '2em' }}>
 					<Col lg={18}>
-						<StyledCalendar dateCellRender={renderDayCell} />
+						<Heading
+							level={1}
+							content={
+								<span>
+									Lihat <span className="underline">jadwal</span> kami
+								</span>
+							}
+							subheader="List event yang sudah dan akan kami gelar"
+							marginBottom="3em"
+						/>
+						<StyledCalendar dateCellRender={renderDayCell} onSelect={handleSelectEvent} />
 					</Col>
 				</Row>
+			</CalSection>
+
+			<MiddleSection ph="very">
 				<Row gutter={32} type="flex">
 					<Col lg={8}>
 						<InnerBox align="center">
@@ -198,8 +231,20 @@ export const queryAllEvents = graphql`
 		allContentfulEvent {
 			edges {
 				node {
-					fromDate(formatString: "D MMM YYYY")
+					fromDate(formatString: "DD MMM YYYY", locale: "id")
 					title
+					featuredImage {
+						fluid {
+							src
+						}
+					}
+					tags
+					toDate(formatString: "DD MMM YYYY", locale: "id")
+					description {
+						description
+					}
+					id
+					client
 				}
 			}
 		}
@@ -298,6 +343,12 @@ const InnerBox = styled.div`
 			left: 10%;
 		}
 	`}
+`
+
+const CalSection = styled(Section)`
+	text-align: center;
+	margin-bottom: 3em;
+	padding-top: 5em;
 `
 
 const StyledCalendar = styled(Calendar)`
