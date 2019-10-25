@@ -10,9 +10,11 @@ import blueSplatter from '../images/splatter-blue.svg'
 import { media, mobile } from '../utils'
 import moment from 'moment'
 import EventModal from '../templates/EventModal'
+import useMedia from 'use-media'
 
 const Home = ({ data: { allContentfulEvent = {} } }) => {
 	const [selectedEvent, setSelectedEvent] = useState({})
+	const isMobile = useMedia('(max-width: 414px)')
 
 	const handleSelectEvent = value => {
 		const selected =
@@ -25,12 +27,11 @@ const Home = ({ data: { allContentfulEvent = {} } }) => {
 	const renderDayCell = value => {
 		const hasEvent =
 			(allContentfulEvent.edges || []).filter(({ node }) => {
-				console.log({ node: node.fromDate, value: moment(value).format('DD MMM YYYY') })
 				return node.fromDate === moment(value).format('DD MMM YYYY')
 			}) || []
 		if (hasEvent.length > 0) {
 			const event = (hasEvent[0] || {}).node || {}
-			return <Badge status="success" text={event.title} />
+			return isMobile ? <Badge status="success" /> : <Badge status="success" text={event.title} />
 		}
 		return
 	}
@@ -107,7 +108,11 @@ const Home = ({ data: { allContentfulEvent = {} } }) => {
 							subheader="List event yang sudah dan akan kami gelar"
 							marginBottom="3em"
 						/>
-						<StyledCalendar dateCellRender={renderDayCell} onSelect={handleSelectEvent} />
+						<StyledCalendar
+							fullscreen={!isMobile}
+							dateCellRender={renderDayCell}
+							onSelect={handleSelectEvent}
+						/>
 					</Col>
 				</Row>
 			</CalSection>
