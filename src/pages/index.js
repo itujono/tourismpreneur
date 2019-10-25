@@ -19,13 +19,15 @@ const Home = ({ data: { allContentfulEvent = {} } }) => {
 			(allContentfulEvent.edges || []).find(
 				({ node }) => node.fromDate === moment(value).format('DD MMM YYYY')
 			) || {}
-		setSelectedEvent(selected.node)
+		setSelectedEvent(selected.node || {})
 	}
 
 	const renderDayCell = value => {
 		const hasEvent =
-			(allContentfulEvent.edges || []).filter(({ node }) => node.fromDate === moment(value).format('D MM YY')) ||
-			[]
+			(allContentfulEvent.edges || []).filter(({ node }) => {
+				console.log({ node: node.fromDate, value: moment(value).format('DD MMM YYYY') })
+				return node.fromDate === moment(value).format('DD MMM YYYY')
+			}) || []
 		if (hasEvent.length > 0) {
 			const event = (hasEvent[0] || {}).node || {}
 			return <Badge status="success" text={event.title} />
@@ -33,14 +35,12 @@ const Home = ({ data: { allContentfulEvent = {} } }) => {
 		return
 	}
 
-	console.log({ selectedEvent, events: allContentfulEvent.edges })
-
 	return (
 		<Layout>
 			<EventModal
 				item={selectedEvent}
 				visible={Object.keys(selectedEvent).length > 0}
-				onCancel={() => setSelectedEvent('')}
+				onCancel={() => setSelectedEvent({})}
 			/>
 
 			<HeroSection bg="#77b8d4">
