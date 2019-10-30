@@ -5,9 +5,10 @@ import { Section, Heading, Button } from '../components'
 import { baseStyles } from '../styles'
 import { Row, Col, Form, Tooltip, message } from 'antd'
 import DynamicIcon from '../components/DynamicIcon'
-import { mobile, media } from '../utils'
+import { media } from '../utils'
 import TextInput from '../components/TextInput'
 import { navigate, graphql } from 'gatsby'
+import useMedia from 'use-media'
 
 const HeroSection = styled(Section)`
 	padding: 4em 7em;
@@ -72,8 +73,8 @@ function encode(data) {
 }
 
 export default function Contact({ data: { allContentfulContact = {} } }) {
-	console.log({ allContentfulContact })
 	const contactData = allContentfulContact.edges || []
+	const isMobile = useMedia('(max-width: 414px)')
 
 	const [formValues, setFormValues] = useState({})
 
@@ -192,7 +193,9 @@ export default function Contact({ data: { allContentfulContact = {} } }) {
 				<Section className="inner-box">
 					<Row gutter={64}>
 						<Col lg={6}>
-							<Heading content={`Atau hubungi kami via form ${mobile ? 'di bawah ini' : 'di samping'}`} />
+							<Heading
+								content={`Atau hubungi kami via form ${isMobile ? 'di bawah ini' : 'di samping'}`}
+							/>
 						</Col>
 						<Col lg={18}>
 							<Form
@@ -236,14 +239,14 @@ export default function Contact({ data: { allContentfulContact = {} } }) {
 									placeholder="Misal: Saya mau konsultasi tentang event olahraga yang akan saya adakan..."
 									onChange={handleChange('message')}
 								/>
-								<Section ph={0} textAlign={mobile && 'center'}>
+								<Section ph={0} textAlign={isMobile && 'center'}>
 									<Button
 										type="primary"
 										icon="check"
-										block={mobile}
+										block={isMobile}
 										htmlType="submit"
 										style={{
-											marginBottom: mobile && '1em',
+											marginBottom: isMobile && '1em',
 										}}
 									>
 										Kirim pertanyaan saya
