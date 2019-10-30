@@ -6,6 +6,8 @@ import { Row, Col, Divider } from 'antd'
 import { baseStyles } from '../styles'
 import DynamicIcon from '../components/DynamicIcon'
 import { media, mobile } from '../utils'
+import { graphql } from 'gatsby'
+import RichText from '../components/RichText'
 
 const HeroSection = styled(Section)`
 	padding: 7em 8em;
@@ -130,69 +132,40 @@ const CommitmentSection = styled.div`
 	`}
 `
 
-export default function About() {
+export default function About({ data: { contentfulOurCompanyPageAbout: ourCompany = {} } }) {
+	const {
+		title,
+		description,
+		image: { fluid = {} },
+	} = ourCompany
 	const heroText = (
-		<>
-			<p>
-				TACITA ENTERPRISE adalah{' '}
-				<span className="underline">Event Organizer</span> yang berbasis
-				di Batam. Kompetensi kami telah teruji selama bertahun-tahun.
-				Kami bukan fresh graduate di dunia Event Organiser. Latar
-				belakang kami adalah ‘Pekerja Event’, MC, Sales, Pekerja Media
-				serta graphic designer. Dengan ragam latar belakang, kami{' '}
-				<span className="underline">
-					mengikatkan diri dalam satu wadah
-				</span>{' '}
-				bernama TACITA Event Organizer.
-			</p>
-			<p>
-				Kami hadir sebagai solusi kreatif untuk membantu{' '}
-				<span className="underline">
-					mengkomunikasikan kebutuhan promosi dan membangun image
-					positif perusahaan Anda ke konsumen
-				</span>{' '}
-				serta masyarakat secara luas melalui event-event promosi dan
-				kegiatan alternatif lainnya.
-			</p>
-		</>
+		<article>
+			<RichText description={description} />
+		</article>
 	)
 
 	const missionText = (
 		<ul>
-			<li>
-				Menyediakan layanan promosi melalui event secara mudah, cepat
-				dan lengkap.
-			</li>
-			<li>
-				Membangun image dan citra positif perusahaan atau perorangan
-				melalui kegiatan promosi.
-			</li>
-			<li>
-				Mengkreasi dan menggali ide-ide baru sebagai sarana promosi.{' '}
-			</li>
+			<li>Menyediakan layanan promosi melalui event secara mudah, cepat dan lengkap.</li>
+			<li>Membangun image dan citra positif perusahaan atau perorangan melalui kegiatan promosi.</li>
+			<li>Mengkreasi dan menggali ide-ide baru sebagai sarana promosi. </li>
 		</ul>
 	)
 
 	const commitmentText = (
 		<>
 			<p>
-				Bagi kami Customer adalah arah bagi semua yang kami lakukan saat
-				sekarang dan di masa yang akan datang. TACITA Event Organizer
-				sangat menghormati komitmen, pengetahuan dan kreativitas dari
-				semua pihak yang terlibat. Kami meyakini bahwa{' '}
-				<span className="underline inherit">
-					semua orang mempunyai bakat dan kemampuan untuk memberi
-					andil
-				</span>{' '}
+				Bagi kami Customer adalah arah bagi semua yang kami lakukan saat sekarang dan di masa yang akan datang.
+				TACITA Event Organizer sangat menghormati komitmen, pengetahuan dan kreativitas dari semua pihak yang
+				terlibat. Kami meyakini bahwa{' '}
+				<span className="underline inherit">semua orang mempunyai bakat dan kemampuan untuk memberi andil</span>{' '}
 				bagi terciptanya misi kami.
 			</p>
 			<p>
-				Bagi kami kerjasama dan rasa hormat di antara individu merupakan
-				landasan utama bagi semua keberhasilan. Hal inilah yang membuat
-				kami{' '}
+				Bagi kami kerjasama dan rasa hormat di antara individu merupakan landasan utama bagi semua keberhasilan.
+				Hal inilah yang membuat kami{' '}
 				<span className="underline inherit">
-					selalu dipercaya oleh perusahaan-perusahaan berskala
-					Nasional dan Internasional
+					selalu dipercaya oleh perusahaan-perusahaan berskala Nasional dan Internasional
 				</span>{' '}
 				hingga saat ini.
 			</p>
@@ -203,19 +176,19 @@ export default function About() {
 		<Layout>
 			<HeroSection>
 				<HeroCard>
-					<Row>
+					<Row type="flex">
 						<Col lg={14} className="left">
 							<p>Our company</p>
-							<Heading
-								level={1}
-								content="Organized locally, held globally"
-								subheader={heroText}
-							/>
+							<Heading level={1} content={title} subheader={heroText} />
 						</Col>
 						<Col lg={10}>
 							<img
 								src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5ccc8aa73871f943f3c81c9b_about-masthead.jpg"
 								width="100%"
+								height="100%"
+								css={`
+									object-fit: cover;
+								`}
 								alt="Our company - Tacita"
 							/>
 						</Col>
@@ -232,11 +205,7 @@ export default function About() {
 							level={1}
 							content={
 								<span>
-									We don't make events. We{' '}
-									<span className="underline">
-										make happiness
-									</span>
-									.
+									We don't make events. We <span className="underline">make happiness</span>.
 								</span>
 							}
 						/>
@@ -244,12 +213,7 @@ export default function About() {
 				</Col>
 			</Row>
 			<VisionMission ph="very">
-				<Row
-					gutter={!mobile && 120}
-					type="flex"
-					justify="center"
-					align="middle"
-				>
+				<Row gutter={!mobile && 120} type="flex" justify="center" align="middle">
 					<Col lg={12} style={{ marginBottom: mobile && '2em' }}>
 						<img
 							src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5ccc8aa73871f96172c81ca3_passion-01.jpg"
@@ -271,12 +235,9 @@ export default function About() {
 				<Heading
 					content={
 						<span>
-							Lebih dari ratusan event telah kami kerjakan, hingga
-							membuat kami semakin kokoh dan{' '}
-							<span className="underline">
-								dipercaya oleh puluhan perusahaan nasional
-							</span>{' '}
-							yang hingga kini menjadi klien tetap kami.
+							Lebih dari ratusan event telah kami kerjakan, hingga membuat kami semakin kokoh dan{' '}
+							<span className="underline">dipercaya oleh puluhan perusahaan nasional</span> yang hingga
+							kini menjadi klien tetap kami.
 						</span>
 					}
 				/>
@@ -305,3 +266,19 @@ export default function About() {
 		</Layout>
 	)
 }
+
+export const queryAbout = graphql`
+	query queryAbout {
+		contentfulOurCompanyPageAbout {
+			title
+			description {
+				json
+			}
+			image {
+				fluid {
+					src
+				}
+			}
+		}
+	}
+`

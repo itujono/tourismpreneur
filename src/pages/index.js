@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Row, Col, Avatar, Icon, Badge } from 'antd'
+import { Row, Col, Avatar, Icon, Badge, Divider } from 'antd'
 import Layout from '../Layout'
 import { Section, Heading, Card, Button } from '../components'
 import styled from 'styled-components'
@@ -96,23 +96,7 @@ const Home = ({ data: { allContentfulEvent = {} } }) => {
 				</Section>
 			</HeroSection>
 
-			<CalSection ph="very">
-				<Row type="flex" justify="center" style={{ marginBottom: '2em' }}>
-					<Col lg={18}>
-						<Heading
-							level={1}
-							content={
-								<span>
-									Lihat <span className="underline">jadwal</span> kami
-								</span>
-							}
-							subheader="List event yang sudah dan akan kami gelar"
-							marginBottom="3em"
-						/>
-						<Calendar fullscreen={!isMobile} dateCellRender={renderDayCell} onSelect={handleSelectEvent} />
-					</Col>
-				</Row>
-			</CalSection>
+			<Divider />
 
 			<MiddleSection ph="very">
 				<Row gutter={32} type="flex">
@@ -156,6 +140,24 @@ const Home = ({ data: { allContentfulEvent = {} } }) => {
 					</Col>
 				</Row>
 			</MiddleSection>
+
+			<CalSection ph="very">
+				<Row type="flex" justify="center" style={{ marginBottom: '2em' }}>
+					<Col lg={18}>
+						<Heading
+							level={1}
+							content={
+								<span>
+									Lihat <span className="underline">jadwal</span> kami
+								</span>
+							}
+							subheader="List event yang sudah dan akan kami gelar"
+							marginBottom="3em"
+						/>
+						<Calendar fullscreen={!isMobile} dateCellRender={renderDayCell} onSelect={handleSelectEvent} />
+					</Col>
+				</Row>
+			</CalSection>
 
 			<ReviewSection ph="very" bg={baseStyles.secondaryColor}>
 				<Section ph="very">
