@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Row, Col, Avatar, Icon, Calendar, Badge } from 'antd'
+import { Row, Col, Avatar, Icon, Badge } from 'antd'
 import Layout from '../Layout'
 import { Section, Heading, Card, Button } from '../components'
 import styled from 'styled-components'
@@ -11,6 +11,7 @@ import { media, mobile } from '../utils'
 import moment from 'moment'
 import EventModal from '../templates/EventModal'
 import useMedia from 'use-media'
+import Calendar from '../components/Calendar'
 
 const Home = ({ data: { allContentfulEvent = {} } }) => {
 	const [selectedEvent, setSelectedEvent] = useState({})
@@ -108,11 +109,7 @@ const Home = ({ data: { allContentfulEvent = {} } }) => {
 							subheader="List event yang sudah dan akan kami gelar"
 							marginBottom="3em"
 						/>
-						<StyledCalendar
-							fullscreen={!isMobile}
-							dateCellRender={renderDayCell}
-							onSelect={handleSelectEvent}
-						/>
+						<Calendar fullscreen={!isMobile} dateCellRender={renderDayCell} onSelect={handleSelectEvent} />
 					</Col>
 				</Row>
 			</CalSection>
@@ -354,10 +351,6 @@ const CalSection = styled(Section)`
 	text-align: center;
 	margin-bottom: 3em;
 	padding-top: 5em;
-`
-
-const StyledCalendar = styled(Calendar)`
-	background-color: white;
 `
 
 const MiddleSection = styled(Section)`
