@@ -31,6 +31,10 @@ h6 {
 	font-family: 'Futura Bold', Arial, Helvetica, sans-serif;
 }
 
+a {
+	color: #3fe699;
+}
+
 span.underline,
 a.underline {
 	color: initial;

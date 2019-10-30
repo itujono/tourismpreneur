@@ -45,7 +45,7 @@ const Home = ({ data: { allContentfulEvent = {} } }) => {
 			/>
 
 			<HeroSection bg="#77b8d4">
-				{mobile && <div className="overlay-on-mobile"></div>}
+				{isMobile && <div className="overlay-on-mobile"></div>}
 				<Section
 					ph="very"
 					css={`
