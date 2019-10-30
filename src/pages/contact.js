@@ -7,7 +7,7 @@ import { Row, Col, Form, Tooltip, message } from 'antd'
 import DynamicIcon from '../components/DynamicIcon'
 import { mobile, media } from '../utils'
 import TextInput from '../components/TextInput'
-import { navigate } from 'gatsby'
+import { navigate, graphql } from 'gatsby'
 
 const HeroSection = styled(Section)`
 	padding: 4em 7em;
@@ -71,8 +71,19 @@ function encode(data) {
 		.join('&')
 }
 
-export default function Contact() {
+export default function Contact({ data: { allContentfulContact = {} } }) {
+	console.log({ allContentfulContact })
+	const contactData = allContentfulContact.edges || []
+
 	const [formValues, setFormValues] = useState({})
+
+	const email = (contactData.find(({ node }) => node.name === 'Email') || {}).node
+	const alamat = (contactData.find(({ node }) => node.name === 'Alamat') || {}).node
+	const telepon = (contactData.find(({ node }) => node.name === 'Telepon') || {}).node
+	const HP = (contactData.find(({ node }) => node.name === 'HP') || {}).node
+	const facebook = (contactData.find(({ node }) => node.name === 'Facebook') || {}).node
+	const twitter = (contactData.find(({ node }) => node.name === 'Twitter') || {}).node
+	const whatsapp = (contactData.find(({ node }) => node.name === 'Whatsapp') || {}).node
 
 	const handleChange = name => e => {
 		setFormValues({ ...formValues, [name]: e.target.value })
@@ -127,7 +138,7 @@ export default function Contact() {
 											className="underline"
 											href="mailto:rivayudha@gmail.com?subject=Hi, Tacita! Saya mau bertanya tentang pembuatan event"
 										>
-											tacita@gmail.com
+											{email.value}
 										</a>
 									</Tooltip>
 								</p>
@@ -139,25 +150,25 @@ export default function Contact() {
 											href="https://www.google.com/maps/dir/?api=1&destination=Jalan Kartini VI Blok C #89, Sei Harapan, Batam"
 											target="_blank"
 										>
-											Jalan Kartini VI Blok C #89, Sei Harapan, Batam
+											{alamat.value}
 										</a>
 									</Tooltip>
 								</p>
-								<p>Telepon: +62 778 4324242</p>
+								<p>Telepon: {telepon.value}</p>
 							</div>
 							<Row gutter={32} style={{ marginBottom: '2em' }}>
 								<Col lg={12}>
 									<ShareIcons>
 										<li>
 											<StyledShareIcon bg="#3c589a">
-												<a href="https://facebook.com/rivabatam" target="_blank">
+												<a href={facebook.value} target="_blank">
 													<DynamicIcon type="iconfacebook-fill" color="#fff" />
 												</a>
 											</StyledShareIcon>
 										</li>
 										<li>
 											<StyledShareIcon bg="#5eaade">
-												<a href="https://twitter.com/rivayudha" target="_blank">
+												<a href={twitter.value} target="_blank">
 													<DynamicIcon type="icontwitter-fill" color="#fff" />
 												</a>
 											</StyledShareIcon>
@@ -166,7 +177,7 @@ export default function Contact() {
 											<StyledShareIcon bg="#4dc247">
 												<a
 													target="_blank"
-													href="https://wa.me/6282113111668?text=Hi,%20Tacita!%20Saya%20mau%20bertanya%20tentang%20pembuatan%20event"
+													href={`https://wa.me/${whatsapp.value}?text=Hi,%20Tacita!%20Saya%20mau%20bertanya%20tentang%20pembuatan%20event`}
 												>
 													<DynamicIcon type="iconwhatsapp-line" color="#fff" />
 												</a>
@@ -254,3 +265,17 @@ export default function Contact() {
 		</Layout>
 	)
 }
+
+export const queryContact = graphql`
+	query queryContact {
+		allContentfulContact {
+			edges {
+				node {
+					name
+					value
+					id
+				}
+			}
+		}
+	}
+`
