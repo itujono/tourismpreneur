@@ -74,7 +74,7 @@ const VisionMission = styled(Section)`
 				color: ${baseStyles.greyColor};
 			}
 			p {
-				font-size: 1.4em;
+				font-size: 1.2em;
 				color: ${baseStyles.primaryColor};
 			}
 		}
@@ -126,50 +126,55 @@ const CommitmentSection = styled.div`
 		line-height: 1.8;
 		color: #fff;
 	}
+	article {
+		span.underline {
+			color: #fff;
+		}
+	}
 
 	${media.mobile`
 		padding: 2em;
 	`}
 `
 
-export default function About({ data: { contentfulOurCompanyPageAbout: ourCompany = {} } }) {
+export default function About({
+	data: {
+		contentfulOurCompanyPageAbout = {},
+		contentfulOurCommitmentPageAbout = {},
+		contentfulQuotePageAbout = {},
+		contentfulVisiMisiPageAbout = {},
+	},
+}) {
 	const {
 		title,
 		description,
 		image: { fluid = {} },
-	} = ourCompany
+	} = contentfulOurCompanyPageAbout
+	const {
+		title: titleCommitment,
+		description: descCommitment,
+		image: { fluid: fluidCommitment = {} },
+	} = contentfulOurCommitmentPageAbout
+	const {
+		title: titleVisiMisi,
+		visiTitle,
+		visiDescription,
+		misiTitle,
+		misiDescription,
+		image: { fluid: fluidVisiMisi = {} },
+	} = contentfulVisiMisiPageAbout
+	const { quote } = contentfulQuotePageAbout
+
 	const heroText = (
 		<article>
 			<RichText description={description} />
 		</article>
 	)
 
-	const missionText = (
-		<ul>
-			<li>Menyediakan layanan promosi melalui event secara mudah, cepat dan lengkap.</li>
-			<li>Membangun image dan citra positif perusahaan atau perorangan melalui kegiatan promosi.</li>
-			<li>Mengkreasi dan menggali ide-ide baru sebagai sarana promosi. </li>
-		</ul>
-	)
-
 	const commitmentText = (
-		<>
-			<p>
-				Bagi kami Customer adalah arah bagi semua yang kami lakukan saat sekarang dan di masa yang akan datang.
-				TACITA Event Organizer sangat menghormati komitmen, pengetahuan dan kreativitas dari semua pihak yang
-				terlibat. Kami meyakini bahwa{' '}
-				<span className="underline inherit">semua orang mempunyai bakat dan kemampuan untuk memberi andil</span>{' '}
-				bagi terciptanya misi kami.
-			</p>
-			<p>
-				Bagi kami kerjasama dan rasa hormat di antara individu merupakan landasan utama bagi semua keberhasilan.
-				Hal inilah yang membuat kami{' '}
-				<span className="underline inherit">
-					selalu dipercaya oleh perusahaan-perusahaan berskala Nasional dan Internasional
-				</span>{' '}
-				hingga saat ini.
-			</p>
-		</>
+		<article>
+			<RichText description={descCommitment} />
+		</article>
 	)
 
 	return (
@@ -196,51 +201,29 @@ export default function About({ data: { contentfulOurCompanyPageAbout: ourCompan
 				</HeroCard>
 			</HeroSection>
 			<Row type="flex" justify="center">
-				<Col lg={16}>
+				<Col lg={14}>
 					<HappinessSection textAlign="center">
 						<div style={{ marginBottom: '2em' }}>
 							<DynamicIcon type="iconicon_video" size="6em" />
 						</div>
-						<Heading
-							level={1}
-							content={
-								<span>
-									We don't make events. We <span className="underline">make happiness</span>.
-								</span>
-							}
-						/>
+						<Heading level={1} content={<RichText description={titleVisiMisi} />} />
 					</HappinessSection>
 				</Col>
 			</Row>
 			<VisionMission ph="very">
 				<Row gutter={!mobile && 120} type="flex" justify="center" align="middle">
 					<Col lg={12} style={{ marginBottom: mobile && '2em' }}>
-						<img
-							src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5ccc8aa73871f96172c81ca3_passion-01.jpg"
-							width="100%"
-							alt="Visi dan misi Tacita"
-						/>
+						<img src={fluidVisiMisi.src} width="100%" alt="Visi dan misi Tacita" />
 					</Col>
 					<Col lg={10} className="vision-mission">
-						<Heading
-							content="Visi kami"
-							subheader="Menjadi Event Organizer yang Profesional, Berkualitas, Menghibur dan Terpercaya."
-						/>
+						<Heading content={visiTitle} subheader={<RichText description={visiDescription} />} />
 						<Divider />
-						<Heading content="Misi kami" subheader={missionText} />
+						<Heading content={misiTitle} subheader={<RichText description={misiDescription} />} />
 					</Col>
 				</Row>
 			</VisionMission>
 			<QuoteyText>
-				<Heading
-					content={
-						<span>
-							Lebih dari ratusan event telah kami kerjakan, hingga membuat kami semakin kokoh dan{' '}
-							<span className="underline">dipercaya oleh puluhan perusahaan nasional</span> yang hingga
-							kini menjadi klien tetap kami.
-						</span>
-					}
-				/>
+				<Heading content={<RichText description={quote} />} />
 			</QuoteyText>
 			<Row type="flex" style={{ marginTop: !mobile && '-70px' }}>
 				<Col lg={12}>
@@ -250,17 +233,13 @@ export default function About({ data: { contentfulOurCompanyPageAbout: ourCompan
 								marginBottom: '1em',
 								fontSize: '2em',
 							}}
-							content="Komitmen kami"
+							content={titleCommitment}
 							subheader={commitmentText}
 						/>
 					</CommitmentSection>
 				</Col>
 				<Col lg={12}>
-					<img
-						src="https://assets.website-files.com/5ccc8aa73871f9d0b1c81c04/5ccc8aa73871f9ea0fc81c81_production-01.jpg"
-						width="100%"
-						alt="Tacita's commitment"
-					/>
+					<img src={fluidCommitment.src} width="100%" alt="Tacita's commitment" />
 				</Col>
 			</Row>
 		</Layout>
@@ -272,6 +251,43 @@ export const queryAbout = graphql`
 		contentfulOurCompanyPageAbout {
 			title
 			description {
+				json
+			}
+			image {
+				fluid {
+					src
+				}
+			}
+		}
+
+		contentfulOurCommitmentPageAbout {
+			title
+			description {
+				json
+			}
+			image {
+				fluid {
+					src
+				}
+			}
+		}
+
+		contentfulQuotePageAbout {
+			quote {
+				json
+			}
+		}
+
+		contentfulVisiMisiPageAbout {
+			title {
+				json
+			}
+			visiTitle
+			visiDescription {
+				json
+			}
+			misiTitle
+			misiDescription {
 				json
 			}
 			image {
