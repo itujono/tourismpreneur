@@ -53,6 +53,11 @@ function Events({ data: { allContentfulEvent = {} } }) {
 	const [selectedEvent, setSelectedEvent] = useState({})
 	const isMobile = useMedia('(max-width: 414px)')
 
+	const sortOptions = [
+		{ value: 'fromDate', label: 'Tanggal event' },
+		{ value: 'createdAt', label: 'Tanggal postingan' },
+	]
+
 	const handleSelectEvent = value => {
 		const selected = eventData.find(({ node }) => node.fromDate === moment(value).format('DD MMM YYYY')) || {}
 		setSelectedEvent(selected.node || {})
@@ -120,7 +125,7 @@ function Events({ data: { allContentfulEvent = {} } }) {
 							<TextInput search name="search" label="Cari event" placeholder="Misal: Djarum Super" />
 						</Form>
 						<Form layout="vertical" style={{ marginBottom: '3em' }}>
-							<SelectInput name="sort" label="Urutkan event" placeholder="Urutkan event" options={[]} />
+							<SelectInput name="sort" label="Urutkan event" placeholder="Urutkan event" options={sortOptions} defaultValue={sortOptions[0].value} />
 						</Form>
 					</Col>
 				</Row>
@@ -131,7 +136,7 @@ function Events({ data: { allContentfulEvent = {} } }) {
 
 export const queryAllEvents = graphql`
 	query queryEventItem {
-		allContentfulEvent {
+		allContentfulEvent(sort: { fields: fromDate }) {
 			edges {
 				node {
 					id
