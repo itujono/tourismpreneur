@@ -16,15 +16,15 @@ module.exports = exports.createPages = ({ actions }) => {
 			// .then(response => {
 			// 	createPage({
 			// 		path: '/',
-			// 		component: require.resolve(`./src/templates/guests.js`),
+			// 		component: path.resolve(`./src/templates/guests.js`),
 			// 		context: { guests: response.items || [] },
 			// 	})
 			// })
 			.then(response =>
-				(response.items || []).forEach(({ fields }) => {
+				(response.items || []).forEach(({ fields, sys }) => {
 					createPage({
-						path: `/guest/${fields.name}/`,
-						component: require.resolve('./src/templates/guestDetails.js'),
+						path: `/guest/${fields.name}-${sys.id}/`,
+						component: path.resolve('./src/templates/guestDetails.js'),
 						context: { guest: fields },
 					})
 				})

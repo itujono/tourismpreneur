@@ -3,7 +3,7 @@ import { Button as _Button } from 'antd'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
 
-const StyledButton = styled(_Button).attrs(({ size, shape }) => ({
+const StyledButton = styled(_Button).attrs(({ size, shape, type }) => ({
 	size: size || 'large',
 	shape: shape || 'round',
 }))`
@@ -12,9 +12,9 @@ const StyledButton = styled(_Button).attrs(({ size, shape }) => ({
 		width: ${({ shape }) => (shape === 'circle' ? '50px' : 'auto')};
 		font-weight: bold;
 		font-size: ${({ size }) => size === 'large' && '16px'};
-		color: white;
-		border-color: ${baseStyles.primaryColor};
-		background-color: ${baseStyles.primaryColor};
+		color: ${({ type }) => type === 'link' && baseStyles.greyColor};
+		border-color: ${({ type }) => (type === 'link' ? 'transparent' : baseStyles.primaryColor)};
+		background-color: ${({ type }) => (type === 'link' ? 'transparent' : baseStyles.primaryColor)};
 		&:hover {
 			background-color: ${baseStyles.tertiaryColor};
 			border-color: ${baseStyles.tertiaryColor};

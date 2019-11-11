@@ -1,5 +1,5 @@
 export const baseStyles = {
-	primaryColor: '#08242a',
+	primaryColor: 'lightgreen',
 	secondaryColor: '#dde8e2',
 	tertiaryColor: '#3FE699',
 	redColor: '#f50',
@@ -10,8 +10,7 @@ export const baseStyles = {
 		three: '#bbb',
 	},
 	boxShadow: {
-		main:
-			'0 12px 15px 0 rgba(0, 0, 0, 0.1), 0 17px 50px 0 rgba(0, 0, 0, 0.1)',
+		main: '0 12px 15px 0 rgba(0, 0, 0, 0.1), 0 17px 50px 0 rgba(0, 0, 0, 0.1)',
 		hover: '0 2px 5px rgba(0, 0, 0, .2)',
 	},
 }
