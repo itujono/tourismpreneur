@@ -1,8 +1,5 @@
-import axios from 'axios'
-import { useState } from 'react'
-import { css } from 'styled-components'
-import moment from 'moment'
-import 'moment/locale/id'
+const { css } = require('styled-components')
+const moment = require('moment')
 const contentful = require('contentful')
 
 moment.locale('id')
@@ -12,32 +9,7 @@ export const contentfulClient = contentful.createClient({
 	accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 })
 
-const instance = axios.create({
-	baseURL: 'https://chatbot.tutorsms.com/api/',
-	headers: {
-		'x-api-key': '917e0958-tutorsms0-4b26-9cudy-9894ed2b540f',
-		Accept: 'application/json',
-	},
-})
-
-instance.interceptors.request.use(config => {
-	config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-	return config
-})
-
-export { instance }
-
 /////////////////////////////////
-
-export function useFetchData(url, param) {
-	const [data, setData] = useState([])
-
-	instance.get(url, param).then(res => {
-		setData(res.data)
-	})
-
-	return data
-}
 
 export const pricer = price =>
 	new Intl.NumberFormat('en-ID', {

@@ -1,7 +1,35 @@
 const path = require('path')
+// const { contentfulClient } = require('../src/utils')
+const contentful = require('contentful')
 
-module.exports = exports.createPages = ({ graphql, actions }) => {
+const contentfulClient = contentful.createClient({
+	space: process.env.CONTENTFUL_SPACE_ID,
+	accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+})
+
+module.exports = exports.createPages = ({ actions }) => {
 	const { createPage } = actions
+
+	return (
+		contentfulClient
+			.getEntries()
+			// .then(response => {
+			// 	createPage({
+			// 		path: '/',
+			// 		component: require.resolve(`./src/templates/guests.js`),
+			// 		context: { guests: response.items || [] },
+			// 	})
+			// })
+			.then(response =>
+				(response.items || []).forEach(({ fields }) => {
+					createPage({
+						path: `/guest/${fields.name}/`,
+						component: require.resolve('./src/templates/guestDetails.js'),
+						context: { guest: fields },
+					})
+				})
+			)
+	)
 
 	// return graphql(`
 	// 	{
