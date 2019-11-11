@@ -5,7 +5,7 @@ require('dotenv').config({
 
 module.exports = {
 	siteMetadata: {
-		title: 'Tacita Enterprise',
+		title: 'Wisuda Digital Tourismpreneur 4.0',
 	},
 	plugins: [
 		`gatsby-plugin-react-helmet`,
@@ -22,13 +22,13 @@ module.exports = {
 				typeName: `MenuItems`, // a fixed string
 			},
 		},
-		{
-			resolve: `gatsby-source-filesystem`,
-			options: {
-				name: `menuItems`,
-				path: `${__dirname}/src/menuItems`,
-			},
-		},
+		// {
+		// 	resolve: `gatsby-source-filesystem`,
+		// 	options: {
+		// 		name: `menuItems`,
+		// 		path: `${__dirname}/src/menuItems`,
+		// 	},
+		// },
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {

@@ -1,7 +1,7 @@
 {
-	"name": "tacita",
-	"description": "Tacita Enterprise - company profile",
-	"version": "0.1.3",
+	"name": "wisuda",
+	"description": "Wisuda Digital Tourismpreneur 4.0",
+	"version": "0.1.0",
 	"author": "Bejo Karmila",
 	"dependencies": {
 		"@contentful/rich-text-react-renderer": "^13.4.0",
@@ -68,7 +68,6 @@
 		"prettier": "1.18.2"
 	},
 	"repository": {
-		"type": "git",
-		"url": "https://github.com/jannikbuschke/gatsby-antd-docs"
+		"type": "git"
 	}
 }

@@ -10,7 +10,8 @@ const StyledSection = styled.section`
 		(noPadding && 0) ||
 		`${pv} ${ph}`};
 	background: ${({ bg }) => bg};
-	text-align: ${({ textAlign }) => textAlign};
+	text-align: ${({ textAlign, centered }) => (centered ? 'center' : textAlign)};
+	margin: ${({ centered }) => centered && '0 auto'};
 	${media.mobile`
 		&& {
 			padding: 1em;
@@ -20,12 +21,7 @@ const StyledSection = styled.section`
 
 export default function Section({ textAlign = 'left', children, ...props }) {
 	return (
-		<StyledSection
-			textAlign={textAlign}
-			pv={props.pv || '2em'}
-			ph={props.ph || '3em'}
-			{...props}
-		>
+		<StyledSection textAlign={textAlign} pv={props.pv || '2em'} ph={props.ph || '3em'} {...props}>
 			{children}
 		</StyledSection>
 	)
