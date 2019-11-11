@@ -22,7 +22,7 @@ function Home(props) {
 			<MainSection centered>
 				<MiddleRow type="flex" align="middle" justify="center">
 					<Col lg={12}>
-						<Heading content="Selamat datang di Wisuda 4.0" subheader="Lihat daftar tamu undangan" />
+						<Heading content="Selamat datang di Wisuda 4.0" subheader="Lihat daftar semua tamu undangan" />
 						<Button type="primary">
 							Lihat semua <Icon type="arrow-right" />
 						</Button>
