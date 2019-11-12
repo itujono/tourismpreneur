@@ -1,11 +1,5 @@
 const path = require('path')
 // const { contentfulClient } = require('../src/utils')
-const contentful = require('contentful')
-
-const contentfulClient = contentful.createClient({
-	space: process.env.CONTENTFUL_SPACE_ID,
-	accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-})
 
 module.exports = exports.createPages = ({ graphql, actions }) => {
 	const { createPage } = actions

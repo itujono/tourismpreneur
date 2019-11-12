@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../Layout'
-import useMedia from 'use-media'
 import { Section, Heading, Button } from '../components'
 import { Icon, Row, Col } from 'antd'
 import styled from 'styled-components'
@@ -16,8 +15,6 @@ const MiddleRow = styled(Row)`
 `
 
 function Home(props) {
-	const isMobile = useMedia('(max-width: 414px)')
-
 	useEffect(() => {
 		contentfulClient
 			.getEntries()
