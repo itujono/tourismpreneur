@@ -2,7 +2,6 @@ import React from 'react'
 import { Section, Heading, Button } from '../components'
 import { Row, Col, Tag, Popconfirm } from 'antd'
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
 import { baseStyles } from '../styles'
 import { media } from '../utils'
 
@@ -18,7 +17,7 @@ const MainSection = styled(Section)`
     `}
 `
 
-const Card = styled(motion.div)`
+const Card = styled(div)`
 	max-height: 500px;
 	border-radius: 10px;
 	box-shadow: ${baseStyles.boxShadow.main};
