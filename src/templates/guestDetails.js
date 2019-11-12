@@ -17,7 +17,7 @@ const MainSection = styled(Section)`
     `}
 `
 
-const Card = styled(div)`
+const Card = styled.div`
 	max-height: 500px;
 	border-radius: 10px;
 	box-shadow: ${baseStyles.boxShadow.main};
@@ -61,7 +61,7 @@ const Alert = styled.section`
 	}
 `
 
-export default function GuestDetails({ pageContext }) {
+function GuestDetails({ pageContext }) {
 	const guest = pageContext.guest || {}
 	return (
 		<MainSection centered>
@@ -123,3 +123,5 @@ export default function GuestDetails({ pageContext }) {
 		</MainSection>
 	)
 }
+
+export default GuestDetails

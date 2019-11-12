@@ -6,7 +6,7 @@ import Heading from './Heading'
 import Button from './Button'
 import { Link } from 'gatsby'
 import { baseStyles } from '../styles'
-import { mobile, media } from '../utils'
+import { media } from '../utils'
 
 const Nav = styled.nav`
 	width: 85%;
@@ -55,8 +55,7 @@ const MenuItem = styled.p`
 				rgba(0, 255, 0, 0.35) calc(50% - 8px),
 				rgba(0, 255, 0, 0.35) 100%
 			);
-			transition: background-position 120ms ease-in-out,
-				padding 120ms ease-in-out;
+			transition: background-position 120ms ease-in-out, padding 120ms ease-in-out;
 			background-size: 100% 200%;
 			background-position: 0 0;
 			word-break: break-word;
@@ -88,6 +87,7 @@ const StyledDrawer = styled(Drawer)`
 
 function Navbar() {
 	const [menuDrawer, setMenuDrawer] = useState(false)
+	const isMobile = useMedia('(max-width: 414px)')
 
 	return (
 		<Nav>
@@ -95,7 +95,7 @@ function Navbar() {
 				title="Menu"
 				onClose={() => setMenuDrawer(false)}
 				visible={menuDrawer}
-				width={mobile ? '85%' : 450}
+				width={isMobile ? '85%' : 450}
 			>
 				<MenuItem>
 					<Link to="/about" onClick={() => setMenuDrawer(false)}>
@@ -131,33 +131,19 @@ function Navbar() {
 					</span> */}
 				</Col>
 				<Col lg={8} xs={8} style={{ textAlign: 'right' }}>
-					{mobile ? (
-						<Button
-							shape="circle"
-							icon="menu"
-							onClick={() => setMenuDrawer(!menuDrawer)}
-						/>
+					{isMobile ? (
+						<Button shape="circle" icon="menu" onClick={() => setMenuDrawer(!menuDrawer)} />
 					) : (
 						<StyledMenu mode="horizontal">
-							<Menu.Item
-								key="events"
-								style={{ paddingLeft: '2em', paddingRight: 0 }}
-							>
+							<Menu.Item key="events" style={{ paddingLeft: '2em', paddingRight: 0 }}>
 								<Link to="/events">
 									<Button icon="plus" size="large">
 										Browse events
 									</Button>
 								</Link>
 							</Menu.Item>
-							<Menu.Item
-								key="menus"
-								style={{ paddingLeft: '2em', paddingRight: 0 }}
-							>
-								<Button
-									shape="circle"
-									icon="menu"
-									onClick={() => setMenuDrawer(!menuDrawer)}
-								/>
+							<Menu.Item key="menus" style={{ paddingLeft: '2em', paddingRight: 0 }}>
+								<Button shape="circle" icon="menu" onClick={() => setMenuDrawer(!menuDrawer)} />
 							</Menu.Item>
 						</StyledMenu>
 					)}
