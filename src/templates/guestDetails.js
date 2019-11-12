@@ -63,7 +63,6 @@ const Alert = styled.section`
 `
 
 export default function GuestDetails({ pageContext }) {
-	console.log({ guest: pageContext.guest })
 	const guest = pageContext.guest || {}
 	return (
 		<MainSection centered>
