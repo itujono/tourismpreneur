@@ -70,14 +70,14 @@ const Alert = styled.section`
 function GuestDetails({ data: { contentfulGuest: guest = {} } }) {
 	const [isSubmitted, setIsSubmitted] = useState(false)
 	const photo = (guest.photo || {}).fluid || {}
-	const isVip = guest.title === 'VIP'
+	const isSpecialGuest = guest.title === 'VIP' || guest.title === 'VVIP'
 
-	const thanks = isVip ? 'Terima kasih!' : <span>Terima kasih, {guest.name}</span>
+	const thanks = isSpecialGuest ? 'Terima kasih!' : <span>Terima kasih, {guest.name}</span>
 
 	const handleSubmit = () => setIsSubmitted(true)
 
 	useEffect(() => {
-		if (isVip) setIsSubmitted(true)
+		if (isSpecialGuest) setIsSubmitted(true)
 	}, [guest.title])
 
 	return (
