@@ -4,7 +4,6 @@ import { Row, Col, Tag, Popconfirm } from 'antd'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import { baseStyles } from '../styles'
-import Item from 'antd/lib/list/Item'
 import { media } from '../utils'
 
 const MainSection = styled(Section)`
@@ -16,15 +15,13 @@ const MainSection = styled(Section)`
 	${media.mobile`
         height: inherit;
         width: 100%;
-    `} /* .ant-row-flex {
-		height: 100vh;
-	} */
+    `}
 `
 
 const Card = styled(motion.div)`
 	max-height: 500px;
 	border-radius: 10px;
-	box-shadow: ${baseStyles.boxShadow.hover};
+	box-shadow: ${baseStyles.boxShadow.main};
 	.image-section {
 		overflow: hidden;
 		height: 500px;
@@ -37,6 +34,7 @@ const Card = styled(motion.div)`
 	.info-section {
 		text-align: left;
 		padding: 3em;
+		padding-top: 1em;
 		.ant-row-flex {
 			margin-bottom: 2em;
 		}
@@ -82,7 +80,7 @@ export default function GuestDetails({ pageContext }) {
 									<Tag color="#2db7f5">{guest.title}</Tag>
 								</Col>
 								<Col lg={12} style={{ textAlign: 'right' }}>
-									<ChairNumber>A78</ChairNumber>
+									<ChairNumber>{guest.seatNumber}</ChairNumber>
 								</Col>
 							</Row>
 							<Row type="flex" justify="space-between" align="middle">
