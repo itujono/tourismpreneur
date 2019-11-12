@@ -3,7 +3,6 @@ import Layout from '../Layout'
 import { Section, Heading, Button } from '../components'
 import { Icon, Row, Col } from 'antd'
 import styled from 'styled-components'
-import { contentfulClient } from '../utils'
 
 const MainSection = styled(Section)`
 	height: 100vh;
@@ -15,12 +14,7 @@ const MiddleRow = styled(Row)`
 `
 
 function Home(props) {
-	useEffect(() => {
-		contentfulClient
-			.getEntries()
-			.then(response => console.log({ response }))
-			.catch(err => console.error(err))
-	}, [])
+	useEffect(() => {}, [])
 
 	return (
 		<Layout basic>
