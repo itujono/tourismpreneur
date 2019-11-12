@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Row, Col, Menu, Drawer } from 'antd'
 import styled from 'styled-components'
 import Logo from './Logo'
-import Heading from './Heading'
 import Button from './Button'
 import { Link } from 'gatsby'
 import { baseStyles } from '../styles'
 import { media } from '../utils'
+import useMedia from 'use-media'
 
 const Nav = styled.nav`
 	width: 85%;

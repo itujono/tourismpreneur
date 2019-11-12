@@ -1,6 +1,9 @@
 const path = require('path')
 // const { contentfulClient } = require('../src/utils')
-const contentful = require('contentful')
+let contentful
+if (typeof window !== 'undefined') {
+	contentful = require('contentful')
+}
 
 const contentfulClient = contentful.createClient({
 	space: process.env.CONTENTFUL_SPACE_ID,
