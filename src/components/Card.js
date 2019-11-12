@@ -4,6 +4,7 @@ import { Card as _Card } from 'antd'
 
 const StyledCard = styled(_Card)`
 	&& {
+		background-color: #fff;
 		border-radius: 8px;
 		.ant-card-meta-title {
 			font-weight: bold;
@@ -19,10 +20,7 @@ const StyledCard = styled(_Card)`
 export default function Card({ children, description, title, ...props }) {
 	return (
 		<StyledCard {...props} cover={<img src={props.cover || ''} />}>
-			<StyledCard.Meta
-				title={title || ''}
-				description={description || ''}
-			/>
+			<StyledCard.Meta title={title || ''} description={description || ''} />
 			{children}
 		</StyledCard>
 	)

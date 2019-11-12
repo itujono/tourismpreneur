@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Section, Heading, Button } from '../components'
-import { Row, Col, Tag, Popconfirm } from 'antd'
+import { Row, Col, Tag, Popconfirm, Icon } from 'antd'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
 import { media } from '../utils'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
+import userPic from '../images/tutor-object.png'
 
 const MainSection = styled(Section)`
 	height: 100vh;
@@ -12,6 +13,7 @@ const MainSection = styled(Section)`
 	width: 80%;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	${media.mobile`
         height: inherit;
         width: 100%;
@@ -19,8 +21,10 @@ const MainSection = styled(Section)`
 `
 
 const Card = styled.div`
+	background-color: #fff;
 	max-height: 500px;
 	border-radius: 10px;
+	padding: ${({ isSubmitted }) => isSubmitted && '2em'};
 	box-shadow: ${baseStyles.boxShadow.main};
 	.image-section {
 		overflow: hidden;
@@ -50,6 +54,7 @@ const ChairNumber = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: ${({ isSubmitted }) => isSubmitted && '0 auto 3em auto'};
 `
 
 const Alert = styled.section`
@@ -63,64 +68,86 @@ const Alert = styled.section`
 `
 
 function GuestDetails({ data: { contentfulGuest: guest = {} } }) {
+	const [isSubmitted, setIsSubmitted] = useState(false)
 	const photo = (guest.photo || {}).fluid || {}
+
+	console.log({ guest })
+
+	const handleSubmit = () => setIsSubmitted(true)
 
 	return (
 		<MainSection centered>
-			<Card>
-				<Row gutter={32}>
-					<Col lg={12} className="image-section">
-						<img src={photo.src} width="100%" alt={guest.name} />
-					</Col>
-					<Col lg={12} className="info-section">
-						<Section>
-							<Row type="flex" justify="space-between" align="middle">
-								<Col lg={12}>
-									<Heading content={guest.name} marginBottom="0.5em" />
-									<Tag color="#2db7f5">{guest.title}</Tag>
-								</Col>
-								<Col lg={12} style={{ textAlign: 'right' }}>
-									<ChairNumber>{guest.seatNumber}</ChairNumber>
-								</Col>
-							</Row>
-							<Row type="flex" justify="space-between" align="middle">
-								<Col lg={24}>
-									{guest.studentName && (
-										<Alert>
-											<p>
-												Orang tua dari <strong>{guest.studentName}</strong> (Fakultas{' '}
-												<strong>{guest.major}</strong>, jurusan{' '}
-												<strong>{guest.designation}</strong>)
-											</p>
-										</Alert>
-									)}
-								</Col>
-							</Row>
-							<Row type="flex" justify="space-between" align="middle">
-								<Col lg={24}>
-									<p>Apakah anda bersedia menghadiri acaranya?</p>
-									<Popconfirm
-										title="Yakin ingin menghadiri?"
-										okText="Ya"
-										cancelText="Batal"
-										onCancel={() => ({})}
-									>
-										<Button type="primary">Ya, saya bersedia</Button>
-									</Popconfirm>{' '}
-									&nbsp;{' '}
-									<Popconfirm
-										title="Yakin tidak ingin menghadiri?"
-										okText="Ya"
-										cancelText="Batal"
-										onCancel={() => ({})}
-									>
-										<Button type="link">Tidak</Button>
-									</Popconfirm>
-								</Col>
-							</Row>
-						</Section>
-					</Col>
-				</Row>
+			<Card isSubmitted={isSubmitted}>
+				{isSubmitted ? (
+					<Row gutter={32} type="flex" justify="center">
+						<Col lg={20} style={{ textAlign: 'center' }}>
+							<Heading
+								content={<span>Terima kasih, {guest.name}</span>}
+								subheader="Anda sudah terkonfirmasi di dalam buku tamu kami. Nomor kursi Anda:"
+								marginBottom="2em"
+							/>
+							<ChairNumber isSubmitted={isSubmitted}>{guest.seatNumber}</ChairNumber>
+							<Link to="/">
+								<Icon type="home" /> Kembali ke Home
+							</Link>
+						</Col>
+					</Row>
+				) : (
+					<Row gutter={32}>
+						<Col lg={12} className="image-section">
+							<img src={photo.src || userPic} width="100%" alt={guest.name} />
+						</Col>
+						<Col lg={12} className="info-section">
+							<Section>
+								<Row type="flex" justify="space-between" align="middle">
+									<Col lg={12}>
+										<Heading content={guest.name} marginBottom="0.5em" />
+										<Tag color="#2db7f5">{guest.title}</Tag>
+									</Col>
+									<Col lg={12} style={{ textAlign: 'right' }}>
+										<ChairNumber>{guest.seatNumber}</ChairNumber>
+									</Col>
+								</Row>
+								<Row type="flex" justify="space-between" align="middle">
+									<Col lg={24}>
+										{guest.studentName && (
+											<Alert>
+												<p>
+													Orang tua dari <strong>{guest.studentName}</strong> (Fakultas{' '}
+													<strong>{guest.major}</strong>, jurusan{' '}
+													<strong>{guest.designation}</strong>)
+												</p>
+											</Alert>
+										)}
+									</Col>
+								</Row>
+								<Row type="flex" justify="space-between" align="middle">
+									<Col lg={24}>
+										<p>Apakah anda bersedia menghadiri acaranya?</p>
+										<Popconfirm
+											title="Yakin ingin menghadiri?"
+											okText="Ya"
+											cancelText="Batal"
+											onCancel={() => ({})}
+											onConfirm={handleSubmit}
+										>
+											<Button type="primary">Ya, saya bersedia</Button>
+										</Popconfirm>{' '}
+										&nbsp;{' '}
+										<Popconfirm
+											title="Yakin tidak ingin menghadiri?"
+											okText="Ya"
+											cancelText="Batal"
+											onCancel={() => ({})}
+										>
+											<Button type="link">Tidak</Button>
+										</Popconfirm>
+									</Col>
+								</Row>
+							</Section>
+						</Col>
+					</Row>
+				)}
 			</Card>
 		</MainSection>
 	)
