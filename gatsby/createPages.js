@@ -23,7 +23,7 @@ module.exports = exports.createPages = ({ actions }) => {
 			.then(response =>
 				(response.items || []).forEach(({ fields, sys }) => {
 					createPage({
-						path: `/guest/${fields.name}-${sys.id}/`,
+						path: `/guest/${sys.id}/`,
 						component: path.resolve('./src/templates/guestDetails.js'),
 						context: { guest: fields },
 					})
