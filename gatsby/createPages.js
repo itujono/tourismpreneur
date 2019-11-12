@@ -7,64 +7,61 @@ const contentfulClient = contentful.createClient({
 	accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 })
 
-module.exports = exports.createPages = ({ actions }) => {
+module.exports = exports.createPages = ({ graphql, actions }) => {
 	const { createPage } = actions
 
-	return (
-		contentfulClient
-			.getEntries()
-			// .then(response => {
-			// 	createPage({
-			// 		path: '/',
-			// 		component: path.resolve(`./src/templates/guests.js`),
-			// 		context: { guests: response.items || [] },
-			// 	})
-			// })
-			.then(response =>
-				(response.items || []).forEach(({ fields, sys }) => {
-					createPage({
-						path: `/guest/${sys.id}/`,
-						component: path.resolve('./src/templates/guestDetails.js'),
-						context: { guest: fields },
-					})
-				})
-			)
-	)
+	// return (
+	// 	contentfulClient
+	// 		.getEntries()
+	// 		// .then(response => {
+	// 		// 	createPage({
+	// 		// 		path: '/',
+	// 		// 		component: path.resolve(`./src/templates/guests.js`),
+	// 		// 		context: { guests: response.items || [] },
+	// 		// 	})
+	// 		// })
+	// 		.then(response =>
+	// 			(response.items || []).forEach(({ fields, sys }) => {
+	// 				createPage({
+	// 					path: `/guest/${sys.id}/`,
+	// 					component: path.resolve('./src/templates/guestDetails.js'),
+	// 					context: { guest: fields },
+	// 				})
+	// 			})
+	// 		)
+	// )
 
-	// return graphql(`
-	// 	{
-	// 		allContentfulEvent {
-	// 			edges {
-	// 				node {
-	// 					client
-	// 					id
-	// 					title
-	// 					tags
-	// 					featuredImage {
-	// 						fluid {
-	// 							src
-	// 						}
-	// 					}
-	// 					fromDate(formatString: "DD MMM YYYY")
-	// 					toDate(formatString: "DD MMM YYYY")
-	// 					description {
-	// 						json
-	// 						description
-	// 					}
-	// 					updatedAt(formatString: "DD MMM YYYY")
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// `).then(({ data = {} }) => {
-	// 	data.allContentfulEvent.edges.forEach(({ node }) => {
-	// 		createPage({
-	// 			path: `/events/${node.id}`,
-	// 			component: path.resolve(`./src/templates/event.js`),
-	// 			context: {
-	// 				id: node.id,
-	// 			},
-	// 		})
-	// 	})
-	// })
+	return graphql(`
+		{
+			allContentfulGuest {
+				edges {
+					node {
+						id
+						name
+						title
+						studentName
+						isAttending
+						photo {
+							fluid {
+								src
+							}
+						}
+						seatNumber
+						major
+						designation
+					}
+				}
+			}
+		}
+	`).then(({ data = {} }) => {
+		data.allContentfulGuest.edges.forEach(({ node }) => {
+			createPage({
+				path: `/guest/${node.id}`,
+				component: path.resolve(`./src/templates/guestDetails.js`),
+				context: {
+					id: node.id,
+				},
+			})
+		})
+	})
 }

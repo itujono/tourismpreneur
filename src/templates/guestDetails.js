@@ -4,6 +4,7 @@ import { Row, Col, Tag, Popconfirm } from 'antd'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
 import { media } from '../utils'
+import { graphql } from 'gatsby'
 
 const MainSection = styled(Section)`
 	height: 100vh;
@@ -61,14 +62,15 @@ const Alert = styled.section`
 	}
 `
 
-function GuestDetails({ pageContext = {} }) {
-	const guest = pageContext.guest || {}
+function GuestDetails({ data: { contentfulGuest: guest = {} } }) {
+	const photo = (guest.photo || {}).fluid || {}
+
 	return (
 		<MainSection centered>
 			<Card>
 				<Row gutter={32}>
 					<Col lg={12} className="image-section">
-						<img src={(guest.photo.fields || {}).file.url || ''} width="100%" alt="Sempardak" />
+						<img src={photo.src} width="100%" alt={guest.name} />
 					</Col>
 					<Col lg={12} className="info-section">
 						<Section>
@@ -125,3 +127,23 @@ function GuestDetails({ pageContext = {} }) {
 }
 
 export default GuestDetails
+
+export const queryGuest = graphql`
+	query queryGuest($id: String!) {
+		contentfulGuest(id: { eq: $id }) {
+			id
+			name
+			title
+			studentName
+			isAttending
+			photo {
+				fluid {
+					src
+				}
+			}
+			seatNumber
+			major
+			designation
+		}
+	}
+`
