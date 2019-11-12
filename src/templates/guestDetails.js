@@ -61,7 +61,7 @@ const Alert = styled.section`
 	}
 `
 
-function GuestDetails({ pageContext }) {
+function GuestDetails({ pageContext = {} }) {
 	const guest = pageContext.guest || {}
 	return (
 		<MainSection centered>
