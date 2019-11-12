@@ -1,13 +1,7 @@
-const { css } = require('styled-components')
-const moment = require('moment')
-const contentful = require('contentful')
+import { css } from 'styled-components'
+import moment from 'moment'
 
 moment.locale('id')
-
-export const contentfulClient = contentful.createClient({
-	space: process.env.CONTENTFUL_SPACE_ID,
-	accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-})
 
 /////////////////////////////////
 
