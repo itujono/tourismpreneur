@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Section, Heading, Button } from '../components'
 import { Row, Col, Tag, Popconfirm, Icon } from 'antd'
 import styled from 'styled-components'
@@ -70,10 +70,15 @@ const Alert = styled.section`
 function GuestDetails({ data: { contentfulGuest: guest = {} } }) {
 	const [isSubmitted, setIsSubmitted] = useState(false)
 	const photo = (guest.photo || {}).fluid || {}
+	const isVip = guest.title === 'VIP'
 
-	console.log({ guest })
+	const thanks = isVip ? 'Terima kasih!' : <span>Terima kasih, {guest.name}</span>
 
 	const handleSubmit = () => setIsSubmitted(true)
+
+	useEffect(() => {
+		if (isVip) setIsSubmitted(true)
+	}, [guest.title])
 
 	return (
 		<MainSection centered>
@@ -82,13 +87,14 @@ function GuestDetails({ data: { contentfulGuest: guest = {} } }) {
 					<Row gutter={32} type="flex" justify="center">
 						<Col lg={20} style={{ textAlign: 'center' }}>
 							<Heading
-								content={<span>Terima kasih, {guest.name}</span>}
+								content={thanks}
 								subheader="Anda sudah terkonfirmasi di dalam buku tamu kami. Nomor kursi Anda:"
 								marginBottom="2em"
 							/>
 							<ChairNumber isSubmitted={isSubmitted}>{guest.seatNumber}</ChairNumber>
 							<Link to="/">
-								<Icon type="home" /> Kembali ke Home
+								<Icon type="home" />
+								&nbsp; Kembali ke Home
 							</Link>
 						</Col>
 					</Row>
