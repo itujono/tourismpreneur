@@ -8,10 +8,16 @@ import useMedia from 'use-media'
 import { titles } from '../../utils/dummy'
 import { media } from '../../utils'
 
+const StyledCard = styled(Card)`
+	.ant-card-body {
+		display: flex;
+		flex-wrap: wrap;
+	}
+`
+
 const CardGrid = styled(Card.Grid)`
 	text-align: center;
 	width: 20%;
-	height: 100%;
 	cursor: pointer;
 	h4.ant-typography {
 		margin-bottom: 0.5em;
@@ -94,8 +100,6 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 		}
 	}, [])
 
-	console.log({ guestList })
-
 	return (
 		<Section width={isMobile ? '100%' : '80%'} centered>
 			<StyledModal
@@ -127,13 +131,22 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 					</Col>
 				</Row>
 			</StyledModal>
-			<Row type="flex" justify="space-between">
-				<Col lg={8}>
+			{/* prettier-ignore */}
+			<Row
+				type="flex"
+				justify="space-between"
+				css={` margin-bottom: ${isMobile && '2em'}; `}
+			>
+				<Col
+					lg={8}
+					xs={24}
+					css={` text-align: ${isMobile && 'center'}; `}
+				>
 					<Heading content="Daftar tamu" subheader="List tamu undangan acara" />
 				</Col>
-				<Col lg={8}>
+				<Col lg={8} xs={24}>
 					<Row gutter={12}>
-						<Col lg={12}>
+						<Col lg={12} css={`margin-bottom: ${isMobile && '1em'};`}>
 							<Select
 								name="titles"
 								placeholder="Pilih jabatan"
@@ -159,7 +172,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 					</Row>
 				</Col>
 			</Row>
-			<Card>
+			<StyledCard>
 				{theData.length === 0 ? (
 					<Section centered style={{ textAlign: 'center' }}>
 						<p>Tidak ada data</p>
@@ -179,7 +192,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 						)
 					})
 				)}
-			</Card>
+			</StyledCard>
 		</Section>
 	)
 }
