@@ -66,8 +66,10 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 
 	const handleFilter = value => {
 		if (!initial) {
-			console.log({ filterValue: value })
-			const filtered = guestList.filter(({ node }) => node.title === value)
+			const filtered = (guest.edges || []).filter(({ node }, _, arr) => {
+				if (value === '') return arr
+				return node.title === value
+			})
 			setGuestList(filtered)
 		}
 	}
