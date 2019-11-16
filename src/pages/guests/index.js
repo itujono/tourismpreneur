@@ -17,7 +17,7 @@ const StyledCard = styled(Card)`
 
 const CardGrid = styled(Card.Grid)`
 	text-align: center;
-	width: 20%;
+	width: 19%;
 	cursor: pointer;
 	h4.ant-typography {
 		margin-bottom: 0.5em;
