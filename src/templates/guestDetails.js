@@ -67,17 +67,19 @@ const Alert = styled.section`
 	}
 `
 
-function GuestDetails({ data: { contentfulGuest: guest = {} } }) {
+function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 	const [isSubmitted, setIsSubmitted] = useState(false)
 	const photo = (guest.photo || {}).fluid || {}
 	const isSpecialGuest = guest.title === 'VIP' || guest.title === 'VVIP'
+	const params = new URLSearchParams(location.search)
+	const goToSeatNumber = params.get('seatNumber')
 
 	const thanks = isSpecialGuest ? 'Terima kasih!' : <span>Terima kasih, {guest.name}</span>
 
 	const handleSubmit = () => setIsSubmitted(true)
 
 	useEffect(() => {
-		if (isSpecialGuest) setIsSubmitted(true)
+		if (isSpecialGuest && goToSeatNumber === 'true') setIsSubmitted(true)
 	}, [guest.title])
 
 	return (

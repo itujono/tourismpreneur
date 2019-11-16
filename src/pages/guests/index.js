@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Section, Heading, Modal } from '../../components'
 import { Card, Tag, Row, Col, Switch, Input, Select } from 'antd'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 import QrCode from 'qrcode.react'
 import useMedia from 'use-media'
@@ -52,6 +52,12 @@ const StyledModal = styled(Modal)`
 	}
 `
 
+const QrSection = styled(Row).attrs(props => ({
+	type: 'flex',
+	justify: props.qrCodeOnly ? 'center' : 'space-around',
+	gutter: 16,
+}))``
+
 export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 	const [selectedGuest, setSelectedGuest] = useState({})
 	const [qrCodeOnly, setQrCodeOnly] = useState(false)
@@ -60,6 +66,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 	const isMobile = useMedia('(max-width: 414px)')
 
 	const theData = initial ? guest.edges : guestList
+	const isSpecialGuest = selectedGuest.title === 'VIP' || selectedGuest.title === 'VVIP'
 
 	const handleSelectGuest = guest => {
 		setSelectedGuest(guest)
@@ -113,14 +120,47 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 					<Col lg={16}>
 						{qrCodeOnly ? (
 							<Row type="flex" justify="center" align="middle">
-								<Col>
-									<QrCode value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`} />
+								<Col lg={24}>
+									<QrSection qrCodeOnly={qrCodeOnly}>
+										<Col lg={12}>
+											<p>Undangan</p>
+											<QrCode
+												value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`}
+											/>
+										</Col>
+										{isSpecialGuest && (
+											<Col lg={12}>
+												<p>Nomor kursi</p>
+												<QrCode
+													value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}?seatNumber=true`}
+												/>
+											</Col>
+										)}
+									</QrSection>
 								</Col>
 							</Row>
 						) : (
 							<>
-								<Heading content={selectedGuest.name} subheader={selectedGuest.title} />
-								<QrCode value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`} />
+								<Heading
+									content={<Link to={`/guest/${selectedGuest.id}`}>{selectedGuest.name}</Link>}
+									subheader={selectedGuest.title}
+								/>
+								<QrSection>
+									<Col lg={12}>
+										<p>Undangan</p>
+										<QrCode
+											value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`}
+										/>
+									</Col>
+									{isSpecialGuest && (
+										<Col lg={12}>
+											<p>Nomor kursi</p>
+											<QrCode
+												value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}?seatNumber=true`}
+											/>
+										</Col>
+									)}
+								</QrSection>
 							</>
 						)}
 					</Col>
