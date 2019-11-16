@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { baseStyles } from '../styles'
 import { media } from '../utils'
 import { graphql, Link } from 'gatsby'
+import useMedia from 'use-media'
 import userPic from '../images/tutor-object.png'
 
 const MainSection = styled(Section)`
@@ -23,6 +24,7 @@ const MainSection = styled(Section)`
 const Card = styled.div`
 	background-color: #fff;
 	max-height: 500px;
+	min-width: 50%;
 	border-radius: 10px;
 	padding: ${({ isSubmitted }) => isSubmitted && '2em'};
 	box-shadow: ${baseStyles.boxShadow.main};
@@ -39,6 +41,7 @@ const Card = styled.div`
 		text-align: left;
 		padding: 3em;
 		padding-top: 1em;
+		padding-bottom: 0;
 		.ant-row-flex {
 			margin-bottom: 2em;
 		}
@@ -73,6 +76,7 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 	const isSpecialGuest = guest.title === 'VIP' || guest.title === 'VVIP'
 	const params = new URLSearchParams(location.search)
 	const goToSeatNumber = params.get('seatNumber')
+	const isMobile = useMedia('(max-width: 414px)')
 
 	const thanks = isSpecialGuest ? 'Terima kasih!' : <span>Terima kasih, {guest.name}</span>
 
@@ -84,7 +88,7 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 
 	return (
 		<MainSection centered>
-			<Card isSubmitted={isSubmitted}>
+			<Card isSubmitted={isSubmitted} isSpecialGuest={isSpecialGuest}>
 				{isSubmitted ? (
 					<Row gutter={32} type="flex" justify="center">
 						<Col lg={20} style={{ textAlign: 'center' }}>
@@ -102,19 +106,23 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 					</Row>
 				) : (
 					<Row gutter={32}>
-						<Col lg={12} className="image-section">
-							<img src={photo.src || userPic} width="100%" alt={guest.name} />
-						</Col>
-						<Col lg={12} className="info-section">
+						{!isSpecialGuest && (
+							<Col lg={12} className="image-section">
+								<img src={photo.src || userPic} width="100%" alt={guest.name} />
+							</Col>
+						)}
+						<Col lg={isSpecialGuest ? 24 : 12} className="info-section">
 							<Section>
 								<Row type="flex" justify="space-between" align="middle">
 									<Col lg={12}>
 										<Heading content={guest.name} marginBottom="0.5em" />
 										<Tag color="#2db7f5">{guest.title}</Tag>
 									</Col>
-									<Col lg={12} style={{ textAlign: 'right' }}>
-										<ChairNumber>{guest.seatNumber}</ChairNumber>
-									</Col>
+									{!isSpecialGuest && (
+										<Col lg={12} style={{ textAlign: 'right' }}>
+											<ChairNumber>{guest.seatNumber}</ChairNumber>
+										</Col>
+									)}
 								</Row>
 								<Row type="flex" justify="space-between" align="middle">
 									<Col lg={24}>
