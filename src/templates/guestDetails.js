@@ -42,6 +42,10 @@ const Card = styled.div`
 		padding: 3em;
 		padding-top: 1em;
 		padding-bottom: 0;
+		> section {
+			padding-left: 2em;
+			padding-right: 2em;
+		}
 		.ant-row-flex {
 			margin-bottom: 2em;
 		}
@@ -76,7 +80,6 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 	const isSpecialGuest = guest.title === 'VIP' || guest.title === 'VVIP'
 	const params = new URLSearchParams(location.search)
 	const goToSeatNumber = params.get('seatNumber')
-	const isMobile = useMedia('(max-width: 414px)')
 
 	const thanks = isSpecialGuest ? 'Terima kasih!' : <span>Terima kasih, {guest.name}</span>
 
