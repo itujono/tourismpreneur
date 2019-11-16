@@ -30,6 +30,7 @@ function Home() {
 								margin-top: -120px;
 								padding-top: 0;
 								margin-bottom: 2em;
+								text-align: center;
 							`}
 						>
 							<img src={scenery} width="180" alt="Welcome to wisuda 4.0" />
