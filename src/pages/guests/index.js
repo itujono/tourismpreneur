@@ -51,11 +51,16 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 		setSelectedGuest(guest)
 	}
 
+	const handleCloseModal = () => {
+		setQrCodeOnly(false)
+		setSelectedGuest(false)
+	}
+
 	return (
 		<Section>
 			<StyledModal
 				visible={Object.keys(selectedGuest).length}
-				onCancel={() => setSelectedGuest(false)}
+				onCancel={handleCloseModal}
 				width={qrCodeOnly ? 800 : 640}
 				footer={false}
 				qrCodeOnly={qrCodeOnly}
@@ -76,7 +81,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 						)}
 					</Col>
 					<Col lg={8} className="qr-section">
-						<Switch name="qrcode" onChange={checked => setQrCodeOnly(checked)} value={qrCodeOnly} />
+						<Switch name="qrcode" onChange={checked => setQrCodeOnly(checked)} checked={qrCodeOnly} />
 						&nbsp;
 						<span>QR code saja</span>
 					</Col>
