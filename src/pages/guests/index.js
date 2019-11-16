@@ -11,7 +11,10 @@ const CardGrid = styled(Card.Grid)`
 	width: 20%;
 	cursor: pointer;
 	h4.ant-typography {
-		margin-bottom: 1em;
+		margin-bottom: 0.5em;
+		+ p {
+			margin-bottom: 0;
+		}
 	}
 
 	${media.mobile`
@@ -21,6 +24,7 @@ const CardGrid = styled(Card.Grid)`
 
 const StyledModal = styled(Modal)`
 	height: ${({ qrCodeOnly }) => qrCodeOnly && '500px'};
+	transition: all 0.4s ease;
 	.ant-modal-content {
 		height: 100%;
 		.ant-modal-body {
@@ -55,9 +59,6 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 				width={qrCodeOnly ? 800 : 640}
 				footer={false}
 				qrCodeOnly={qrCodeOnly}
-				css={`
-					transition: all 0.4s ease;
-				`}
 			>
 				<Row gutter={32}>
 					<Col lg={16}>
@@ -88,7 +89,11 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 
 					return (
 						<CardGrid key={node.id} onClick={() => handleSelectGuest(node)}>
-							<Heading content={node.name} subheader={<Tag color={tagColor}>{node.title}</Tag>} />
+							<Heading
+								content={node.name}
+								subheader={<Tag color={tagColor}>{node.title}</Tag>}
+								marginBottom="0"
+							/>
 						</CardGrid>
 					)
 				})}
