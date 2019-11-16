@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Section, Heading, Modal } from '../../components'
-import { Card, Tag, Row, Col } from 'antd'
+import { Card, Tag, Row, Col, Switch } from 'antd'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import QrCode from 'qrcode.react'
+import { media } from '../../utils'
 
 const CardGrid = styled(Card.Grid)`
 	text-align: center;
@@ -12,10 +13,35 @@ const CardGrid = styled(Card.Grid)`
 	h4.ant-typography {
 		margin-bottom: 1em;
 	}
+
+	${media.mobile`
+        width: 50%;
+    `}
+`
+
+const StyledModal = styled(Modal)`
+	height: ${({ qrCodeOnly }) => qrCodeOnly && '500px'};
+	.ant-modal-content {
+		height: 100%;
+		.ant-modal-body {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			height: 100%;
+			> .ant-row {
+				width: 100%;
+			}
+			.qr-section {
+				padding-top: 3em;
+				text-align: center;
+			}
+		}
+	}
 `
 
 export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 	const [selectedGuest, setSelectedGuest] = useState({})
+	const [qrCodeOnly, setQrCodeOnly] = useState(false)
 
 	const handleSelectGuest = guest => {
 		setSelectedGuest(guest)
@@ -23,15 +49,38 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 
 	return (
 		<Section>
-			<Modal visible={Object.keys(selectedGuest).length} onCancel={() => setSelectedGuest(false)} footer={false}>
+			<StyledModal
+				visible={Object.keys(selectedGuest).length}
+				onCancel={() => setSelectedGuest(false)}
+				width={qrCodeOnly ? 800 : 640}
+				footer={false}
+				qrCodeOnly={qrCodeOnly}
+				css={`
+					transition: all 0.4s ease;
+				`}
+			>
 				<Row gutter={32}>
 					<Col lg={16}>
-						<Heading content={selectedGuest.name} subheader={selectedGuest.title} />
-						<QrCode value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`} />
+						{qrCodeOnly ? (
+							<Row type="flex" justify="center" align="middle">
+								<Col>
+									<QrCode value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`} />
+								</Col>
+							</Row>
+						) : (
+							<>
+								<Heading content={selectedGuest.name} subheader={selectedGuest.title} />
+								<QrCode value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`} />
+							</>
+						)}
 					</Col>
-					<Col lg={8}>Gak tau mau nulis apa</Col>
+					<Col lg={8} className="qr-section">
+						<Switch name="qrcode" onChange={checked => setQrCodeOnly(checked)} value={qrCodeOnly} />
+						&nbsp;
+						<span>QR code saja</span>
+					</Col>
 				</Row>
-			</Modal>
+			</StyledModal>
 			<Heading content="Daftar tamu" subheader="List tamu undangan acara" />
 			<Card>
 				{(guest.edges || []).map(({ node }) => {
