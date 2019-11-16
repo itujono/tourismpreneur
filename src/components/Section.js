@@ -9,6 +9,7 @@ const StyledSection = styled.section`
 		(ph === 'very' && `${pv} 5.5em`) ||
 		(noPadding && 0) ||
 		`${pv} ${ph}`};
+	width: ${({ width }) => width || '100%'};
 	background: ${({ bg }) => bg};
 	text-align: ${({ textAlign, centered }) => (centered ? 'center' : textAlign)};
 	margin: ${({ centered }) => centered && '0 auto'};
