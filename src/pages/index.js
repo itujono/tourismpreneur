@@ -9,6 +9,7 @@ import scenery from '../images/scenery.png'
 const MainSection = styled(Section)`
 	height: 100vh;
 	padding-top: 0;
+	text-align: center;
 `
 
 const MiddleRow = styled(Row)`
