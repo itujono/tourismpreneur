@@ -14,7 +14,7 @@ const MiddleRow = styled(Row)`
 	height: 100vh;
 `
 
-function Home(props) {
+function Home() {
 	useEffect(() => {}, [])
 
 	return (

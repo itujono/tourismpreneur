@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Section, Heading, Modal } from '../../components'
 import { Card, Tag, Row, Col } from 'antd'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
-import qrcode from 'qrcode'
+import QrCode from 'qrcode.react'
 
 const CardGrid = styled(Card.Grid)`
 	text-align: center;
@@ -14,27 +14,12 @@ const CardGrid = styled(Card.Grid)`
 	}
 `
 
-const generateQr = id => {
-	const qr = document.querySelector('#qr')
-	qrcode.toCanvas(qr, `https://tourismpreneur.netlify.com/guest/${id}/`, error => {
-		if (error) console.error(error)
-		console.log('Success!')
-	})
-}
-
 export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 	const [selectedGuest, setSelectedGuest] = useState({})
 
 	const handleSelectGuest = guest => {
 		setSelectedGuest(guest)
-		generateQr(guest.id)
 	}
-
-	useEffect(() => {
-		if (Object.keys(selectedGuest).length) {
-			generateQr(selectedGuest.id)
-		}
-	}, [selectedGuest, generateQr])
 
 	return (
 		<Section>
@@ -42,7 +27,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 				<Row gutter={32}>
 					<Col lg={16}>
 						<Heading content={selectedGuest.name} subheader={selectedGuest.title} />
-						<canvas id="qr"></canvas>
+						<QrCode value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`} />
 					</Col>
 					<Col lg={8}>Gak tau mau nulis apa</Col>
 				</Row>
