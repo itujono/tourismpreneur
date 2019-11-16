@@ -18,6 +18,7 @@ const MainSection = styled(Section)`
 	${media.mobile`
         height: inherit;
         width: 100%;
+		margin-top: 5em;
     `}
 `
 
@@ -53,15 +54,15 @@ const Card = styled.div`
 `
 
 const ChairNumber = styled.div`
-	width: 80px;
-	height: 80px;
+	width: 130px;
+	height: 130px;
 	border-radius: 100px;
 	background-color: ${baseStyles.primaryColor};
-	font-size: 1.2em;
+	font-size: 2.8em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: ${({ isSubmitted }) => isSubmitted && '0 auto 3em auto'};
+	margin: ${({ isSubmitted }) => isSubmitted && '0 auto 2em auto'};
 `
 
 const Alert = styled.section`
