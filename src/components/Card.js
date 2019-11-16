@@ -19,7 +19,7 @@ const StyledCard = styled(_Card)`
 
 export default function Card({ children, description, title, ...props }) {
 	return (
-		<StyledCard {...props} cover={<img src={props.cover || ''} />}>
+		<StyledCard {...props} cover={<img src={props.cover || ''} alt="" />}>
 			<StyledCard.Meta title={title || ''} description={description || ''} />
 			{children}
 		</StyledCard>
