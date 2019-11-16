@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Section, Heading, Modal } from '../../components'
-import { Card, Tag, Row, Col, Switch, Input } from 'antd'
+import { Card, Tag, Row, Col, Switch, Input, Select } from 'antd'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import QrCode from 'qrcode.react'
 import useMedia from 'use-media'
+import { titles } from '../../utils/dummy'
 import { media } from '../../utils'
 
 const CardGrid = styled(Card.Grid)`
@@ -48,9 +49,11 @@ const StyledModal = styled(Modal)`
 export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 	const [selectedGuest, setSelectedGuest] = useState({})
 	const [qrCodeOnly, setQrCodeOnly] = useState(false)
+	const [initial, setInitial] = useState(true)
 	const [guestList, setGuestList] = useState([])
-	const [keyword, setKeyword] = useState('')
 	const isMobile = useMedia('(max-width: 414px)')
+
+	const theData = initial ? guest.edges : guestList
 
 	const handleSelectGuest = guest => {
 		setSelectedGuest(guest)
@@ -60,6 +63,36 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 		setQrCodeOnly(false)
 		setSelectedGuest(false)
 	}
+
+	const handleFilter = value => {
+		if (!initial) {
+			console.log({ filterValue: value })
+			const filtered = guestList.filter(({ node }) => node.title === value)
+			setGuestList(filtered)
+		}
+	}
+
+	const handleSearch = value => {
+		if (!initial) {
+			value = value.toLowerCase()
+			const filtered = guestList.filter(({ node }) => {
+				const name = node.name.toLowerCase()
+				return name.includes(value)
+			})
+			setGuestList(filtered)
+		}
+
+		if (value === '') setGuestList(guest.edges)
+	}
+
+	useEffect(() => {
+		if (initial) {
+			setInitial(false)
+			setGuestList(guest.edges)
+		}
+	}, [])
+
+	console.log({ guestList })
 
 	return (
 		<Section width={isMobile ? '100%' : '80%'} centered>
@@ -96,24 +129,54 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 				<Col lg={8}>
 					<Heading content="Daftar tamu" subheader="List tamu undangan acara" />
 				</Col>
-				<Col lg={6}>
-					<Input.Search name="keyword" onSearch={() => ({})} allowClear />
+				<Col lg={8}>
+					<Row gutter={12}>
+						<Col lg={12}>
+							<Select
+								name="titles"
+								placeholder="Pilih jabatan"
+								defaultValue="Pilih jabatan..."
+								style={{ width: '100%' }}
+								onChange={handleFilter}
+							>
+								{titles.map(({ value, label }) => (
+									<Select.Option value={value} key={value}>
+										{label}
+									</Select.Option>
+								))}
+							</Select>
+						</Col>
+						<Col lg={12}>
+							<Input.Search
+								name="keyword"
+								onSearch={handleSearch}
+								placeholder="Cari apa saja..."
+								allowClear
+							/>
+						</Col>
+					</Row>
 				</Col>
 			</Row>
 			<Card>
-				{(guest.edges || []).map(({ node }) => {
-					const tagColor = node.title === 'VIP' ? '#2db7f5' : node.title === 'VVIP' ? '#87d068' : ''
+				{theData.length === 0 ? (
+					<Section centered style={{ textAlign: 'center' }}>
+						<p>Tidak ada data</p>
+					</Section>
+				) : (
+					(theData || []).map(({ node }) => {
+						const tagColor = node.title === 'VIP' ? '#2db7f5' : node.title === 'VVIP' ? '#87d068' : ''
 
-					return (
-						<CardGrid key={node.id} onClick={() => handleSelectGuest(node)}>
-							<Heading
-								content={node.name}
-								subheader={<Tag color={tagColor}>{node.title}</Tag>}
-								marginBottom="0"
-							/>
-						</CardGrid>
-					)
-				})}
+						return (
+							<CardGrid key={node.id} onClick={() => handleSelectGuest(node)}>
+								<Heading
+									content={node.name}
+									subheader={<Tag color={tagColor}>{node.title}</Tag>}
+									marginBottom="0"
+								/>
+							</CardGrid>
+						)
+					})
+				)}
 			</Card>
 		</Section>
 	)
