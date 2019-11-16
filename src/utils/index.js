@@ -2,14 +2,14 @@ import { css } from 'styled-components'
 import moment from 'moment'
 import 'moment/locale/id'
 
-const contentful = require('contentful')
+// const contentful = require('contentful')
 
 moment.locale('id')
 
-export const contentfulClient = contentful.createClient({
-	space: process.env.CONTENTFUL_SPACE_ID,
-	accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-})
+// export const contentfulClient = contentful.createClient({
+// 	space: process.env.CONTENTFUL_SPACE_ID,
+// 	accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+// })
 
 /////////////////////////////////
 

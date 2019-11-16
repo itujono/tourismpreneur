@@ -11,7 +11,7 @@ const StyledSection = styled.section`
 		`${pv} ${ph}`};
 	width: ${({ width }) => width || '100%'};
 	background: ${({ bg }) => bg};
-	text-align: ${({ textAlign, centered }) => (centered ? 'center' : textAlign)};
+	text-align: ${({ textAlign, centered }) => textAlign || 'left'};
 	margin: ${({ centered }) => centered && '0 auto'};
 	${media.mobile`
 		&& {

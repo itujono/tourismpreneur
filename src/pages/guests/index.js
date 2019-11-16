@@ -5,11 +5,12 @@ import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import QrCode from 'qrcode.react'
 import useMedia from 'use-media'
-import { media, contentfulClient } from '../../utils'
+import { media } from '../../utils'
 
 const CardGrid = styled(Card.Grid)`
 	text-align: center;
 	width: 20%;
+	height: 100%;
 	cursor: pointer;
 	h4.ant-typography {
 		margin-bottom: 0.5em;
@@ -52,8 +53,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 	const isMobile = useMedia('(max-width: 414px)')
 
 	const handleSelectGuest = guest => {
-		const selected = guestList.find(({ sys }) => sys.id === guest.id) || {}
-		setSelectedGuest({ ...selected.fields, id: selected.sys.id })
+		setSelectedGuest(guest)
 	}
 
 	const handleCloseModal = () => {
@@ -61,29 +61,8 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 		setSelectedGuest(false)
 	}
 
-	const handleSearch = value => {
-		setKeyword(value)
-		contentfulClient
-			.getEntries({ query: value, content_type: 'guest' })
-			.then(({ items }) => {
-				setGuestList(items)
-			})
-			.catch(err => console.error(err.response))
-	}
-
-	useEffect(() => {
-		contentfulClient
-			.getEntries({ query: '', content_type: 'guest' })
-			.then(({ items }) => {
-				setGuestList(items)
-			})
-			.catch(err => console.error(err.response))
-	}, [])
-
-	console.log({ guestList, selectedGuest })
-
 	return (
-		<Section width={isMobile ? '100%' : '75%'}>
+		<Section width={isMobile ? '100%' : '80%'} centered>
 			<StyledModal
 				visible={Object.keys(selectedGuest).length}
 				onCancel={handleCloseModal}
@@ -118,24 +97,11 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 					<Heading content="Daftar tamu" subheader="List tamu undangan acara" />
 				</Col>
 				<Col lg={6}>
-					<Input.Search name="keyword" onSearch={handleSearch} allowClear />
+					<Input.Search name="keyword" onSearch={() => ({})} allowClear />
 				</Col>
 			</Row>
 			<Card>
-				{guestList.map(({ sys, fields }) => {
-					const tagColor = fields.title === 'VIP' ? '#2db7f5' : fields.title === 'VVIP' ? '#87d068' : ''
-
-					return (
-						<CardGrid key={sys.id} onClick={() => handleSelectGuest(sys)}>
-							<Heading
-								content={fields.name}
-								subheader={<Tag color={tagColor}>{fields.title}</Tag>}
-								marginBottom="0"
-							/>
-						</CardGrid>
-					)
-				})}
-				{/* {(guest.edges || []).map(({ node }) => {
+				{(guest.edges || []).map(({ node }) => {
 					const tagColor = node.title === 'VIP' ? '#2db7f5' : node.title === 'VVIP' ? '#87d068' : ''
 
 					return (
@@ -147,7 +113,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 							/>
 						</CardGrid>
 					)
-				})} */}
+				})}
 			</Card>
 		</Section>
 	)
