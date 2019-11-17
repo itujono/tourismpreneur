@@ -5,7 +5,7 @@ import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 import QrCode from 'qrcode.react'
 import useMedia from 'use-media'
-import { titles } from '../../utils/dummy'
+import { titles, sorting } from '../../utils/dummy'
 import { media } from '../../utils'
 
 const StyledCard = styled(Card)`
@@ -87,6 +87,19 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 		}
 	}
 
+	const handleSort = value => {
+		const data = guest.edges || []
+		// if (!initial) {
+		const sorted = data.slice().sort((a, b) => {
+			const nameA = a.node[value].toLowerCase()
+			const nameB = b.node[value].toLowerCase()
+			return nameA < nameB ? -1 : nameA > nameB ? 1 : 0
+		})
+		console.log({ sorted })
+		setGuestList(sorted)
+		// }
+	}
+
 	const handleSearch = value => {
 		if (!initial) {
 			value = value.toLowerCase()
@@ -106,6 +119,8 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 			setGuestList(guest.edges)
 		}
 	}, [])
+
+	console.log({ guestList, initial })
 
 	return (
 		<Section width={isMobile ? '100%' : '80%'} centered>
@@ -184,9 +199,24 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 				>
 					<Heading content="Daftar tamu" subheader="List tamu undangan acara" />
 				</Col>
-				<Col lg={8} xs={24}>
-					<Row gutter={12}>
-						<Col lg={12} css={`margin-bottom: ${isMobile && '1em'};`}>
+				<Col lg={12} xs={24}>
+					<Row gutter={16}>
+						<Col lg={8} xs={12} css={`margin-bottom: ${isMobile && '1em'};`}>
+							<Select
+								name="sorting"
+								placeholder="Sortir tamu"
+								defaultValue="Sortir tamu..."
+								style={{ width: '100%' }}
+								onChange={handleSort}
+							>
+								{sorting.map(({ value, label }) => (
+									<Select.Option value={value} key={value}>
+										{label}
+									</Select.Option>
+								))}
+							</Select>
+						</Col>
+						<Col lg={8} xs={12} css={`margin-bottom: ${isMobile && '1em'};`}>
 							<Select
 								name="titles"
 								placeholder="Pilih jabatan"
@@ -201,7 +231,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 								))}
 							</Select>
 						</Col>
-						<Col lg={12}>
+						<Col lg={8}>
 							<Input.Search
 								name="keyword"
 								onSearch={handleSearch}
@@ -254,6 +284,7 @@ export const queryAllGuests = graphql`
 					studentName
 					studyProgram
 					isAttending
+					updatedAt(locale: "ID")
 				}
 			}
 		}

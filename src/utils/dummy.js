@@ -31,3 +31,8 @@ export const titles = [
 	{ value: 'VVIP', label: 'VVIP' },
 	{ value: 'Reguler', label: 'Reguler' },
 ]
+
+export const sorting = [
+	{ value: 'name', label: 'Berdasarkan alfabet' },
+	{ value: 'updatedAt', label: 'Terakhir diupdate' },
+]
