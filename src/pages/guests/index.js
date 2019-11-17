@@ -228,7 +228,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 								))}
 							</Select>
 						</Col>
-						<Col lg={8}>
+						<Col lg={8} xs={24}>
 							<Input.Search
 								name="keyword"
 								onSearch={handleSearch}
