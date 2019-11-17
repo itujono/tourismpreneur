@@ -133,9 +133,8 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 										{guest.studentName && (
 											<Alert>
 												<p>
-													Orang tua dari <strong>{guest.studentName}</strong> (Fakultas{' '}
-													<strong>{guest.major}</strong>, jurusan{' '}
-													<strong>{guest.designation}</strong>)
+													Orang tua dari <strong>{guest.studentName}</strong> (Program studi{' '}
+													<strong>{guest.studyProgram}</strong>)
 												</p>
 											</Alert>
 										)}
@@ -189,8 +188,7 @@ export const queryGuest = graphql`
 				}
 			}
 			seatNumber
-			major
-			designation
+			studyProgram
 		}
 	}
 `

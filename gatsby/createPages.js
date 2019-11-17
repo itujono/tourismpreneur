@@ -41,8 +41,7 @@ module.exports = exports.createPages = ({ graphql, actions }) => {
 							}
 						}
 						seatNumber
-						major
-						designation
+						studyProgram
 					}
 				}
 			}
