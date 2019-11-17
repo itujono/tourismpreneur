@@ -95,7 +95,6 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 			const nameB = b.node[value].toLowerCase()
 			return nameA < nameB ? -1 : nameA > nameB ? 1 : 0
 		})
-		console.log({ sorted })
 		setGuestList(sorted)
 		// }
 	}
@@ -119,8 +118,6 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 			setGuestList(guest.edges)
 		}
 	}, [])
-
-	console.log({ guestList, initial })
 
 	return (
 		<Section width={isMobile ? '100%' : '80%'} centered>
