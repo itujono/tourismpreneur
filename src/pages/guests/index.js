@@ -252,8 +252,7 @@ export const queryAllGuests = graphql`
 					title
 					seatNumber
 					studentName
-					major
-					designation
+					studyProgram
 					isAttending
 				}
 			}
