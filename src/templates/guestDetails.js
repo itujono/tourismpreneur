@@ -182,11 +182,6 @@ export const queryGuest = graphql`
 			title
 			studentName
 			isAttending
-			photo {
-				fluid {
-					src
-				}
-			}
 			seatNumber
 			studyProgram
 		}
