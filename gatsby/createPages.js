@@ -35,11 +35,6 @@ module.exports = exports.createPages = ({ graphql, actions }) => {
 						title
 						studentName
 						isAttending
-						photo {
-							fluid {
-								src
-							}
-						}
 						seatNumber
 						studyProgram
 					}

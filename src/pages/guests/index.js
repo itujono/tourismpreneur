@@ -271,11 +271,6 @@ export const queryAllGuests = graphql`
 				node {
 					id
 					name
-					photo {
-						fluid {
-							src
-						}
-					}
 					title
 					seatNumber
 					studentName
