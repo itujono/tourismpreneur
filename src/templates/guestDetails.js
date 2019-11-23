@@ -130,11 +130,11 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 								</Row>
 								<Row type="flex" justify="space-between" align="middle">
 									<Col lg={24}>
-										{guest.studentName && (
+										{guest.studentName || guest.studyProgram && (
 											<Alert>
 												<p>
-													Orang tua dari <strong>{guest.studentName}</strong> (Program studi{' '}
-													<strong>{guest.studyProgram}</strong>)
+													Orang tua dari <strong>{guest.studentName || “-“}</strong> (Program studi{' '}
+													<strong>{guest.studyProgram || “-“}</strong>)
 												</p>
 											</Alert>
 										)}
