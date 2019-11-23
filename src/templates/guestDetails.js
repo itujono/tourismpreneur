@@ -130,14 +130,15 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 								</Row>
 								<Row type="flex" justify="space-between" align="middle">
 									<Col lg={24}>
-										{guest.studentName && (
-											<Alert>
-												<p>
-													Orang tua dari <strong>{guest.studentName}</strong> (Program studi{' '}
-													<strong>{guest.studyProgram}</strong>)
-												</p>
-											</Alert>
-										)}
+										{guest.studentName ||
+											(guest.studyProgram && (
+												<Alert>
+													<p>
+														Orang tua dari <strong>{guest.studentName || '-'}</strong>{' '}
+														(Program studi <strong>{guest.studyProgram || '-'}</strong>)
+													</p>
+												</Alert>
+											))}
 									</Col>
 								</Row>
 								<Row type="flex" justify="space-between" align="middle">
@@ -181,6 +182,11 @@ export const queryGuest = graphql`
 			name
 			title
 			studentName
+			photo {
+				fluid {
+					src
+				}
+			}
 			isAttending
 			seatNumber
 			studyProgram
