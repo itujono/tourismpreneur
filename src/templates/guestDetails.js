@@ -77,8 +77,7 @@ const Alert = styled.section`
 
 function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 	const [isSubmitted, setIsSubmitted] = useState(false)
-	const photo = (guest.photo || {}).fluid || {}
-	const isSpecialGuest = guest.title === 'VIP' || guest.title === 'VVIP'
+	const isSpecialGuest = guest.ticketPurchased === 'VIP' || guest.ticketPurchased === 'VVIP'
 	const params = new URLSearchParams(location.search)
 	const goToSeatNumber = params.get('seatNumber')
 
@@ -110,25 +109,21 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 					</Row>
 				) : (
 					<Row gutter={32}>
-						{!isSpecialGuest && (
-							<Col lg={12} className="image-section">
-								<img src={photo.src || userPic} width="100%" alt={guest.name} />
-							</Col>
-						)}
 						<Col lg={isSpecialGuest ? 24 : 12} className="info-section">
 							<Section>
 								<Row type="flex" justify="space-between" align="middle">
 									<Col lg={12}>
 										<Heading content={guest.name} marginBottom="0.5em" />
-										<Tag color="#2db7f5">{guest.title}</Tag>
+										<Tag color="#2db7f5">{guest.carModel}</Tag>
 									</Col>
 									{!isSpecialGuest && (
 										<Col lg={12} style={{ textAlign: 'right' }}>
-											<ChairNumber>{guest.seatNumber}</ChairNumber>
+											<ChairNumber>{guest.phoneNumber}</ChairNumber>
 										</Col>
 									)}
 								</Row>
-								<Row type="flex" justify="space-between" align="middle">
+
+								{/* <Row type="flex" justify="space-between" align="middle">
 									<Col lg={24}>
 										{guest.studentName && (
 											<Alert>
@@ -139,7 +134,8 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 											</Alert>
 										)}
 									</Col>
-								</Row>
+								</Row> */}
+
 								<Row type="flex" justify="space-between" align="middle">
 									<Col lg={24}>
 										<p>Apakah anda bersedia menghadiri acaranya?</p>
@@ -179,16 +175,9 @@ export const queryGuest = graphql`
 		contentfulGuest(id: { eq: $id }) {
 			id
 			name
-			title
-			studentName
-			isAttending
-			photo {
-				fluid {
-					src
-				}
-			}
-			seatNumber
-			studyProgram
+			phoneNumber
+			ticketPurchased
+			carModel
 		}
 	}
 `

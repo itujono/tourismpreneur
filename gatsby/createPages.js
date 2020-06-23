@@ -32,16 +32,9 @@ module.exports = exports.createPages = ({ graphql, actions }) => {
 					node {
 						id
 						name
-						title
-						studentName
-						isAttending
-						photo {
-							fluid {
-								src
-							}
-						}
-						seatNumber
-						studyProgram
+						phoneNumber
+						ticketPurchased
+						carModel
 					}
 				}
 			}

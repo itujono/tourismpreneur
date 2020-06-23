@@ -96,7 +96,6 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 			return nameA < nameB ? -1 : nameA > nameB ? 1 : 0
 		})
 		setGuestList(sorted)
-		// }
 	}
 
 	const handleSearch = value => {
@@ -183,17 +182,14 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 					</Col>
 				</Row>
 			</StyledModal>
+
 			{/* prettier-ignore */}
 			<Row
 				type="flex"
 				justify="space-between"
 				css={` margin-bottom: ${isMobile && '2em'}; `}
 			>
-				<Col
-					lg={8}
-					xs={24}
-					css={` text-align: ${isMobile && 'center'}; `}
-				>
+				<Col lg={8} xs={24} css={` text-align: ${isMobile && 'center'}; `}>
 					<Heading content="Daftar tamu" subheader="List tamu undangan acara" />
 				</Col>
 				<Col lg={12} xs={24}>
@@ -214,7 +210,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 							</Select>
 						</Col>
 						<Col lg={8} xs={12} css={`margin-bottom: ${isMobile && '1em'};`}>
-							<Select
+							{/* <Select
 								name="titles"
 								placeholder="Pilih jabatan"
 								defaultValue="Pilih jabatan..."
@@ -226,7 +222,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 										{label}
 									</Select.Option>
 								))}
-							</Select>
+							</Select> */}
 						</Col>
 						<Col lg={8} xs={24}>
 							<Input.Search
@@ -246,7 +242,8 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 					</Section>
 				) : (
 					(theData || []).map(({ node }) => {
-						const tagColor = node.title === 'VIP' ? '#2db7f5' : node.title === 'VVIP' ? '#87d068' : ''
+						const tagColor = '#87d068'
+						// const tagColor = node.title === 'VIP' ? '#2db7f5' : node.title === 'VVIP' ? '#87d068' : ''
 
 						return (
 							<CardGrid key={node.id} onClick={() => handleSelectGuest(node)}>
@@ -271,17 +268,9 @@ export const queryAllGuests = graphql`
 				node {
 					id
 					name
-					photo {
-						fluid {
-							src
-						}
-					}
-					title
-					seatNumber
-					studentName
-					studyProgram
-					isAttending
-					updatedAt(locale: "ID")
+					phoneNumber
+					ticketPurchased
+					carModel
 				}
 			}
 		}
