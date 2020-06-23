@@ -123,19 +123,6 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 									)}
 								</Row>
 
-								{/* <Row type="flex" justify="space-between" align="middle">
-									<Col lg={24}>
-										{guest.studentName && (
-											<Alert>
-												<p>
-													Orang tua dari <strong>{guest.studentName}</strong> (Program studi{' '}
-													<strong>{guest.studyProgram}</strong>)
-												</p>
-											</Alert>
-										)}
-									</Col>
-								</Row> */}
-
 								<Row type="flex" justify="space-between" align="middle">
 									<Col lg={24}>
 										<p>Apakah anda bersedia menghadiri acaranya?</p>
