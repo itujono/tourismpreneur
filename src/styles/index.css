@@ -65,6 +65,10 @@ span.underline.inherit {
 	text-align: right;
 }
 
+.ant-descriptions .ant-descriptions-row > td {
+	padding-bottom: 8px;
+}
+
 @media screen and (max-width: 414px) {
 	.mb2em__mobile {
 		margin-bottom: 2em;

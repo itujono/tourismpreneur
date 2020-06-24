@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Section, Heading, Modal } from '../../components'
-import { Card, Tag, Row, Col, Switch, Input, Select, Descriptions } from 'antd'
+import { Card, Tag, Row, Col, Switch, Input, Select, Descriptions, Icon } from 'antd'
 import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 import QrCode from 'qrcode.react'
@@ -155,13 +155,22 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 							<>
 								<Heading
 									content={selectedGuest.name}
-									// content={<Link to={`/guest/${selectedGuest.id}`}>{selectedGuest.name}</Link>}
+									subheader={
+										<Tag color="#2db7f5">
+											<Icon type="phone" />
+											&nbsp; {selectedGuest.phoneNumber}
+										</Tag>
+									}
 								/>
-								<Descriptions colon={false} layout="vertical" className="mb2em">
-									<Descriptions.Item label="Nomor HP">{selectedGuest.phoneNumber}</Descriptions.Item>
+								<Descriptions
+									colon={false}
+									layout={isMobile ? 'horizontal' : 'vertical'}
+									className="mb2em"
+								>
 									<Descriptions.Item label="Jumlah tiket dibeli">
 										{selectedGuest.ticketPurchased}
 									</Descriptions.Item>
+									<Descriptions.Item label="Tanggal">{selectedGuest.date}</Descriptions.Item>
 									<Descriptions.Item label="Jam tayang">
 										{selectedGuest.hour?.map(item => <Tag>{item}</Tag>)}
 									</Descriptions.Item>
