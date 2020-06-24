@@ -278,6 +278,7 @@ export const queryAllGuests = graphql`
 					name
 					phoneNumber
 					ticketPurchased
+					date
 					hour
 				}
 			}

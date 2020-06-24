@@ -34,6 +34,7 @@ module.exports = exports.createPages = ({ graphql, actions }) => {
 						name
 						phoneNumber
 						ticketPurchased
+						date
 						hour
 					}
 				}

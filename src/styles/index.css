@@ -60,3 +60,13 @@ span.underline.inherit {
 .mb2em {
 	margin-bottom: 2em;
 }
+
+.ta-right {
+	text-align: right;
+}
+
+@media screen and (max-width: 414px) {
+	.mb2em__mobile {
+		margin-bottom: 2em;
+	}
+}

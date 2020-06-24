@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createRef } from 'react'
 import { Section, Heading, Button } from '../components'
-import { Row, Col, Tag, Popconfirm, Icon } from 'antd'
+import { Row, Col, Tag, Popconfirm, Icon, Descriptions } from 'antd'
+import moment from 'moment'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
 import { media } from '../utils'
@@ -68,9 +69,14 @@ const ChairNumber = styled.div`
 	background-color: ${baseStyles.primaryColor};
 	font-size: 2.8em;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	text-align: right;
+	text-align: center;
+	p {
+		font-size: 0.8rem;
+		margin-bottom: 0;
+	}
 `
 
 const Alert = styled.section`
@@ -89,6 +95,7 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 	const params = new URLSearchParams(location.search)
 	const goToSeatNumber = params.get('seatNumber')
 	const animContainer = createRef()
+	const isMobile = useMedia('(max-width: 414px)')
 
 	const thanks = <span>Terima kasih, {guest.name}</span>
 
@@ -105,7 +112,7 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 	return (
 		<MainSection centered>
 			<Card isSubmitted={isSubmitted} isSpecialGuest={isSpecialGuest}>
-				{isSubmitted ? (
+				{/* {isSubmitted ? (
 					<Row gutter={32} type="flex" justify="center">
 						<Col lg={20} style={{ textAlign: 'center' }}>
 							<Heading
@@ -113,55 +120,48 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 								subheader="Anda sudah terkonfirmasi di dalam buku tamu kami. Nomor kursi Anda:"
 								marginBottom="2em"
 							/>
-							<ChairNumber isSubmitted={isSubmitted}>{guest.seatNumber}</ChairNumber>
+							<ChairNumber isSubmitted={isSubmitted}>
+								<p>Tiket dibeli</p>
+								{guest.seatNumber}
+							</ChairNumber>
 							<Link to="/">
 								<Icon type="home" />
 								&nbsp; Kembali ke Home
 							</Link>
 						</Col>
 					</Row>
-				) : (
-					<Row gutter={32}>
-						<Col lg={24} className="info-section">
-							<Section>
-								<div className="success" ref={animContainer} />
-								<Row type="flex" justify="space-between" align="middle">
-									<Col lg={12}>
-										<Heading content={guest.name} marginBottom="0.5em" />
-										<Tag color="#2db7f5">{guest.phoneNumber}</Tag>
-									</Col>
-									<Col lg={12}>
-										<ChairNumber>{guest.ticketPurchased}</ChairNumber>
-									</Col>
-								</Row>
-
-								{/* <Row type="flex" justify="space-between" align="middle">
-									<Col lg={24}>
-										<p>Apakah anda bersedia menghadiri acaranya?</p>
-										<Popconfirm
-											title="Yakin ingin menghadiri?"
-											okText="Ya"
-											cancelText="Batal"
-											onCancel={() => ({})}
-											onConfirm={handleSubmit}
-										>
-											<Button type="primary">Ya, saya bersedia</Button>
-										</Popconfirm>{' '}
-										&nbsp;{' '}
-										<Popconfirm
-											title="Yakin tidak ingin menghadiri?"
-											okText="Ya"
-											cancelText="Batal"
-											onCancel={() => ({})}
-										>
-											<Button type="link">Tidak</Button>
-										</Popconfirm>
-									</Col>
-								</Row> */}
-							</Section>
-						</Col>
-					</Row>
-				)}
+				) : ( */}
+				<Row gutter={32}>
+					<Col lg={24} className="info-section">
+						<Section>
+							<div className="success" ref={animContainer} />
+							<Row type="flex" justify="space-between" align="middle">
+								<Col lg={16} xs={24} className="mb2em__mobile">
+									<Heading content={guest.name} marginBottom="0.5em" />
+									<Tag color="#2db7f5" className="mb2em">
+										<Icon type="phone" />
+										&nbsp; {guest.phoneNumber}
+									</Tag>
+									<Descriptions colon={false} layout={isMobile ? 'horizontal' : 'vertical'}>
+										<Descriptions.Item label="Tanggal">
+											{moment(guest.date).format('ddd, DD MMM YYYY')}
+										</Descriptions.Item>
+										<Descriptions.Item label="Jam tayang">
+											{guest.hour?.map(item => <Tag>{item}</Tag>)}
+										</Descriptions.Item>
+									</Descriptions>
+								</Col>
+								<Col lg={8} xs={24} className="ta-right">
+									<ChairNumber>
+										<p>Tiket dibeli</p>
+										{guest.ticketPurchased}
+									</ChairNumber>
+								</Col>
+							</Row>
+						</Section>
+					</Col>
+				</Row>
+				{/* )} */}
 			</Card>
 		</MainSection>
 	)
@@ -176,6 +176,7 @@ export const queryGuest = graphql`
 			name
 			phoneNumber
 			ticketPurchased
+			date
 			hour
 		}
 	}
