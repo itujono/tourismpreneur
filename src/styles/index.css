@@ -56,3 +56,7 @@ a.underline {
 span.underline.inherit {
 	color: inherit;
 }
+
+.mb2em {
+	margin-bottom: 2em;
+}

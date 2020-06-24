@@ -5,7 +5,7 @@ require('dotenv').config({
 
 module.exports = {
 	siteMetadata: {
-		title: 'Wisuda Digital Tourismpreneur 4.0',
+		title: 'Playpark Batam',
 	},
 	plugins: [
 		`gatsby-plugin-react-helmet`,

@@ -114,16 +114,16 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 								<Row type="flex" justify="space-between" align="middle">
 									<Col lg={12}>
 										<Heading content={guest.name} marginBottom="0.5em" />
-										<Tag color="#2db7f5">{guest.carModel}</Tag>
+										<Tag color="#2db7f5">{guest.phoneNumber}</Tag>
 									</Col>
 									{!isSpecialGuest && (
 										<Col lg={12} style={{ textAlign: 'right' }}>
-											<ChairNumber>{guest.phoneNumber}</ChairNumber>
+											<ChairNumber>{guest.ticketPurchased}</ChairNumber>
 										</Col>
 									)}
 								</Row>
 
-								<Row type="flex" justify="space-between" align="middle">
+								{/* <Row type="flex" justify="space-between" align="middle">
 									<Col lg={24}>
 										<p>Apakah anda bersedia menghadiri acaranya?</p>
 										<Popconfirm
@@ -145,7 +145,7 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 											<Button type="link">Tidak</Button>
 										</Popconfirm>
 									</Col>
-								</Row>
+								</Row> */}
 							</Section>
 						</Col>
 					</Row>
@@ -164,7 +164,7 @@ export const queryGuest = graphql`
 			name
 			phoneNumber
 			ticketPurchased
-			carModel
+			hour
 		}
 	}
 `

@@ -1,6 +1,6 @@
 {
-	"name": "wisuda",
-	"description": "Wisuda Digital Tourismpreneur 4.0",
+	"name": "playpark",
+	"description": "Playpark Batam",
 	"version": "0.1.0",
 	"author": "Bejo Karmila",
 	"dependencies": {
@@ -12,8 +12,8 @@
 		"antd": "3.23.1",
 		"babel-plugin-styled-components": "^1.10.6",
 		"contentful": "^7.10.0",
-		"gatsby": "2.13.65",
-		"gatsby-cli": "2.7.44",
+		"gatsby": "^2.23.11",
+		"gatsby-cli": "^2.12.51",
 		"gatsby-image": "2.2.17",
 		"gatsby-plugin-manifest": "2.2.14",
 		"gatsby-plugin-mdx": "1.0.39",

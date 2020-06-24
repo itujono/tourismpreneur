@@ -34,20 +34,22 @@ module.exports = exports.createPages = ({ graphql, actions }) => {
 						name
 						phoneNumber
 						ticketPurchased
-						carModel
+						hour
 					}
 				}
 			}
 		}
 	`).then(({ data = {} }) => {
-		data.allContentfulGuest.edges.forEach(({ node }) => {
-			createPage({
-				path: `/guest/${node.id}`,
-				component: path.resolve(`./src/templates/guestDetails.js`),
-				context: {
-					id: node.id,
-				},
+		// prettier=ignore
+		data.allContentfulGuest &&
+			(data.allContentfulGuest.edges || []).forEach(({ node }) => {
+				createPage({
+					path: `/guest/${node.id}`,
+					component: path.resolve(`./src/templates/guestDetails.js`),
+					context: {
+						id: node.id,
+					},
+				})
 			})
-		})
 	})
 }

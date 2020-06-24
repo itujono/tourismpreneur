@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Section, Heading, Modal } from '../../components'
-import { Card, Tag, Row, Col, Switch, Input, Select } from 'antd'
+import { Card, Tag, Row, Col, Switch, Input, Select, Descriptions } from 'antd'
 import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 import QrCode from 'qrcode.react'
 import useMedia from 'use-media'
 import { titles, sorting } from '../../utils/dummy'
 import { media } from '../../utils'
+import { WEB_URL } from '../../utils/constants'
 
 const StyledCard = styled(Card)`
 	.ant-card-body {
@@ -56,7 +57,9 @@ const QrSection = styled(Row).attrs(props => ({
 	type: 'flex',
 	justify: props.qrCodeOnly ? 'center' : 'space-around',
 	gutter: 16,
-}))``
+}))`
+	text-align: center;
+`
 
 export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 	const [selectedGuest, setSelectedGuest] = useState({})
@@ -91,8 +94,8 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 		const data = guest.edges || []
 		// if (!initial) {
 		const sorted = data.slice().sort((a, b) => {
-			const nameA = a.node[value].toLowerCase()
-			const nameB = b.node[value].toLowerCase()
+			const nameA = a.node[value]?.toLowerCase()
+			const nameB = b.node[value]?.toLowerCase()
 			return nameA < nameB ? -1 : nameA > nameB ? 1 : 0
 		})
 		setGuestList(sorted)
@@ -118,32 +121,32 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 		}
 	}, [])
 
+	console.log({ guest })
+
 	return (
 		<Section width={isMobile ? '100%' : '80%'} centered>
 			<StyledModal
 				visible={Object.keys(selectedGuest).length}
 				onCancel={handleCloseModal}
-				width={qrCodeOnly ? 800 : 640}
+				width={qrCodeOnly ? 800 : 740}
 				footer={false}
 				qrCodeOnly={qrCodeOnly}
 			>
 				<Row gutter={32}>
-					<Col lg={16}>
+					<Col lg={18}>
 						{qrCodeOnly ? (
 							<Row type="flex" justify="center" align="middle">
 								<Col lg={24}>
 									<QrSection qrCodeOnly={qrCodeOnly}>
 										<Col lg={12}>
 											<p>Undangan</p>
-											<QrCode
-												value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`}
-											/>
+											<QrCode size={220} value={`${WEB_URL}/guest/${selectedGuest.id}`} />
 										</Col>
 										{isSpecialGuest && (
 											<Col lg={12}>
 												<p>Nomor kursi</p>
 												<QrCode
-													value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}?seatNumber=true`}
+													value={`${WEB_URL}/guest/${selectedGuest.id}?seatNumber=true`}
 												/>
 											</Col>
 										)}
@@ -153,29 +156,36 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 						) : (
 							<>
 								<Heading
-									content={<Link to={`/guest/${selectedGuest.id}`}>{selectedGuest.name}</Link>}
-									subheader={selectedGuest.title}
+									content={selectedGuest.name}
+									// content={<Link to={`/guest/${selectedGuest.id}`}>{selectedGuest.name}</Link>}
 								/>
+								<Descriptions colon={false} layout="vertical" className="mb2em">
+									<Descriptions.Item label="Nomor HP">{selectedGuest.phoneNumber}</Descriptions.Item>
+									<Descriptions.Item label="Jumlah tiket dibeli">
+										{selectedGuest.ticketPurchased}
+									</Descriptions.Item>
+									<Descriptions.Item label="Jam tayang">
+										{selectedGuest.hour?.map(item => <Tag>{item}</Tag>)}
+									</Descriptions.Item>
+								</Descriptions>
 								<QrSection>
 									<Col lg={12}>
-										<p>Undangan</p>
-										<QrCode
-											value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}`}
-										/>
+										<p>Scan QR Code ini pakai camera HP</p>
+										<QrCode value={`${WEB_URL}/guest/${selectedGuest.id}`} />
 									</Col>
-									{isSpecialGuest && (
+									{/* {isSpecialGuest && (
 										<Col lg={12}>
 											<p>Nomor kursi</p>
 											<QrCode
-												value={`https://tourismpreneur.netlify.com/guest/${selectedGuest.id}?seatNumber=true`}
+												value={`${WEB_URL}/guest/${selectedGuest.id}?seatNumber=true`}
 											/>
 										</Col>
-									)}
+									)} */}
 								</QrSection>
 							</>
 						)}
 					</Col>
-					<Col lg={8} className="qr-section">
+					<Col lg={6} className="qr-section">
 						<Switch name="qrcode" onChange={checked => setQrCodeOnly(checked)} checked={qrCodeOnly} />
 						&nbsp;
 						<span>QR code saja</span>
@@ -270,7 +280,7 @@ export const queryAllGuests = graphql`
 					name
 					phoneNumber
 					ticketPurchased
-					carModel
+					hour
 				}
 			}
 		}
