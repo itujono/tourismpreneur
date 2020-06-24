@@ -1,7 +1,7 @@
 {
 	"name": "playpark",
 	"description": "Playpark Batam",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "Bejo Karmila",
 	"dependencies": {
 		"@contentful/rich-text-react-renderer": "^13.4.0",
