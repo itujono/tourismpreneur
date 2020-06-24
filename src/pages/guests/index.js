@@ -121,8 +121,6 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 		}
 	}, [])
 
-	console.log({ guest })
-
 	return (
 		<Section width={isMobile ? '100%' : '80%'} centered>
 			<StyledModal

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Layout from '../Layout'
 import { Section, Heading, Button } from '../components'
 import { Icon, Row, Col } from 'antd'
@@ -17,8 +17,6 @@ const MiddleRow = styled(Row)`
 `
 
 function Home() {
-	useEffect(() => {}, [])
-
 	return (
 		<Layout basic>
 			<MainSection centered>
@@ -33,9 +31,9 @@ function Home() {
 								text-align: center;
 							`}
 						>
-							<img src={scenery} width="180" alt="Welcome to wisuda 4.0" />
+							<img src={scenery} width="180" alt="Welcome to Playpark Batam" />
 						</Section>
-						<Heading content="Selamat datang di Wisuda 4.0" subheader="Lihat daftar semua tamu undangan" />
+						<Heading content="Selamat datang di Playpark Batam" subheader="Lihat daftar semua tamu" />
 						<Button type="primary">
 							<Link to="/guests">
 								Lihat semua <Icon type="arrow-right" />

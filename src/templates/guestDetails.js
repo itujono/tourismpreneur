@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import { Section, Heading, Button } from '../components'
 import { Row, Col, Tag, Popconfirm, Icon } from 'antd'
 import styled from 'styled-components'
 import { baseStyles } from '../styles'
 import { media } from '../utils'
 import { graphql, Link } from 'gatsby'
+import lottie from 'lottie-web'
+import success from '../images/success-animation.json'
 import useMedia from 'use-media'
 import userPic from '../images/tutor-object.png'
 
@@ -43,6 +45,12 @@ const Card = styled.div`
 		padding: 3em;
 		padding-top: 1em;
 		padding-bottom: 0;
+		.success {
+			width: 100%;
+			height: 150px;
+			margin-top: -100px;
+			margin-bottom: 3em;
+		}
 		> section {
 			padding-left: 2em;
 			padding-right: 2em;
@@ -62,7 +70,7 @@ const ChairNumber = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: ${({ isSubmitted }) => isSubmitted && '0 auto 2em auto'};
+	text-align: right;
 `
 
 const Alert = styled.section`
@@ -80,14 +88,19 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 	const isSpecialGuest = guest.ticketPurchased === 'VIP' || guest.ticketPurchased === 'VVIP'
 	const params = new URLSearchParams(location.search)
 	const goToSeatNumber = params.get('seatNumber')
+	const animContainer = createRef()
 
-	const thanks = isSpecialGuest ? 'Terima kasih!' : <span>Terima kasih, {guest.name}</span>
-
-	const handleSubmit = () => setIsSubmitted(true)
+	const thanks = <span>Terima kasih, {guest.name}</span>
 
 	useEffect(() => {
-		if (isSpecialGuest && goToSeatNumber === 'true') setIsSubmitted(true)
-	}, [guest.title])
+		lottie.loadAnimation({
+			container: animContainer.current, // current instance of our container!
+			animationData: success, // animation file!
+			renderer: 'svg',
+			loop: true,
+			autoplay: true,
+		})
+	}, [])
 
 	return (
 		<MainSection centered>
@@ -109,18 +122,17 @@ function GuestDetails({ location, data: { contentfulGuest: guest = {} } }) {
 					</Row>
 				) : (
 					<Row gutter={32}>
-						<Col lg={isSpecialGuest ? 24 : 12} className="info-section">
+						<Col lg={24} className="info-section">
 							<Section>
+								<div className="success" ref={animContainer} />
 								<Row type="flex" justify="space-between" align="middle">
 									<Col lg={12}>
 										<Heading content={guest.name} marginBottom="0.5em" />
 										<Tag color="#2db7f5">{guest.phoneNumber}</Tag>
 									</Col>
-									{!isSpecialGuest && (
-										<Col lg={12} style={{ textAlign: 'right' }}>
-											<ChairNumber>{guest.ticketPurchased}</ChairNumber>
-										</Col>
-									)}
+									<Col lg={12}>
+										<ChairNumber>{guest.ticketPurchased}</ChairNumber>
+									</Col>
 								</Row>
 
 								{/* <Row type="flex" justify="space-between" align="middle">
