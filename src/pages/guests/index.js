@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 import { Section, Heading, Modal } from '../../components'
 import { Card, Tag, Row, Col, Switch, Input, Select, Descriptions, Icon } from 'antd'
 import { graphql, Link } from 'gatsby'
@@ -6,7 +7,7 @@ import styled from 'styled-components'
 import QrCode from 'qrcode.react'
 import useMedia from 'use-media'
 import { titles, sorting } from '../../utils/dummy'
-import { media } from '../../utils'
+import { media, useHotKey } from '../../utils'
 import { WEB_URL } from '../../utils/constants'
 
 const StyledCard = styled(Card)`
@@ -61,6 +62,8 @@ const QrSection = styled(Row).attrs(props => ({
 	text-align: center;
 `
 
+const sequence = ['ArrowUp', 'ArrowDown', 'x', 'x', 'Enter']
+
 export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 	const [selectedGuest, setSelectedGuest] = useState({})
 	const [qrCodeOnly, setQrCodeOnly] = useState(false)
@@ -69,11 +72,14 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 	const isMobile = useMedia('(max-width: 414px)')
 
 	const theData = initial ? guest.edges : guestList
-	const isSpecialGuest = selectedGuest.title === 'VIP' || selectedGuest.title === 'VVIP'
 
-	const handleSelectGuest = guest => {
-		setSelectedGuest(guest)
-	}
+	useHotKey(sequence, () => {
+		const guestList = theData.map(({ node }) => node)
+		const ticketPurchased = guestList.reduce((acc, curr) => acc + curr.ticketPurchased, 0)
+		console.log({ ticketPurchased, amountOfGuest: guestList.length })
+	})
+
+	const handleSelectGuest = guest => setSelectedGuest(guest)
 
 	const handleCloseModal = () => {
 		setQrCodeOnly(false)
@@ -140,14 +146,6 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 											<p>Undangan</p>
 											<QrCode size={220} value={`${WEB_URL}/guest/${selectedGuest.id}`} />
 										</Col>
-										{isSpecialGuest && (
-											<Col lg={12}>
-												<p>Nomor kursi</p>
-												<QrCode
-													value={`${WEB_URL}/guest/${selectedGuest.id}?seatNumber=true`}
-												/>
-											</Col>
-										)}
 									</QrSection>
 								</Col>
 							</Row>
@@ -170,7 +168,9 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 									<Descriptions.Item label="Jumlah tiket dibeli">
 										{selectedGuest.ticketPurchased}
 									</Descriptions.Item>
-									<Descriptions.Item label="Tanggal">{selectedGuest.date}</Descriptions.Item>
+									<Descriptions.Item label="Tanggal">
+										{moment(selectedGuest.date).format('ddd, DD MMM YYYY')}
+									</Descriptions.Item>
 									<Descriptions.Item label="Jam tayang">
 										{selectedGuest.hour?.map(item => <Tag>{item}</Tag>)}
 									</Descriptions.Item>
@@ -180,14 +180,6 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 										<p>Scan QR Code ini pakai camera HP</p>
 										<QrCode value={`${WEB_URL}/guest/${selectedGuest.id}`} />
 									</Col>
-									{/* {isSpecialGuest && (
-										<Col lg={12}>
-											<p>Nomor kursi</p>
-											<QrCode
-												value={`${WEB_URL}/guest/${selectedGuest.id}?seatNumber=true`}
-											/>
-										</Col>
-									)} */}
 								</QrSection>
 							</>
 						)}
@@ -209,8 +201,8 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 				<Col lg={8} xs={24} css={` text-align: ${isMobile && 'center'}; `}>
 					<Heading content="Daftar tamu" subheader="List tamu undangan acara" />
 				</Col>
-				<Col lg={12} xs={24}>
-					<Row gutter={16}>
+				<Col lg={12} xs={24} className="ta-right">
+					<Row gutter={16} type="flex" justify="end">
 						<Col lg={8} xs={12} css={`margin-bottom: ${isMobile && '1em'};`}>
 							<Select
 								name="sorting"
@@ -226,22 +218,7 @@ export default function Guests({ data: { allContentfulGuest: guest = {} } }) {
 								))}
 							</Select>
 						</Col>
-						<Col lg={8} xs={12} css={`margin-bottom: ${isMobile && '1em'};`}>
-							{/* <Select
-								name="titles"
-								placeholder="Pilih jabatan"
-								defaultValue="Pilih jabatan..."
-								style={{ width: '100%' }}
-								onChange={handleFilter}
-							>
-								{titles.map(({ value, label }) => (
-									<Select.Option value={value} key={value}>
-										{label}
-									</Select.Option>
-								))}
-							</Select> */}
-						</Col>
-						<Col lg={8} xs={24}>
+						<Col lg={12} xs={24}>
 							<Input.Search
 								name="keyword"
 								onSearch={handleSearch}
